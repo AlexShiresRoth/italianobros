@@ -2,44 +2,51 @@ import React from "react"
 
 import { ReadMoreButton } from "./ReadMoreButton"
 
-const ServicesListItemDesktop = props => {
+const ServicesListItemDesktop = ({
+  service,
+  contentSize,
+  read,
+  reduced,
+  styles,
+  animate,
+}) => {
+  const { images } = service
+
+  if (!images || !service) {
+    return <p>Loading...</p>
+  }
+  console.log("service", service, images)
   return (
-    <div className={props.styles.container__column} id={props.service.id}>
+    <div className={styles.container__column} id={service.id}>
       <div
-        className={`${props.styles.servicesList__item} ${
-          props.animate ? "fadeIn" : ""
-        }`}
+        className={`${styles.servicesList__item} ${animate ? "fadeIn" : ""}`}
       >
-        <div className={props.styles.servicesList__item__heading}>
-          <h1>{props.service.title}</h1>
+        <div className={styles.servicesList__item__heading}>
+          <h1>{service.title}</h1>
           <hr />
         </div>
-        {props.service.button ? (
-          <div className={props.styles.paragraph}>
+        {service.button ? (
+          <div className={styles.paragraph}>
             <ReadMoreButton
-              contentSize={props.contentSize}
-              read={props.read}
-              content={props.service.content}
-              reduced={props.reduced}
+              contentSize={contentSize}
+              read={read}
+              content={service.content}
+              reduced={reduced}
             />
           </div>
         ) : (
-          <div className={props.styles.paragraph}>
+          <div className={styles.paragraph}>
             <p>
-              {props.service.content}
+              {service.content}
               {""}
             </p>
           </div>
         )}
-        <div className={props.styles.services__image__grid}>
-          {props.service.images.map((img, i) => {
+        <div className={styles.services__image__grid}>
+          {images.map((img, i) => {
             return (
-              <figure className={props.styles.services__image} key={i}>
-                <img
-                  src={img}
-                  alt={img}
-                  className={props.styles.services__img}
-                />
+              <figure className={styles.services__image} key={i}>
+                <img src={img} alt={img} className={styles.services__img} />
               </figure>
             )
           })}

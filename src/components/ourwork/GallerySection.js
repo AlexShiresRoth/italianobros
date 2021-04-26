@@ -1,58 +1,55 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { useContext } from "react"
 import ImageGrid from "./ImageGrid"
 import { images } from "./images"
 import layoutStyles from "./styles/GallerySection.module.scss"
+import { ContentContext } from "../../components/RootLayout"
 
-export default class GallerySection extends React.Component {
-  constructor(props) {
-    super(props)
+const GallerySection = () => {
+  const { pageContent } = useContext(ContentContext)
+  const [reduced, setReduced] = useState(false)
+  const [imagesArray, setArray] = useState([])
 
-    this.state = {
-      reduced: false,
-      imagesArray: [],
-    }
-  }
-
-  reduceImageArray = () => {
+  const reduceImageArray = () => {
     let shortArr = images.slice(0, 6)
-    this.setState({ imagesArray: shortArr, reduced: true })
+    setReduced(true)
+    setArray(shortArr)
   }
 
-  addMoreImages = () => {
+  const addMoreImages = () => {
     let imagesFull = images.slice(6, images.length)
 
-    if (this.state.reduced) {
-      this.setState({
-        imagesArray: [...this.state.imagesArray, ...imagesFull],
-        reduced: false,
-      })
+    if (reduced) {
+      setArray(prevState => [...prevState, ...imagesFull])
+      setReduced(false)
     }
-    if (!this.state.reduced) {
-      this.reduceImageArray()
-      this.setState({ reduced: true })
+
+    if (!reduced) {
+      reduceImageArray()
+      setReduced(true)
     }
   }
 
-  componentDidMount() {
-    this.reduceImageArray()
-  }
+  useEffect(() => {
+    reduceImageArray()
+  }, [])
 
-  render() {
-    return (
-      <section className={layoutStyles.gallery__section}>
-        <div className={layoutStyles.heading}>
-          <h2>Best In Class</h2>
-          <p>
-            Being the forerunner in complete interior wall and exterior stucco
-            systems for over 30 years, we give you our gallery of past projects
-            &amp; experience.
-          </p>
-        </div>
-        <ImageGrid images={this.state.imagesArray} />
-        <button className={layoutStyles.button} onClick={this.addMoreImages}>
-          {this.state.reduced ? `Show More` : `Show Less`}
-        </button>
-      </section>
-    )
-  }
+  return (
+    <section className={layoutStyles.gallery__section}>
+      <div className={layoutStyles.heading}>
+        <h2>Best In Class</h2>
+        <p>
+          Being the forerunner in complete interior wall and exterior stucco
+          systems for over 30 years, we give you our gallery of past projects
+          &amp; experience.
+        </p>
+      </div>
+      <ImageGrid images={imagesArray} />
+      <button className={layoutStyles.button} onClick={addMoreImages}>
+        {reduced ? `Show More` : `Show Less`}
+      </button>
+    </section>
+  )
 }
+
+export default GallerySection

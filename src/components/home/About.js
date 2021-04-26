@@ -1,35 +1,43 @@
-import React, { Fragment } from "react"
+import React, { Fragment, useContext } from "react"
 import { Link } from "gatsby"
 
 import layoutStyles from "./aboutstyles/About.module.scss"
+import { ContentContext } from "../RootLayout"
 
 const About = _ => {
-  const aboutImgs = [
-    "https://res.cloudinary.com/snackmanproductions/image/upload/v1568244365/italianobros/home/marc__italiano_udqcdu.jpg",
-  ]
+  const { pageContent } = useContext(ContentContext)
+
+  if (!pageContent) {
+    return <p>Loading...</p>
+  }
+
+  const { data } = pageContent
+
+  console.log(data["mainpage-section3"][0]["mainpage-section3-image"])
+
+  const mainImg = data["mainpage-section3"][0]["mainpage-section3-image"].url
+  const paragraph =
+    data["mainpage-section3"][0]["mainpage-section3-paragraph3"][0].text
+  const heading =
+    data["mainpage-section3"][0]["mainpage-section3-heading"][0].text
 
   return (
     <Fragment>
       <section className={layoutStyles.about__section}>
         <div>
           <img
-            src={aboutImgs[0]}
+            src={mainImg}
             alt="Marc Italiano"
             className={layoutStyles.about__img}
           />
         </div>
         <div className={layoutStyles.container}>
           <div className={layoutStyles.heading}>
-            <h3 className={layoutStyles.about__h3}>Family Owned &amp; Operated</h3>
+            <h3 className={layoutStyles.about__h3}>{heading}</h3>
             <hr className={layoutStyles.about__hr} />
           </div>
           <div className={layoutStyles.paragraph__section}>
-            <p className={layoutStyles.paragraph}>
-              Founded by Guy and Marc Italiano in 1979, while continuing today
-              to be a leader in the industry and growing to achieve the creative
-              demands of the future. As artisans, we are passionate about
-              excellence with each new project.
-            </p>
+            <p className={layoutStyles.paragraph}>{paragraph}</p>
           </div>
 
           <div className={layoutStyles.button__container}>

@@ -1,24 +1,34 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Link } from "gatsby"
 
 import layoutStyles from "./servicestyles/Services.module.scss"
+import { ContentContext } from "../RootLayout"
 
 const Services = () => {
+  const { pageContent } = useContext(ContentContext)
+
+  if (!pageContent) {
+    return (
+      <section className={layoutStyles.services__section}>
+        <p>Loading...</p>
+      </section>
+    )
+  }
+
+  const { data } = pageContent
 
   return (
     <section className={layoutStyles.services__section}>
       <div className={layoutStyles.container}>
         <div className={layoutStyles.heading}>
           <h3 className={layoutStyles.services__h3}>
-            Professionally Handcrafted
+            {data["mainpage-section1"][0]["mainpage-heading1"][0].text}
           </h3>
           <hr className={layoutStyles.services__hr} />
         </div>
         <div className={layoutStyles.paragraph__section}>
           <p className={layoutStyles.paragraph}>
-            Our experts are highly skilled in services for high end residential,
-            large volume residential, as well as commercial applications of
-            sheetrock, plaster, exterior stucco systems and more.
+            {data["mainpage-section1"][0]["mainpage-paragraph"][0].text}
           </p>
         </div>
         <div className={layoutStyles.button__container}>
