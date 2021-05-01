@@ -14,7 +14,7 @@ const ServiceList = () => {
 
   const [isMobile, setMobile] = useState(false)
 
-  const [servicesArray, setArraySize] = useState(content)
+  const [servicesArray, setArraySize] = useState([])
 
   const [reduced, setReduced] = useState(true)
 
@@ -57,6 +57,8 @@ const ServiceList = () => {
     const vpData = pageContent.data["venetian-plaster"][0]
     const dryWall = pageContent.data["drywall"][0]
     const stucco = pageContent.data["stucco"][0]
+    const concrete = pageContent.data["architectural-concrete"][0]
+    const plaster = pageContent.data["plaster-mouldings"][0]
     setContent([
       {
         title: vpData.heading[0].text,
@@ -95,6 +97,34 @@ const ServiceList = () => {
         display1: "left",
         display2: "right",
       },
+      {
+        title: concrete.heading[0].text,
+        content: concrete.paragraph[0].text,
+        images: [
+          concrete.image1.url,
+          concrete.image2.url,
+          concrete.image3.url,
+          concrete.image4.url,
+        ],
+        id: "concrete",
+        button: true,
+        display1: "left",
+        display2: "right",
+      },
+      {
+        title: plaster.heading[0].text,
+        content: plaster.paragraph[0].text,
+        images: [
+          plaster.image1.url,
+          plaster.image2.url,
+          plaster.image3.url,
+          plaster.image4.url,
+        ],
+        id: "plaster-mouldings",
+        button: true,
+        display1: "left",
+        display2: "right",
+      },
     ])
   }
 
@@ -109,9 +139,10 @@ const ServiceList = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       handleWindowResize()
-      window.addEventListener("resize", handleWindowResize)
+      window.addEventListener("resize", () => handleWindowResize())
     }
-    return () => window.removeEventListener("resize", handleWindowResize)
+    return () =>
+      window.removeEventListener("resize", () => handleWindowResize())
   }, [])
 
   useEffect(() => {
@@ -119,6 +150,7 @@ const ServiceList = () => {
       getPathName(content)
       setLocation(window.location.href)
       setCurrent(content[0])
+      setArraySize(content)
     }
   }, [content])
 
@@ -133,6 +165,7 @@ const ServiceList = () => {
   const heading = servicesData["services-heading1"][0].text
   const paragraph = servicesData["paragraph"][0].text
 
+  console.log("is mobile", isMobile)
   return (
     <div className={layoutStyles.servicesList__section}>
       <div className={layoutStyles.heading}>

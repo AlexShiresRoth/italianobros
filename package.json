@@ -1,9 +1,9 @@
 {
   "name": "gatsby-starter-default",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Italiano Bros ",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Alex Roth",
   "dependencies": {
     "@prismicio/client": "^4.0.0",
     "gatsby": "^2.32.12",
@@ -24,7 +24,8 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-helmet": "^5.2.1",
-    "react-media": "^1.10.0"
+    "react-media": "^1.10.0",
+    "react-simple-image-slider": "^2.1.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"

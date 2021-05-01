@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { useContext } from "react"
 import ImageGrid from "./ImageGrid"
-import { images } from "./images"
 import layoutStyles from "./styles/GallerySection.module.scss"
 import { ContentContext } from "../../components/RootLayout"
 
 const GallerySection = () => {
   const { pageContent } = useContext(ContentContext)
   const [reduced, setReduced] = useState(false)
+  const [images, setImages] = useState([])
   const [imagesArray, setArray] = useState([])
 
   const reduceImageArray = () => {
@@ -16,8 +16,8 @@ const GallerySection = () => {
     setArray(shortArr)
   }
 
-  const addMoreImages = () => {
-    let imagesFull = images.slice(6, images.length)
+  const addMoreImages = imgs => {
+    let imagesFull = imgs.slice(6, imgs.length)
 
     if (reduced) {
       setArray(prevState => [...prevState, ...imagesFull])
@@ -31,21 +31,33 @@ const GallerySection = () => {
   }
 
   useEffect(() => {
-    reduceImageArray()
-  }, [])
+    if (images) reduceImageArray(images)
+  }, [images])
 
+  useEffect(() => {
+    if (pageContent) {
+      const workImgs = pageContent.data.images.map(src => src.image.url)
+      console.log("workimgs", workImgs)
+      setImages(workImgs)
+    }
+  }, [pageContent])
+
+  if (!pageContent) {
+    return <p>Loading...</p>
+  }
+
+  console.log(pageContent.data)
   return (
     <section className={layoutStyles.gallery__section}>
       <div className={layoutStyles.heading}>
-        <h2>Best In Class</h2>
-        <p>
-          Being the forerunner in complete interior wall and exterior stucco
-          systems for over 30 years, we give you our gallery of past projects
-          &amp; experience.
-        </p>
+        <h2>{pageContent.data.heading[0].text}</h2>
+        <p>{pageContent.data.paragraph[0].text}</p>
       </div>
       <ImageGrid images={imagesArray} />
-      <button className={layoutStyles.button} onClick={addMoreImages}>
+      <button
+        className={layoutStyles.button}
+        onClick={() => addMoreImages(images)}
+      >
         {reduced ? `Show More` : `Show Less`}
       </button>
     </section>

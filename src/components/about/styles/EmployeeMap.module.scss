@@ -8,7 +8,8 @@
     gap: 2rem;
     justify-items: center;
     align-self: center;
-    max-width: 70vw;
+    width: 70vw;
+    max-width: 1200px;
     margin: 2rem 0;
   }
   .about__info:nth-child(2) {
@@ -57,6 +58,18 @@
     }
   }
 }
+@media screen and (max-width: 1200px) {
+  .about__info {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 2rem;
+    justify-items: center;
+    align-self: center;
+    width: 85vw;
+    max-width: 1200px;
+    margin: 2rem 0;
+  }
+}
 @media screen and (min-width: 601px) and (max-width: 850px) {
   .about__info {
     display: grid;
@@ -64,7 +77,7 @@
     gap: 0rem;
     justify-items: center;
     align-self: center;
-    max-width: 90vw;
+    max-width: 95vw;
     margin: 2rem 0;
   }
   .about__image {

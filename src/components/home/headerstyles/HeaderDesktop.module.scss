@@ -2,13 +2,12 @@
 @import "../../../../sass/base/mixins";
 
 @media screen and (min-width: 601px) {
-  
   .desktop__heading {
     font-size: 4rem;
     font-weight: 500;
     margin: 0 0 2rem 0;
     color: #fff;
-    max-width: 100rem;
+    max-width: 100%;
   }
 
   .desktop__button {

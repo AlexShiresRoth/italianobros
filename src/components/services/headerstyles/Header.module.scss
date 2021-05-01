@@ -3,7 +3,6 @@
 
 @media screen and (min-width: 601px) {
   .header__section {
-    background: url("https://res.cloudinary.com/snackmanproductions/image/upload/c_scale,q_51,w_2067/v1568248775/italianobros/services/services-header_jpza6t.jpg");
     @include mobile-header;
     -webkit-box-pack: end;
     -ms-flex-pack: end;
@@ -16,7 +15,6 @@
 }
 @media screen and (max-width: 600px) {
   .header__section {
-    background: url("https://res.cloudinary.com/snackmanproductions/image/upload/c_scale,q_51,w_2067/v1568248775/italianobros/services/services-header_jpza6t.jpg");
     @include mobile-header;
     -webkit-box-pack: end;
     -ms-flex-pack: end;
