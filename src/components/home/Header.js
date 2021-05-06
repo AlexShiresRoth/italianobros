@@ -1,72 +1,205 @@
-import React, { createRef, useContext, useEffect, useState } from "react"
+import React, {
+  createRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 import { Link } from "gatsby"
 import layoutStyles from "./headerstyles/Header.module.scss"
 import wideScreenLayoutStyles from "./headerstyles/HeaderDesktop.module.scss"
 import { ContentContext } from "../RootLayout"
+import { ChevronRight, ChevronLeft } from "react-feather"
 
 const Header = () => {
   const { pageContent } = useContext(ContentContext)
 
-  const scrollRef = createRef()
+  const [timeID, setTime] = useState(null)
+
+  const scrollRef = useRef()
+
+  const sliderRef = createRef()
 
   const [sliderImgs, setImgs] = useState([])
 
+  const [currentIndex, setIndex] = useState(1)
+
+  const [imageWidth, setImageWidth] = useState(null)
+
   const [scrollWidth, setScrollWidth] = useState(0)
 
-  const [current, changeIndex] = useState(0)
+  const [max, setMax] = useState(0)
 
-  const handleWindowResize = () => setScrollWidth(window.innerWidth)
+  const [shifting, setShifting] = useState(false)
 
-  const handleScrolling = ref => {
-    console.log("scroll this width", scrollWidth)
-    if (scrollWidth) {
-      ref.style.transition = "all 0.3s ease"
-      ref.style.transform = `translate3d(${scrollWidth}px,0px,0px)`
-      console.log(ref.style)
+  const [sliderWidth, setSliderWidth] = useState(0)
+
+  const [loading, loadData] = useState(true)
+
+  const [restarted, setRestart] = useState(null)
+
+  const handleInitialSliderWidth = length => {
+    const newWidth = length * 100
+    setSliderWidth(newWidth)
+  }
+
+  const endTransition = () => {
+    //once transition is complete allow for next slide
+    setShifting(false)
+    scrollRef.current.style.transition = "all 0s ease"
+
+    if (currentIndex >= max) {
+      console.log("MAXREACH", currentIndex)
+      setScrollWidth(-(1 * imageWidth))
+      setIndex(1)
+    }
+    if (currentIndex <= 0) {
+      console.log("at the begining")
+      setScrollWidth(-(imageWidth * (sliderImgs.length - 1)) + imageWidth)
+      setIndex(sliderImgs.length - 2)
     }
   }
 
-  useEffect(() => {
-    if (scrollWidth && sliderImgs.length > 0) {
-      const index = Math.floor((scrollWidth * sliderImgs.length) / scrollWidth)
-      console.log("index", scrollWidth, sliderImgs.length, index)
-      changeIndex(index)
-    }
-  }, [scrollWidth, sliderImgs])
+  const handleResize = () => {
+    // clearInterval(timeID)
+    loadData(true)
+    setIndex(1)
+    setScrollWidth(0)
+  }
 
+  const handleTimedSlide = () => handleIndexChange(1)
+
+  const cancelOnHover = () => {
+    clearInterval(timeID)
+    setTime(null)
+    setRestart(null)
+    console.log("hovering", timeID)
+  }
+  const restartOnHover = () => setRestart(true)
+
+  const handleIndexChange = val => {
+    // Val will either be 1 or null
+    //if slide is in transition, disable index change in order to prevent transitionend from not being triggered
+    if (shifting) return
+    //appear to be moving right
+    if (val) {
+      //set state of slide to be transitioning
+      setShifting(true)
+      //activate transition
+      scrollRef.current.style.transition = "all 0.5s ease"
+      //index determines where in sequence
+      setIndex(prevState => prevState + 1)
+      //scroll width determines size of slide
+      setScrollWidth(prevWidth => prevWidth - imageWidth)
+    }
+
+    //appear to be moving left
+    if (!val) {
+      //set state of slide to be transitioning
+      setShifting(true)
+      //activate transition
+      scrollRef.current.style.transition = "all 0.5s ease"
+      //index determines where in sequence
+      setIndex(prevState => prevState - 1)
+      //scroll width determines size of slide
+      setScrollWidth(prevState => prevState + imageWidth)
+    }
+  }
+
+  //update scroll point on index change
+  const handleScroll = () => {
+    scrollRef.current.style.transform = `translate3d(${scrollWidth}px, 0,0)`
+  }
+
+  //retrieve image data from context
   useEffect(() => {
     if (pageContent) {
       const imgs = pageContent.data["mainpage-header"].map(img => ({
         url: img.image.url,
       }))
-      console.log("imgs", imgs)
-      setImgs(imgs)
+
+      setImgs([imgs[imgs.length - 1], ...imgs, imgs[0]])
     }
   }, [pageContent])
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", () => handleWindowResize())
-    }
-    return () => window.removeEventListener("resize", handleWindowResize)
+    setMax(sliderImgs.length - 1)
+  }, [sliderImgs])
+
+  //set initial image width
+  useEffect(() => {
+    if (sliderRef.current && imageWidth === null)
+      setImageWidth(sliderRef.current.clientWidth)
+  }, [sliderRef, imageWidth, sliderWidth])
+
+  // once image width has updated, update the scrollwidth
+  useEffect(() => {
+    if (imageWidth) setScrollWidth(-imageWidth)
+  }, [imageWidth, sliderWidth])
+
+  //Resizing window handle
+  useEffect(() => {
+    window.addEventListener("resize", handleResize)
   }, [])
 
   useEffect(() => {
-    if (scrollRef.current) {
-      setScrollWidth(-scrollRef.current.scrollWidth)
+    if (scrollRef.current && sliderRef.current) {
+      handleScroll()
     }
-  }, [scrollRef])
+  }, [currentIndex, scrollRef, sliderRef])
+
+  useEffect(() => {
+    if (sliderImgs.length > 0 && scrollRef.current) {
+      handleInitialSliderWidth(sliderImgs.length)
+      loadData(false)
+    }
+  }, [sliderImgs, scrollRef])
+
+  useEffect(() => {
+    if (!loading && scrollRef.current) {
+      let interval = setInterval(() => {
+        handleTimedSlide()
+      }, 7000)
+
+      setTime(interval)
+    }
+  }, [loading, scrollRef, restarted])
 
   if (!pageContent) {
     return <p>please wait...</p>
   }
-
+  console.log("time!", scrollRef)
   return (
     <header className={layoutStyles.header__section}>
+      <div className={layoutStyles.buttons}>
+        <button
+          onPointerDown={e => {
+            handleIndexChange(0)
+          }}
+          onMouseEnter={() => cancelOnHover()}
+          onMouseLeave={() => restartOnHover()}
+        >
+          <ChevronLeft size={55} />
+        </button>
+        <button
+          onPointerDown={e => {
+            handleIndexChange(1)
+          }}
+          onMouseEnter={() => cancelOnHover()}
+          onMouseLeave={() => restartOnHover()}
+        >
+          <ChevronRight size={55} />
+        </button>
+      </div>
       <div className={layoutStyles.overlay} />
 
-      <div className={layoutStyles.slider}>
-        <div className={layoutStyles.inner} ref={scrollRef}>
+      <div className={layoutStyles.slider} ref={sliderRef}>
+        <div
+          className={layoutStyles.inner}
+          ref={scrollRef}
+          onTransitionEnd={() => endTransition()}
+          style={{ minWidth: `${sliderWidth}vw` }}
+        >
           {sliderImgs.map((img, i) => {
             return (
               <div className={layoutStyles.imgContainer} key={i}>
@@ -82,16 +215,21 @@ const Header = () => {
           return (
             <span
               key={i}
-              onPointerDown={e => changeIndex(i)}
-              className={current === i ? layoutStyles.active : ""}
+              onPointerDown={e => setIndex(i)}
+              className={currentIndex === i ? layoutStyles.active : ""}
+              style={{
+                display:
+                  i === 0 || i === sliderImgs.length - 1 ? "none" : "block",
+                transition:
+                  currentIndex >= sliderImgs.length - 1
+                    ? "all 0s"
+                    : "all .3s ease",
+              }}
             ></span>
           )
         })}
       </div>
       <div className={layoutStyles.herobox}>
-        <button onPointerDown={e => handleScrolling(scrollRef.current)}>
-          click
-        </button>
         <h1
           className={`${layoutStyles.heading} ${wideScreenLayoutStyles.desktop__heading}`}
         >

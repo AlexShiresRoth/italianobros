@@ -23,6 +23,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-feather": "^2.0.9",
     "react-helmet": "^5.2.1",
     "react-media": "^1.10.0",
     "react-simple-image-slider": "^2.1.0"
