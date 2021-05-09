@@ -89,7 +89,7 @@ const Header = () => {
       //set state of slide to be transitioning
       setShifting(true)
       //activate transition
-      scrollRef.current.style.transition = "all 0.5s ease"
+      scrollRef.current.style.transition = "all 0.8s ease"
       //index determines where in sequence
       setIndex(prevState => prevState + 1)
       //scroll width determines size of slide
@@ -101,7 +101,7 @@ const Header = () => {
       //set state of slide to be transitioning
       setShifting(true)
       //activate transition
-      scrollRef.current.style.transition = "all 0.5s ease"
+      scrollRef.current.style.transition = "all 0.8s ease"
       //index determines where in sequence
       setIndex(prevState => prevState - 1)
       //scroll width determines size of slide
@@ -117,32 +117,32 @@ const Header = () => {
   //Scrolling needs to update where progress is
   //if progress gets to  end, reset and scroll to begininning without a transition
   const handleMobileSwipe = e => {
-    console.log("scrolllll")
+    // console.log("scrolllll")
     if (!sliderRef.current) return
     const element = sliderRef.current
     const progress = sliderRef.current.scrollLeft
     const totalWidth = element.scrollWidth - element.clientWidth
     // console.log(scrollRef.current.scrollWidth - scrollRef.current.clientWidth);
     const moved = Math.floor((progress / totalWidth) * 100)
-    console.log(progress)
+    // console.log(progress)
     if (Math.floor(progress) <= 0) {
-      setScrollWidth(totalWidth)
+      setScrollAmt(totalWidth)
       return false
     }
     if (progress > totalWidth) {
-      setScrollWidth(0)
+      setScrollAmt(0)
       return false
     }
-    setScrollWidth(moved)
+    setScrollAmt(moved)
   }
 
   useEffect(() => {
-    if (scrollWidth) {
-      const index = Math.floor((scrollWidth * (sliderImgs.length - 2)) / 100)
+    if (scrollAmt) {
+      const index = Math.floor((scrollAmt * (sliderImgs.length - 2)) / 100)
       console.log("index!", index)
       setIndex(index + 1)
     }
-  }, [scrollWidth])
+  }, [scrollAmt])
 
   //retrieve image data from context
   useEffect(() => {
@@ -188,15 +188,16 @@ const Header = () => {
     }
   }, [sliderImgs, scrollRef])
 
-  // useEffect(() => {
-  //   if (!loading && scrollRef.current) {
-  //     let interval = setInterval(() => {
-  //       handleTimedSlide()
-  //     }, 7000)
+  useEffect(() => {
+    if (!loading && scrollRef.current) {
+      let interval = setInterval(() => {
+        handleTimedSlide()
+        handleMobileSwipe()
+      }, 7000)
 
-  //     setTime(interval)
-  //   }
-  // }, [loading, scrollRef, restarted])
+      setTime(interval)
+    }
+  }, [loading, scrollRef, restarted])
 
   if (!pageContent) {
     return <p>please wait...</p>
@@ -230,7 +231,7 @@ const Header = () => {
         className={layoutStyles.slider}
         ref={sliderRef}
         onScroll={e => handleMobileSwipe(e)}
-        onTransitionEnd={e => console.log("does this have a tranaition")}
+        onTouchEnd={e => endTransition()}
       >
         <div
           className={layoutStyles.inner}
