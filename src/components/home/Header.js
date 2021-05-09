@@ -38,6 +38,8 @@ const Header = () => {
 
   const [restarted, setRestart] = useState(null)
 
+  const [scrollAmt, setScrollAmt] = useState(0)
+
   const handleInitialSliderWidth = length => {
     const newWidth = length * 100
     setSliderWidth(newWidth)
@@ -67,6 +69,7 @@ const Header = () => {
     setScrollWidth(0)
   }
 
+  //a positive integer scrolls to the right
   const handleTimedSlide = () => handleIndexChange(1)
 
   const cancelOnHover = () => {
@@ -110,6 +113,36 @@ const Header = () => {
   const handleScroll = () => {
     scrollRef.current.style.transform = `translate3d(${scrollWidth}px, 0,0)`
   }
+
+  //Scrolling needs to update where progress is
+  //if progress gets to  end, reset and scroll to begininning without a transition
+  const handleMobileSwipe = e => {
+    console.log("scrolllll")
+    if (!sliderRef.current) return
+    const element = sliderRef.current
+    const progress = sliderRef.current.scrollLeft
+    const totalWidth = element.scrollWidth - element.clientWidth
+    // console.log(scrollRef.current.scrollWidth - scrollRef.current.clientWidth);
+    const moved = Math.floor((progress / totalWidth) * 100)
+    console.log(progress)
+    if (Math.floor(progress) <= 0) {
+      setScrollWidth(totalWidth)
+      return false
+    }
+    if (progress > totalWidth) {
+      setScrollWidth(0)
+      return false
+    }
+    setScrollWidth(moved)
+  }
+
+  useEffect(() => {
+    if (scrollWidth) {
+      const index = Math.floor((scrollWidth * (sliderImgs.length - 2)) / 100)
+      console.log("index!", index)
+      setIndex(index + 1)
+    }
+  }, [scrollWidth])
 
   //retrieve image data from context
   useEffect(() => {
@@ -155,20 +188,20 @@ const Header = () => {
     }
   }, [sliderImgs, scrollRef])
 
-  useEffect(() => {
-    if (!loading && scrollRef.current) {
-      let interval = setInterval(() => {
-        handleTimedSlide()
-      }, 7000)
+  // useEffect(() => {
+  //   if (!loading && scrollRef.current) {
+  //     let interval = setInterval(() => {
+  //       handleTimedSlide()
+  //     }, 7000)
 
-      setTime(interval)
-    }
-  }, [loading, scrollRef, restarted])
+  //     setTime(interval)
+  //   }
+  // }, [loading, scrollRef, restarted])
 
   if (!pageContent) {
     return <p>please wait...</p>
   }
-  console.log("time!", scrollRef)
+
   return (
     <header className={layoutStyles.header__section}>
       <div className={layoutStyles.buttons}>
@@ -193,7 +226,12 @@ const Header = () => {
       </div>
       <div className={layoutStyles.overlay} />
 
-      <div className={layoutStyles.slider} ref={sliderRef}>
+      <div
+        className={layoutStyles.slider}
+        ref={sliderRef}
+        onScroll={e => handleMobileSwipe(e)}
+        onTransitionEnd={e => console.log("does this have a tranaition")}
+      >
         <div
           className={layoutStyles.inner}
           ref={scrollRef}
