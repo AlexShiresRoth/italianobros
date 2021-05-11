@@ -41,6 +41,7 @@
   & .inner {
     display: flex;
     height: 100%;
+    min-width: 3000px;
     & .imgContainer {
       width: 100vw;
       height: 100%;

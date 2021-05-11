@@ -24,10 +24,9 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
 
   const [paused, setPaused] = useState(false)
 
-  const handleInitialSliderWidth = length => {
-    const newWidth = length * 100
-    setSliderWidth(newWidth)
-  }
+  //set the width in the view port
+  const handleInitialSliderWidth = (length, width) =>
+    setSliderWidth(length * width)
 
   const endTransition = () => {
     //once transition is complete allow for next slide
@@ -102,25 +101,24 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
   }, [imageWidth])
 
   useEffect(() => {
-    if (!loading && !shifting) {
+    if (!loading) {
       timeID = setTimeout(() => {
         console.log("is paused?", paused)
         if (!paused) handleTimedSlide()
       }, 7000)
     }
     return () => clearTimeout(timeID)
-  }, [loading, paused, currentIndex, shifting])
+  }, [loading, paused, currentIndex])
 
   useEffect(() => {
     handleScroll()
   }, [currentIndex, scrollWidth])
 
   useEffect(() => {
-    if (sliderImgs.length > 0 && scrollRef.current) {
-      handleInitialSliderWidth(sliderImgs.length)
-      loadData(false)
+    if (sliderImgs.length > 0) {
+      handleInitialSliderWidth(sliderImgs.length, window.innerWidth)
     }
-  }, [sliderImgs, scrollRef])
+  }, [sliderImgs])
 
   useEffect(() => {
     if (sliderImgs.length > 0) {
@@ -128,7 +126,8 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
     }
   }, [sliderImgs])
 
-  console.log("is loading?", scrollWidth, currentIndex, imageWidth)
+  console.log("is loading?", sliderWidth)
+
   return (
     <>
       <div className={layoutStyles.buttons}>
@@ -163,7 +162,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
           ref={scrollRef}
           onTransitionEnd={() => endTransition()}
           style={{
-            minWidth: `${sliderWidth}vw`,
+            minWidth: `${sliderWidth}px`,
           }}
         >
           {sliderImgs.map((img, i) => {
