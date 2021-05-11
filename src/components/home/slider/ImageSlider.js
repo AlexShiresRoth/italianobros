@@ -1,14 +1,12 @@
 import React, { createRef, useEffect, useRef, useState } from "react"
 import PropTypes from "prop-types"
+import { ChevronRight, ChevronLeft } from "react-feather"
 
-const MobileSlider = ({ layoutStyles, sliderImgs }) => {
+const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
+  let timeID
   const scrollRef = useRef()
 
   const sliderRef = createRef()
-
-  const [scrollAmt, setScrollAmt] = useState(0)
-
-  const [timeID, setTime] = useState(null)
 
   const [currentIndex, setIndex] = useState(1)
 
@@ -24,37 +22,7 @@ const MobileSlider = ({ layoutStyles, sliderImgs }) => {
 
   const [loading, loadData] = useState(true)
 
-  const [restarted, setRestart] = useState(null)
-
-  //Scrolling needs to update where progress is
-  //if progress gets to  end, reset and scroll to begininning without a transition
-  const handleMobileSwipe = e => {
-    // console.log("scrolllll")
-    if (!sliderRef.current) return
-    const element = sliderRef.current
-    const progress = sliderRef.current.scrollLeft
-    const totalWidth = element.scrollWidth - element.clientWidth
-    // console.log(scrollRef.current.scrollWidth - scrollRef.current.clientWidth);
-    const moved = Math.floor((progress / totalWidth) * 100)
-    // console.log(progress)
-    if (Math.floor(progress) <= 0) {
-      setScrollAmt(totalWidth)
-      return false
-    }
-    if (progress > totalWidth) {
-      setScrollAmt(0)
-      return false
-    }
-    setScrollAmt(moved)
-  }
-
-  useEffect(() => {
-    if (scrollAmt) {
-      const index = Math.floor((scrollAmt * (sliderImgs.length - 2)) / 100)
-      console.log("index!", index)
-      setIndex(index + 1)
-    }
-  }, [scrollAmt])
+  const [paused, setPaused] = useState(false)
 
   const handleInitialSliderWidth = length => {
     const newWidth = length * 100
@@ -63,9 +31,10 @@ const MobileSlider = ({ layoutStyles, sliderImgs }) => {
 
   const endTransition = () => {
     //once transition is complete allow for next slide
+
     setShifting(false)
     scrollRef.current.style.transition = "all 0s ease"
-
+    console.log("transition ended", shifting)
     if (currentIndex >= max) {
       console.log("MAXREACH", currentIndex)
       setScrollWidth(-(1 * imageWidth))
@@ -78,8 +47,48 @@ const MobileSlider = ({ layoutStyles, sliderImgs }) => {
     }
   }
 
-  //   //a positive integer scrolls to the right
-  const handleTimedSlide = () => {}
+  //a positive integer scrolls to the right
+  const handleTimedSlide = () => handleIndexChange(1)
+
+  const handleIndexChange = val => {
+    console.log("indexxxx change", shifting)
+    // Val will either be 1 or null
+    //if slide is in transition, disable index change in order to prevent transitionend from not being triggered
+    if (shifting) return
+
+    if (!scrollRef || !scrollRef.current) return
+    //appear to be moving right
+    if (val) {
+      //set state of slide to be transitioning
+      setShifting(true)
+      //activate transition
+      scrollRef.current.style.transition = "all 1.3s ease"
+      //index determines where in sequence
+      setIndex(prevState => prevState + 1)
+      //scroll width determines size of slide
+      setScrollWidth(prevWidth => prevWidth - imageWidth)
+      return false
+    }
+
+    //appear to be moving left
+    if (!val) {
+      //set state of slide to be transitioning
+      setShifting(true)
+      //activate transition
+      scrollRef.current.style.transition = "all 1.3s ease"
+      //index determines where in sequence
+      setIndex(prevState => prevState - 1)
+      //scroll width determines size of slide
+      setScrollWidth(prevState => prevState + imageWidth)
+      return false
+    }
+  }
+
+  //update scroll point on index change
+  const handleScroll = () => {
+    if (scrollRef.current)
+      scrollRef.current.style.transform = `translate3d(${scrollWidth}px, 0,0)`
+  }
 
   //set initial image width
   useEffect(() => {
@@ -92,17 +101,19 @@ const MobileSlider = ({ layoutStyles, sliderImgs }) => {
     if (imageWidth) setScrollWidth(-imageWidth)
   }, [imageWidth])
 
-  //   useEffect(() => {
-  //     if (!loading && scrollRef.current) {
-  //       let interval = setInterval(() => {
-  //         handleTimedSlide()
-  //       }, 7000)
+  useEffect(() => {
+    if (!loading && !shifting) {
+      timeID = setTimeout(() => {
+        console.log("is paused?", paused)
+        if (!paused) handleTimedSlide()
+      }, 7000)
+    }
+    return () => clearTimeout(timeID)
+  }, [loading, paused, currentIndex, shifting])
 
-  //       setTime(interval)
-  //     }
-
-  //     return () => clearInterval(timeID)
-  //   }, [loading, scrollRef, restarted])
+  useEffect(() => {
+    handleScroll()
+  }, [currentIndex, scrollWidth])
 
   useEffect(() => {
     if (sliderImgs.length > 0 && scrollRef.current) {
@@ -117,14 +128,34 @@ const MobileSlider = ({ layoutStyles, sliderImgs }) => {
     }
   }, [sliderImgs])
 
+  console.log("is loading?", scrollWidth, currentIndex, imageWidth)
   return (
     <>
+      <div className={layoutStyles.buttons}>
+        <button
+          onPointerDown={e => {
+            handleIndexChange(0)
+          }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <ChevronLeft size={55} />
+        </button>
+        <button
+          onPointerDown={e => {
+            handleIndexChange(1)
+          }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <ChevronRight size={55} />
+        </button>
+      </div>
       <div className={layoutStyles.overlay} />
 
       <div
         className={layoutStyles.slider}
         ref={sliderRef}
-        onScroll={e => handleMobileSwipe(e)}
         onTouchEnd={e => endTransition()}
       >
         <div
@@ -158,7 +189,7 @@ const MobileSlider = ({ layoutStyles, sliderImgs }) => {
                 transition:
                   currentIndex >= sliderImgs.length - 1
                     ? "all 0s"
-                    : "all .8s ease",
+                    : "all 1.3s ease",
               }}
             ></span>
           )
@@ -168,6 +199,6 @@ const MobileSlider = ({ layoutStyles, sliderImgs }) => {
   )
 }
 
-MobileSlider.propTypes = {}
+ImageSlider.propTypes = {}
 
-export default MobileSlider
+export default ImageSlider

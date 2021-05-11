@@ -1,15 +1,9 @@
-import React, {
-  createRef,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import layoutStyles from "./headerstyles/Header.module.scss"
 import wideScreenLayoutStyles from "./headerstyles/HeaderDesktop.module.scss"
 import { ContentContext } from "../RootLayout"
-import ImageSlider from "./ImageSlider"
+import Slider from "./slider/Slider"
 
 const Header = () => {
   const { pageContent } = useContext(ContentContext)
@@ -33,7 +27,7 @@ const Header = () => {
 
   return (
     <header className={layoutStyles.header__section}>
-      <ImageSlider sliderImgs={sliderImgs} layoutStyles={layoutStyles} />
+      <Slider sliderImgs={sliderImgs} layoutStyles={layoutStyles} />
       <div className={layoutStyles.herobox}>
         <h1
           className={`${layoutStyles.heading} ${wideScreenLayoutStyles.desktop__heading}`}
