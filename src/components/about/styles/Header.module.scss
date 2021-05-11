@@ -3,16 +3,13 @@
 
 @media screen and (min-width: 601px) {
   .about__header {
-    background: url("https://res.cloudinary.com/snackmanproductions/image/upload/c_scale,q_51,w_2067/v1568246114/italianobros/about/about-header_ngompt.jpg");
-
-    @include mobile-header;
+    @include mobile_header;
+    background-position: center 25%;
   }
 }
 
 @media screen and (max-width: 600px) {
   .about__header {
-    background: url("https://res.cloudinary.com/snackmanproductions/image/upload/c_scale,q_51,w_2067/v1568246114/italianobros/about/about-header_ngompt.jpg");
-
     @include mobile-header;
   }
 }

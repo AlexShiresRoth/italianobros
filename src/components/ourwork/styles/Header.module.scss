@@ -3,16 +3,15 @@
 
 @media screen and (min-width: 601px) {
   .ourwork__header {
-    background: url("https://res.cloudinary.com/snackmanproductions/image/upload/c_scale,q_51,w_2067/v1568248716/italianobros/ourwork/ourwork-header_iejwel.jpg");
-
     @include mobile-header;
+    background-position: "center 85%";
+    background-repeat: "no-repeat";
+    background-attachment: "fixed";
   }
 }
 
 @media screen and (max-width: 600px) {
   .ourwork__header {
-    background: url("https://res.cloudinary.com/snackmanproductions/image/upload/c_scale,q_51,w_2067/v1568248716/italianobros/ourwork/ourwork-header_iejwel.jpg");
-
     @include mobile-header;
   }
 }

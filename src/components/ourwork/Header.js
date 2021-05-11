@@ -11,10 +11,7 @@ const Header = () => {
     <header
       className={layoutStyles.ourwork__header}
       style={{
-        background: `url(${pageContent.data["header-img"].url})`,
-        backgroundPosition: "center 85%",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
+        backgroundImage: `url(${pageContent.data["header-img"].url})`,
       }}
     ></header>
   )

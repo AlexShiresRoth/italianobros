@@ -24,6 +24,14 @@ const Slider = ({ sliderImgs, layoutStyles }) => {
     }
   }, [])
 
+  if (sliderImgs.length === 0) {
+    return (
+      <div>
+        <p>Loading images...</p>
+      </div>
+    )
+  }
+
   if (isMobile) {
     return (
       <MobileGallery

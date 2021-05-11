@@ -48,7 +48,7 @@ const MobileGallery = ({ layoutStyles, sliderImgs, reset }) => {
   useEffect(() => {
     if (scrollAmt) {
       const index = Math.floor((scrollAmt * (sliderImgs.length - 2)) / 100)
-      console.log("index!", index)
+      console.log("index!", index + 1)
       setIndex(index + 1)
     }
   }, [scrollAmt])

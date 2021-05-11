@@ -13,10 +13,7 @@ const Header = () => {
     <header
       className={layoutStyles.header__section}
       style={{
-        background: `url(${pageContent.data["services-heading-image"].url})`,
-        backgroundPosition: "bottom",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
+        backgroundImage: `url(${pageContent.data["services-heading-image"].url})`,
       }}
     ></header>
   )
