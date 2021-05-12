@@ -61,7 +61,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
       //set state of slide to be transitioning
       setShifting(true)
       //activate transition
-      scrollRef.current.style.transition = "all 1.3s ease"
+      scrollRef.current.style.transition = "all 1.1s ease"
       //index determines where in sequence
       setIndex(prevState => prevState + 1)
       //scroll width determines size of slide
@@ -74,7 +74,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
       //set state of slide to be transitioning
       setShifting(true)
       //activate transition
-      scrollRef.current.style.transition = "all 1.3s ease"
+      scrollRef.current.style.transition = "all 1.1s ease"
       //index determines where in sequence
       setIndex(prevState => prevState - 1)
       //scroll width determines size of slide
@@ -123,10 +123,11 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
   useEffect(() => {
     if (sliderImgs.length > 0) {
       setMax(sliderImgs.length - 1)
+      loadData(false)
     }
   }, [sliderImgs])
 
-  console.log("is loading?", sliderWidth)
+  console.log("is loading?", sliderWidth, paused, loading)
 
   return (
     <>
