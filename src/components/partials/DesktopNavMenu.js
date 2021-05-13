@@ -27,12 +27,12 @@ const DesktopNavMenu = props => {
             to="/Services"
             style={{ textDecoration: "none" }}
             activeClassName={wideScreenLayoutStyles.active}
+            className={wideScreenLayoutStyles.services_list}
           >
             <li className={wideScreenLayoutStyles.dt__li}>Services</li>
           </Link>
-          {props.serviceToggle ? (
-            <ServiceMenu toggled={props.serviceToggle} />
-          ) : null}
+
+          <ServiceMenu toggled={props.serviceToggle} />
         </div>
         <div className={wideScreenLayoutStyles.dt__nav__item}>
           <Link

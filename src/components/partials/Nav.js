@@ -1,6 +1,5 @@
 import React, { Fragment } from "react"
 import { Link } from "gatsby"
-
 import NavMenu from "./NavMenu"
 import Contact from "./Contact"
 import MobileMenu from "./MobileMenu"

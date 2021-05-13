@@ -34,9 +34,11 @@
   opacity: 0.8;
   z-index: 1;
   scroll-snap-type: x mandatory;
-
+  scrollbar-width:none;
+  -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
+    height:0;
   }
   & .inner {
     display: flex;
