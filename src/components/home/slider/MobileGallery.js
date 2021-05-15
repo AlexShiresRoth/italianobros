@@ -9,10 +9,8 @@ const MobileGallery = ({ layoutStyles, sliderImgs, reset }) => {
 
   const indexChange = () => {
     //once transition is complete allow for next slide
-    setIndex(prevIndex => prevIndex + 1)
 
     if (currentIndex >= max) {
-      console.log("MAXREACH", currentIndex)
       setIndex(1)
     }
     if (currentIndex <= 0) {
@@ -22,8 +20,12 @@ const MobileGallery = ({ layoutStyles, sliderImgs, reset }) => {
 
   useEffect(() => {
     timeID = setTimeout(() => {
-      indexChange()
-    }, 5000)
+      setIndex(prevIndex => prevIndex + 1)
+    }, 7000)
+  }, [currentIndex])
+
+  useEffect(() => {
+    indexChange()
   }, [currentIndex])
 
   useEffect(() => {
@@ -34,16 +36,16 @@ const MobileGallery = ({ layoutStyles, sliderImgs, reset }) => {
 
   return (
     <>
-      <div className={layoutStyles.overlay} />
+      <div className={style.overlay} />
 
-      <div className={layoutStyles.slider}>
-        <div className={layoutStyles.inner}>
+      <div className={style.slider}>
+        <div className={style.inner}>
           {sliderImgs.map((img, i) => {
             return (
               <div
                 className={
                   currentIndex === i
-                    ? layoutStyles.imgContainer
+                    ? style.imgContainer
                     : style.imgContainer__hidden
                 }
                 key={i}
@@ -55,13 +57,13 @@ const MobileGallery = ({ layoutStyles, sliderImgs, reset }) => {
         </div>
       </div>
 
-      <div className={layoutStyles.index_marker}>
+      <div className={style.index_marker}>
         {sliderImgs.map((_, i) => {
           return (
             <span
               key={i}
               onPointerDown={e => setIndex(i)}
-              className={currentIndex === i ? layoutStyles.active : ""}
+              className={currentIndex === i ? style.active : ""}
               style={{
                 display:
                   i === 0 || i === sliderImgs.length - 1 ? "none" : "block",
