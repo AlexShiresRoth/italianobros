@@ -13,14 +13,17 @@ const Section = styled.section`
 `
 
 const Container = styled.div`
-  margin: -2rem 0;
+  margin: -2.5rem 0;
   z-index: 10;
-  padding: 3rem;
-  box-shadow: 0 1px 10px #66666666;
+  padding: 4rem;
   background: #fff;
   display: flex;
   flex-direction: column;
   max-width: 60%;
+  border-left: 5px solid #ceb862;
+  @media screen and (max-width: 760px) {
+    max-width: 90%;
+  }
 `
 
 const Services = () => {

@@ -7,7 +7,7 @@ const Slider = styled.div`
   position: absolute;
   overflow: scroll;
   width: 100vw;
-  height: 75vh;
+  height: 40rem;
   display: flex;
   flex-direction: column;
   z-index: 1;
@@ -175,7 +175,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
     }
   }, [sliderImgs])
 
-  console.log("is loading?", sliderWidth, paused, loading)
+  console.log("is loading?", sliderWidth, paused, loading, window.innerWidth)
 
   return (
     <>
@@ -208,7 +208,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
           ref={scrollRef}
           onTransitionEnd={() => endTransition()}
           style={{
-            minWidth: `${sliderWidth}px`,
+            width: `${sliderWidth}px`,
           }}
         >
           {sliderImgs.map((img, i) => {

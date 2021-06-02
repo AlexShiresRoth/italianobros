@@ -11,13 +11,13 @@ const HeaderSection = styled.header`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: url(${props => props.datatype});
   background-size: cover;
   background-position: 50% 0vh;
   background-repeat: no-repeat;
-  height: 75vh;
+  height: 40rem;
   overflow: hidden;
   position: relative;
-  margin-top: 2rem;
 `
 
 const Heading = styled.h1`
@@ -29,6 +29,20 @@ const Heading = styled.h1`
   font-size: 4.3rem;
   text-shadow: 0 1px 20px #99999933;
   text-align: center;
+
+  @media screen and (max-width: 760px) {
+    font-size: 2.5rem;
+    line-height: 1.5;
+  }
+`
+
+const HeroBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4rem;
+  z-index: 20;
 `
 
 const Header = () => {
@@ -52,9 +66,9 @@ const Header = () => {
   }
 
   return (
-    <HeaderSection>
+    <HeaderSection datatype={sliderImgs[0]}>
       <Slider sliderImgs={sliderImgs} layoutStyles={layoutStyles} />
-      <div className={layoutStyles.herobox}>
+      <HeroBox>
         <Heading>
           {pageContent.data["mainpage-header"][0]["mainpage-slogan"][0].text}
         </Heading>
@@ -65,7 +79,7 @@ const Header = () => {
             Learn More
           </button>
         </Link>
-      </div>
+      </HeroBox>
     </HeaderSection>
   )
 }
