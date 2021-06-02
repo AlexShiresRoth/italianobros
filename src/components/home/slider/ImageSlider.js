@@ -1,6 +1,52 @@
 import React, { createRef, useEffect, useRef, useState } from "react"
 import PropTypes from "prop-types"
 import { ChevronRight, ChevronLeft } from "react-feather"
+import styled from "styled-components"
+
+const Slider = styled.div`
+  position: absolute;
+  overflow: scroll;
+  width: 100vw;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+    height: 0;
+  }
+`
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  height: 100%;
+  width: 100%;
+  opacity: 0.4;
+  z-index: 2;
+`
+const Inner = styled.div`
+  display: flex;
+  height: 100%;
+  min-width: 3000px;
+  z-index: 2;
+`
+
+const ImgContainer = styled.div`
+  width: 100vw;
+  height: 100%;
+  scroll-snap-align: center;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`
 
 const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
   let timeID
@@ -23,6 +69,8 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
   const [loading, loadData] = useState(true)
 
   const [paused, setPaused] = useState(false)
+
+  const [showArrows, setArrows] = useState(false)
 
   //set the width in the view port
   const handleInitialSliderWidth = (length, width) =>
@@ -53,7 +101,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
     console.log("indexxxx change", shifting)
     // Val will either be 1 or null
     //if slide is in transition, disable index change in order to prevent transitionend from not being triggered
-    if (shifting) return
+    // if (shifting) return
 
     if (!scrollRef || !scrollRef.current) return
     //appear to be moving right
@@ -66,7 +114,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
       setIndex(prevState => prevState + 1)
       //scroll width determines size of slide
       setScrollWidth(prevWidth => prevWidth - imageWidth)
-      return false
+      return
     }
 
     //appear to be moving left
@@ -79,7 +127,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
       setIndex(prevState => prevState - 1)
       //scroll width determines size of slide
       setScrollWidth(prevState => prevState + imageWidth)
-      return false
+      return
     }
   }
 
@@ -105,7 +153,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
       timeID = setTimeout(() => {
         console.log("is paused?", paused)
         if (!paused) handleTimedSlide()
-      }, 7000)
+      }, 4000)
     }
     return () => clearTimeout(timeID)
   }, [loading, paused, currentIndex])
@@ -131,35 +179,32 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
 
   return (
     <>
-      <div className={layoutStyles.buttons}>
-        <button
-          onPointerDown={e => {
-            handleIndexChange(0)
-          }}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          <ChevronLeft size={55} />
-        </button>
-        <button
-          onPointerDown={e => {
-            handleIndexChange(1)
-          }}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          <ChevronRight size={55} />
-        </button>
-      </div>
-      <div className={layoutStyles.overlay} />
+      {showArrows && (
+        <div className={layoutStyles.buttons}>
+          <button
+            onPointerDown={e => {
+              handleIndexChange(0)
+            }}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            <ChevronLeft size={55} />
+          </button>
+          <button
+            onPointerDown={e => {
+              handleIndexChange(1)
+            }}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            <ChevronRight size={55} />
+          </button>
+        </div>
+      )}
+      <Overlay />
 
-      <div
-        className={layoutStyles.slider}
-        ref={sliderRef}
-        onTouchEnd={e => endTransition()}
-      >
-        <div
-          className={layoutStyles.inner}
+      <Slider ref={sliderRef} onTouchEnd={e => endTransition()}>
+        <Inner
           ref={scrollRef}
           onTransitionEnd={() => endTransition()}
           style={{
@@ -168,13 +213,13 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
         >
           {sliderImgs.map((img, i) => {
             return (
-              <div className={layoutStyles.imgContainer} key={i}>
+              <ImgContainer key={i}>
                 <img src={img.url} alt="work" />
-              </div>
+              </ImgContainer>
             )
           })}
-        </div>
-      </div>
+        </Inner>
+      </Slider>
 
       <div className={layoutStyles.index_marker}>
         {sliderImgs.map((_, i) => {

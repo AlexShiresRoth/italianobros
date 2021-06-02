@@ -22,6 +22,8 @@ const MobileGallery = ({ layoutStyles, sliderImgs, reset }) => {
     timeID = setTimeout(() => {
       setIndex(prevIndex => prevIndex + 1)
     }, 7000)
+
+    return () => clearTimeout(timeID)
   }, [currentIndex])
 
   useEffect(() => {

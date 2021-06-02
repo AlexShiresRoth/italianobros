@@ -3,6 +3,25 @@ import { Link } from "gatsby"
 
 import layoutStyles from "./servicestyles/Services.module.scss"
 import { ContentContext } from "../RootLayout"
+import styled from "styled-components"
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const Container = styled.div`
+  margin: -2rem 0;
+  z-index: 10;
+  padding: 3rem;
+  box-shadow: 0 1px 10px #66666666;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+`
 
 const Services = () => {
   const { pageContent } = useContext(ContentContext)
@@ -18,8 +37,8 @@ const Services = () => {
   const { data } = pageContent
 
   return (
-    <section className={layoutStyles.services__section}>
-      <div className={layoutStyles.container}>
+    <Section>
+      <Container>
         <div className={layoutStyles.heading}>
           <h3 className={layoutStyles.services__h3}>
             {data["mainpage-section1"][0]["mainpage-heading1"][0].text}
@@ -39,8 +58,8 @@ const Services = () => {
             <button className={layoutStyles.button}>Learn More</button>
           </Link>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   )
 }
 
