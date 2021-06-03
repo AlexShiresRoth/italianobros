@@ -3,84 +3,125 @@ import { Link } from "gatsby"
 
 import { ServiceMenu } from "./ServiceMenu"
 import wideScreenLayoutStyles from "./navstyles/NavDesktop.module.scss"
+import styled from "styled-components"
 
-const DesktopNavMenu = props => {
+const TopTier = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`
+const Inner = styled.div`
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`
+const LogoBox = styled.div`
+  display: flex;
+  align-items: center;
+  max-width: 9rem;
+`
+const Grouping = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const Logo = styled.img`
+  object-fit: contain;
+  width: 100%;
+`
+const Item = styled.div`
+  & a {
+    text-decoration: none;
+  }
+`
+const List = styled.ul`
+  list-style: none;
+  display: flex;
+`
+
+const ListItem = styled.li`
+  color: #666;
+  font-size: 1.2rem;
+  margin: 0 1rem;
+  transition: all 0.3s ease;
+  &:hover {
+    color: #ceb862;
+  }
+`
+
+const DesktopNavMenu = ({
+  renderServicesHoverMenu,
+  removeServicesHoverMenu,
+  contactToggle,
+  contactToggled,
+}) => {
+  const links = [
+    { path: "/", text: "Home", hoverable: false },
+    { path: "/Services", text: "Services", hoverable: true },
+    { path: "/OurWork", text: "Our Work", hoverable: false },
+    { path: "/About", text: "About", hoverable: false },
+    { path: "/Location", text: "Location", hoverable: false },
+  ]
   return (
-    <div className={wideScreenLayoutStyles.dt__top__tier}>
-      <ul className={wideScreenLayoutStyles.dt__ul}>
-        <div className={wideScreenLayoutStyles.dt__nav__item}>
-          <Link
-            to="/"
-            style={{ textDecoration: "none" }}
-            activeClassName={wideScreenLayoutStyles.active}
-          >
-            <li className={wideScreenLayoutStyles.dt__li}>Home</li>
-          </Link>
-        </div>
-        <div
-          className={wideScreenLayoutStyles.dt__nav__item}
-          onMouseEnter={() => props.renderServicesHoverMenu()}
-          onMouseLeave={() => props.removeServicesHoverMenu()}
-          style={{ position: "relative" }}
-        >
-          <Link
-            to="/Services"
-            style={{ textDecoration: "none" }}
-            activeClassName={wideScreenLayoutStyles.active}
-            className={wideScreenLayoutStyles.services_list}
-          >
-            <li className={wideScreenLayoutStyles.dt__li}>Services</li>
-          </Link>
+    <>
+      <style>
+        {`.active li {
+      color:#CEB862;
+      border-bottom:2px solid transparent;
+      position:relative;
+    }
+    .active li::after{
+      content:"";
+      width:100%;
+      bottom:-110%;
+      left:0;
+      position:absolute;
+      border-bottom:2px solid #CEB862;
+    }`}
+      </style>
+      <TopTier>
+        <Inner>
+          <List>
+            {links.map((linkObj, key) => {
+              return linkObj.hoverable ? (
+                <Item
+                  key={key}
+                  onMouseEnter={e => renderServicesHoverMenu()}
+                  onMouseLeave={e => removeServicesHoverMenu()}
+                >
+                  <Link to={linkObj.path} activeClassName="active">
+                    <ListItem>{linkObj.text}</ListItem>
+                  </Link>
+                </Item>
+              ) : (
+                <Item>
+                  <Link to={linkObj.path} activeClassName="active">
+                    <ListItem>{linkObj.text}</ListItem>
+                  </Link>
+                </Item>
+              )
+            })}
+          </List>
+          <LogoBox>
+            <Logo
+              src={
+                "https://res.cloudinary.com/snackmanproductions/image/upload/v1568323268/italianobros/logos/Black_s394t0.png"
+              }
+              alt="italiano bros logo"
+            />
+          </LogoBox>
 
-          <ServiceMenu toggled={props.serviceToggle} />
-        </div>
-        <div className={wideScreenLayoutStyles.dt__nav__item}>
-          <Link
-            to="/OurWork"
-            style={{ textDecoration: "none" }}
-            activeClassName={wideScreenLayoutStyles.active}
+          <div />
+          <button
+            className={wideScreenLayoutStyles.dt__button}
+            onClick={contactToggle}
           >
-            <li className={wideScreenLayoutStyles.dt__li}>Our Work</li>
-          </Link>
-        </div>
-        <div className={wideScreenLayoutStyles.dt__nav__item}>
-          <Link
-            to="/About"
-            style={{ textDecoration: "none" }}
-            activeClassName={wideScreenLayoutStyles.active}
-          >
-            <li className={wideScreenLayoutStyles.dt__li}>About</li>
-          </Link>
-        </div>
-        <div className={wideScreenLayoutStyles.dt__nav__item}>
-          <Link
-            to="/Location"
-            style={{ textDecoration: "none" }}
-            activeClassName={wideScreenLayoutStyles.active}
-          >
-            <li className={wideScreenLayoutStyles.dt__li}>Contact</li>
-          </Link>
-        </div>
-      </ul>
-      <div className={wideScreenLayoutStyles.dt__logo__nav}>
-        <Link to="/">
-          <img
-            src={
-              "https://res.cloudinary.com/snackmanproductions/image/upload/v1568323268/italianobros/logos/Black_s394t0.png"
-            }
-            alt="italiano bros logo"
-            className={wideScreenLayoutStyles.dt__logo__nav}
-          />
-        </Link>
-      </div>
-      <div />
-      <button
-        className={wideScreenLayoutStyles.dt__button}
-        onClick={props.contactToggle}
-      >
-        {!props.contactToggled ? `Get A Quote` : `Close`}
-      </button>
-    </div>
+            {!contactToggled ? `Get A Quote` : `Close`}
+          </button>
+        </Inner>
+      </TopTier>
+    </>
   )
 }
 

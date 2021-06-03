@@ -71,14 +71,14 @@ html,
 body {
   font-size: 80%;
   letter-spacing: 1.3px;
-  font-family: proxima-nova, sans-serif;
+  font-family: jaf-bernina-sans, sans-serif;
   font-weight: 400;
   font-style: normal;
   padding: 0;
   animation: fadeIn 1s ease-in-out; }
 
 p {
-  font-family: proxima-nova, sans-serif;
+  font-family: jaf-bernina-sans, sans-serif;
   font-weight: 400;
   font-style: normal; }
 
