@@ -10,6 +10,7 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-top: 5px solid #ceb86266;
 `
 
 const Container = styled.div`
@@ -21,9 +22,10 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 60%;
-  border-left: 5px solid #ceb862;
   @media screen and (max-width: 760px) {
     max-width: 90%;
+    width: 90%;
+    padding: 1rem;
   }
 `
 const Inner = styled.div`

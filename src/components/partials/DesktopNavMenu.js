@@ -9,6 +9,11 @@ const TopTier = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: relative;
+  @media screen and (max-width: 760px) {
+    display: none;
+    max-height: 0;
+  }
 `
 const Inner = styled.div`
   width: 90%;
@@ -20,10 +25,6 @@ const LogoBox = styled.div`
   display: flex;
   align-items: center;
   max-width: 9rem;
-`
-const Grouping = styled.div`
-  display: flex;
-  align-items: center;
 `
 
 const Logo = styled.img`
@@ -45,14 +46,45 @@ const ListItem = styled.li`
   font-size: 1.2rem;
   margin: 0 1rem;
   transition: all 0.3s ease;
+  position: relative;
+
+  &:after {
+    content: " ";
+    width: 0%;
+    bottom: -125%;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    border-bottom: 2px solid #ceb862;
+    transition: all 0.3s ease;
+  }
   &:hover {
     color: #ceb862;
+    &::after {
+      content: " ";
+      width: 100%;
+      right: 0;
+    }
+  }
+`
+
+const Button = styled.button`
+  border: 1px solid #ceb862;
+  background: transparent;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  font-weight: 500;
+  height: 3.2rem;
+  width: 15rem;
+  &:hover {
+    cursor: pointer;
+    background: #ceb862;
+    color: #fff;
   }
 `
 
 const DesktopNavMenu = ({
-  renderServicesHoverMenu,
-  removeServicesHoverMenu,
+  setServiceToggle,
   contactToggle,
   contactToggled,
 }) => {
@@ -63,6 +95,7 @@ const DesktopNavMenu = ({
     { path: "/About", text: "About", hoverable: false },
     { path: "/Location", text: "Location", hoverable: false },
   ]
+
   return (
     <>
       <style>
@@ -71,13 +104,13 @@ const DesktopNavMenu = ({
       border-bottom:2px solid transparent;
       position:relative;
     }
-    .active li::after{
-      content:"";
-      width:100%;
-      bottom:-110%;
-      left:0;
-      position:absolute;
-      border-bottom:2px solid #CEB862;
+      .active li::after{
+        content:"";
+        width:100%;
+        bottom:-125%;
+        left:0;
+        position:absolute;
+        border-bottom:2px solid #CEB862;
     }`}
       </style>
       <TopTier>
@@ -87,8 +120,8 @@ const DesktopNavMenu = ({
               return linkObj.hoverable ? (
                 <Item
                   key={key}
-                  onMouseEnter={e => renderServicesHoverMenu()}
-                  onMouseLeave={e => removeServicesHoverMenu()}
+                  onMouseEnter={e => setServiceToggle(true)}
+                  onMouseLeave={e => setServiceToggle(false)}
                 >
                   <Link to={linkObj.path} activeClassName="active">
                     <ListItem>{linkObj.text}</ListItem>
@@ -113,12 +146,9 @@ const DesktopNavMenu = ({
           </LogoBox>
 
           <div />
-          <button
-            className={wideScreenLayoutStyles.dt__button}
-            onClick={contactToggle}
-          >
-            {!contactToggled ? `Get A Quote` : `Close`}
-          </button>
+          <Button onClick={() => contactToggle(!contactToggled)}>
+            {!contactToggled ? `Contact Us` : `Close`}
+          </Button>
         </Inner>
       </TopTier>
     </>

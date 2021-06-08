@@ -1,163 +1,118 @@
-import React, { Fragment } from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 import NavMenu from "./NavMenu"
 import Contact from "./Contact"
 import MobileMenu from "./MobileMenu"
 import DesktopNavMenu from "./DesktopNavMenu"
+import styled from "styled-components"
 
-import layoutStyles from "./navstyles/Nav.module.scss"
-import wideScreenLayoutStyles from "./navstyles/NavDesktop.module.scss"
-
-export default class Nav extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      toggled: false,
-      contactToggled: false,
-      serviceToggle: false,
-      isMobile: false,
-    }
-    this.handleWindowResize = this.handleWindowResize.bind(this)
-    this.renderServicesHoverMenu = this.renderServicesHoverMenu.bind(this)
-    this.removeServicesHoverMenu = this.removeServicesHoverMenu.bind(this)
-    this.contactToggle = this.contactToggle.bind(this)
+const NavContainer = styled.nav`
+  width: 100%;
+  min-height: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: #fff;
+  box-shadow: 0 1px 30px #66666622;
+  @media screen and (max-width: 760px) {
+    align-items: center;
+    padding-bottom: 0;
   }
+`
+const MobileGrouping = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+`
+
+const LogoContainer = styled.div`
+  display: none;
+  @media screen and (max-width: 760px) {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    & img {
+      max-width: 8rem;
+      object-fit: contain;
+    }
+  }
+`
+
+const Nav = () => {
+  const [toggled, setToggled] = useState(false)
+  const [contactToggled, contactToggle] = useState(false)
+  const [serviceToggle, setServiceToggle] = useState(false)
+  const [isMobile, setMobile] = useState(false)
 
   //handles when service menus are toggled to stop background scrolling
-  handleScrolling = () => {
-    if (this.state.toggled || this.state.contactToggled) {
-      document.body.style.overflowY = "hidden"
-    } else {
-      document.body.style.overflowY = "scroll"
-    }
-  }
+
   // if nav menu is open on resize to different media query, close out
-  handleWindowResizeWithToggledMenu() {
-    if (this.state.toggled && !this.state.isMobile) {
-      this.setState({ toggled: !this.state.toggled })
+  const handleWindowResizeWithToggledMenu = () => {
+    if (toggled && !isMobile) {
+      setToggled(!toggled)
     }
-  }
-  toggleNav = () => {
-    this.state.toggled
-      ? this.setState({ toggled: false })
-      : this.setState({ toggled: true, contactToggled: false })
-    console.log(this.state.toggled)
   }
 
-  contactToggle = () => {
-    this.state.contactToggled
-      ? this.setState({ contactToggled: false })
-      : this.setState({ contactToggled: true, toggled: false })
-  }
-  renderServicesHoverMenu() {
-    if (!this.state.serviceToggle) {
-      this.setState({ serviceToggle: true })
-    }
-  }
-  removeServicesHoverMenu() {
-    if (this.state.serviceToggle) {
-      this.setState({ serviceToggle: false })
-    }
-  }
   //sets state to mobile view
-  handleWindowResize = () => {
-    this.setState({
-      isMobile: window.innerWidth < 860,
-    })
-  }
-  componentDidMount() {
-    window.addEventListener("resize", this.handleWindowResize)
-    this.handleWindowResize()
-    this.handleScrolling()
-  }
+  const handleWindowResize = () => setMobile(window.innerWidth < 860)
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleWindowResize)
-    this.handleScrolling()
-  }
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize)
+    handleWindowResize()
+  }, [])
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.toggled !== prevState.toggled ||
-      this.state.contactToggled !== prevState.contactToggled
-    ) {
-      this.handleScrolling()
+  useEffect(() => {
+    if (toggled) {
+      //close the contact form and open pages menu
+      contactToggle(false)
     }
-    if (this.state.isMobile !== prevState.isMobile) {
-      this.handleWindowResizeWithToggledMenu()
+  }, [toggled])
+
+  useEffect(() => {
+    if (contactToggled) {
+      //close the pages menu and open form
+      setToggled(false)
     }
-  }
+  }, [contactToggled])
 
-  render() {
-    return (
-      <Fragment>
-        <nav
-          className={
-            this.state.isMobile
-              ? layoutStyles.navbar__container
-              : wideScreenLayoutStyles.dt__navbar__container
-          }
-        >
-          <div
-            className={
-              this.state.isMobile
-                ? layoutStyles.nb__top
-                : wideScreenLayoutStyles.dt__top
-            }
-          >
-            {this.state.isMobile ? (
-              <NavMenu onClick={this.toggleNav} toggled={this.state.toggled} />
-            ) : null}
-            <div
-              className={
-                this.state.isMobile
-                  ? layoutStyles.none
-                  : wideScreenLayoutStyles.dt__top__tier
+  useEffect(() => {
+    handleWindowResizeWithToggledMenu()
+  }, [isMobile])
+
+  return (
+    <NavContainer>
+      <MobileGrouping>
+        <NavMenu onClick={setToggled} toggled={toggled} />
+        <LogoContainer>
+          <Link to="/">
+            <img
+              src={
+                "https://res.cloudinary.com/snackmanproductions/image/upload/v1568323268/italianobros/logos/Black_s394t0.png"
               }
-            ></div>
+              alt="italiano bros logo"
+            />
+          </Link>
+        </LogoContainer>
+      </MobileGrouping>
+      <DesktopNavMenu
+        isMobile={isMobile}
+        serviceToggle={serviceToggle}
+        setServiceToggle={setServiceToggle}
+        contactToggle={contactToggle}
+        contactToggled={contactToggled}
+      />
+      <MobileMenu toggled={toggled} />
 
-            {!this.state.isMobile ? (
-              <DesktopNavMenu
-                isMobile={this.state.isMobile}
-                serviceToggle={this.state.serviceToggle}
-                renderServicesHoverMenu={this.renderServicesHoverMenu}
-                removeServicesHoverMenu={this.removeServicesHoverMenu}
-                contactToggle={this.contactToggle}
-                contactToggled={this.state.contactToggled}
-              />
-            ) : null}
-
-            <div
-              className={
-                this.state.isMobile
-                  ? layoutStyles.nb__logo__nav
-                  : wideScreenLayoutStyles.dt__logo__nav
-              }
-            >
-              {this.state.isMobile ? (
-                <Link to="/">
-                  <img
-                    src={
-                      "https://res.cloudinary.com/snackmanproductions/image/upload/v1568323268/italianobros/logos/Black_s394t0.png"
-                    }
-                    alt="italiano bros logo"
-                    className={layoutStyles.nb__image}
-                  />
-                </Link>
-              ) : null}
-            </div>
-            <div />
-          </div>
-          <Contact
-            onClick={this.contactToggle}
-            toggled={this.state.contactToggled}
-            isMobile={this.state.isMobile}
-          />
-          {this.state.isMobile ? (
-            <MobileMenu toggled={this.state.toggled} />
-          ) : null}
-        </nav>
-      </Fragment>
-    )
-  }
+      <Contact onClick={contactToggle} toggled={contactToggled} />
+    </NavContainer>
+  )
 }
+
+export default Nav

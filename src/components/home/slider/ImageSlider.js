@@ -81,7 +81,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
 
     setShifting(false)
     scrollRef.current.style.transition = "all 0s ease"
-    console.log("transition ended", shifting)
+
     if (currentIndex >= max) {
       console.log("MAXREACH", currentIndex)
       setScrollWidth(-(1 * imageWidth))
@@ -98,7 +98,6 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
   const handleTimedSlide = () => handleIndexChange(1)
 
   const handleIndexChange = val => {
-    console.log("indexxxx change", shifting)
     // Val will either be 1 or null
     //if slide is in transition, disable index change in order to prevent transitionend from not being triggered
     // if (shifting) return
@@ -151,7 +150,6 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
   useEffect(() => {
     if (!loading) {
       timeID = setTimeout(() => {
-        console.log("is paused?", paused)
         if (!paused) handleTimedSlide()
       }, 4000)
     }
@@ -174,8 +172,6 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
       loadData(false)
     }
   }, [sliderImgs])
-
-  console.log("is loading?", sliderWidth, paused, loading, window.innerWidth)
 
   return (
     <>

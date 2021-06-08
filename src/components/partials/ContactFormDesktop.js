@@ -4,6 +4,7 @@ import wideScreenLayoutStyles from "./contactstyles/ContactDesktop.module.scss"
 
 const ContactFormDesktop = ({ inputs, handleInputs, formSubmit, loading }) => {
   const renderInputs = inputs.map((input, i) => {
+    console.log(input.title)
     return (
       <div key={i} className={wideScreenLayoutStyles.cf__input__column}>
         <label
@@ -20,7 +21,7 @@ const ContactFormDesktop = ({ inputs, handleInputs, formSubmit, loading }) => {
           placeholder={input.placeholder}
           value={input.value}
           onChange={e => handleInputs(e)}
-          required
+          required={true}
         />
       </div>
     )
@@ -37,7 +38,7 @@ const ContactFormDesktop = ({ inputs, handleInputs, formSubmit, loading }) => {
           className={wideScreenLayoutStyles.cf__dt__button}
           onSubmit={formSubmit}
         >
-          {loading ? "Sending..." : "Get A Quote"}
+          {loading ? "Sending..." : "Contact Us"}
         </button>
       </form>
     </div>

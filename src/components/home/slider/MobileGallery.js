@@ -59,7 +59,7 @@ const MobileGallery = ({ layoutStyles, sliderImgs, reset }) => {
         </div>
       </div>
 
-      <div className={style.index_marker}>
+      {/* <div className={style.index_marker}>
         {sliderImgs.map((_, i) => {
           return (
             <span
@@ -77,7 +77,7 @@ const MobileGallery = ({ layoutStyles, sliderImgs, reset }) => {
             ></span>
           )
         })}
-      </div>
+      </div> */}
     </>
   )
 }

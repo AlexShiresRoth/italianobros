@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React from "react"
 import { Link } from "gatsby"
 
 import layoutStyles from "./navstyles/NavLink.module.scss"
@@ -23,5 +23,5 @@ export const NavLink = _ => {
     </Link>
   ))
 
-  return <Fragment>{LinksMap}</Fragment>
+  return <>{LinksMap}</>
 }

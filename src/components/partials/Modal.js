@@ -2,13 +2,15 @@ import React from "react"
 import layoutStyles from "./modalstyles/Modal.module.scss"
 
 //TODO create a background div that contains all these divs so user can't access part of page until modal is closed
-export const Modal = props => {
+export const Modal = ({ modalCase, status, response, onClick }) => {
   const styles = {
     height: "5rem",
     margin: "2rem",
   }
 
-  if (props.status === "success" && props.modalCase === "show") {
+  console.log("Modal:", modalCase, status)
+
+  if (status === "success" && modalCase) {
     return (
       <div className={layoutStyles.modal__container}>
         <div className={layoutStyles.sent}>
@@ -21,17 +23,19 @@ export const Modal = props => {
               alt="Logo"
             />
           </figure>
-          <h2 style={{ "font-size": "2em" }}>
+          <h2 style={{ fontSize: "2em" }}>
             Thank you! your message has been sent, and someone will be in
             contact with you soon.
           </h2>
-          <button className={layoutStyles.button} onClick={props.onClick}>
+          <button className={layoutStyles.button} onClick={onClick}>
             Close
           </button>
         </div>
       </div>
     )
-  } else if (props.status === "error" && props.modalCase === "show") {
+  }
+
+  if (status === "error" && modalCase) {
     return (
       <div className={layoutStyles.modal__container}>
         <div className={layoutStyles.error}>
@@ -44,17 +48,14 @@ export const Modal = props => {
               alt="Logo"
             />
           </figure>
-          <h2 style={{ "font-size": "2em" }}>{props.response}.</h2>
-          <h2 style={{ "font-size": "2em" }}>
-            Please retry sending the email.
-          </h2>
-          <button className={layoutStyles.button} onClick={props.onClick}>
+          <h2 style={{ fontSize: "2em" }}>{response}.</h2>
+          <h2 style={{ fontSize: "2em" }}>Please retry sending the email.</h2>
+          <button className={layoutStyles.button} onClick={onClick}>
             Close
           </button>
         </div>
       </div>
     )
-  } else if (props.modalCase === "hidden") {
-    return <div className={layoutStyles.closed} />
   }
+  return <div className={layoutStyles.closed} />
 }

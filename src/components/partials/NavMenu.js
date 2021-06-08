@@ -1,28 +1,26 @@
-import React from 'react';
+import React from "react"
 
-import layoutStyles from './navstyles/NavMenu.module.scss';
+import layoutStyles from "./navstyles/NavMenu.module.scss"
 
-const NavMenu = (props) => {
-   
-        if(!props.toggled){
-            return(
-                <div className={layoutStyles.nb__icon}
-                    onClick={props.onClick}>
-                    <span className={layoutStyles.nb__line}></span>
-                    <span className={layoutStyles.nb__line}></span>
-                    <span className={layoutStyles.nb__line}></span>
-                </div>
-            )}
-        if(props.toggled){
-            return (
-                <div className={layoutStyles.nb__icon}
-                    onClick={props.onClick}>
-                    <span className={layoutStyles.nb__line__rotated}></span>
-                    <span className={layoutStyles.nb__line__cleared}></span>
-                    <span className={layoutStyles.nb__line__rotated}></span>
-                </div>
-            )
-        }
-    }
+const NavMenu = ({ toggled, onClick }) => {
+  if (!toggled) {
+    return (
+      <div className={layoutStyles.nb__icon} onClick={() => onClick(!toggled)}>
+        <span className={layoutStyles.nb__line}></span>
+        <span className={layoutStyles.nb__line}></span>
+        <span className={layoutStyles.nb__line}></span>
+      </div>
+    )
+  }
+  if (toggled) {
+    return (
+      <div className={layoutStyles.nb__icon} onClick={() => onClick(!toggled)}>
+        <span className={layoutStyles.nb__line__rotated}></span>
+        <span className={layoutStyles.nb__line__cleared}></span>
+        <span className={layoutStyles.nb__line__rotated}></span>
+      </div>
+    )
+  }
+}
 
-export default NavMenu;
+export default NavMenu
