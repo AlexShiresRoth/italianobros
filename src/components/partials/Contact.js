@@ -70,6 +70,9 @@ const ColumnRight = styled.div`
   justify-content: center;
   height: 100%;
   background-color: #ceb862;
+  @media screen and (max-width: 760px) {
+    display: ${props => (props.toggled ? "flex" : "none")};
+  }
 `
 
 const ColumnInner = styled.div`
@@ -121,7 +124,7 @@ const Contact = ({ onClick, toggled }) => {
             </ColumnInner>
           </ColumnLeft>
 
-          <ColumnRight>
+          <ColumnRight toggled={toggled}>
             <ContactForm
               setModal={setModal}
               setResponse={setResponse}
