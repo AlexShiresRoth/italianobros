@@ -8,11 +8,10 @@ import styled from "styled-components"
 
 const NavContainer = styled.nav`
   width: 100%;
-  min-height: 3rem;
+  height: 5.2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -48,7 +47,7 @@ const LogoContainer = styled.div`
 const Nav = () => {
   const [toggled, setToggled] = useState(false)
   const [contactToggled, contactToggle] = useState(false)
-  const [serviceToggle, setServiceToggle] = useState(false)
+  const [serviceToggled, setServiceToggle] = useState(false)
   const [isMobile, setMobile] = useState(false)
 
   //handles when service menus are toggled to stop background scrolling
@@ -103,7 +102,7 @@ const Nav = () => {
       </MobileGrouping>
       <DesktopNavMenu
         isMobile={isMobile}
-        serviceToggle={serviceToggle}
+        serviceToggled={serviceToggled}
         setServiceToggle={setServiceToggle}
         contactToggle={contactToggle}
         contactToggled={contactToggled}

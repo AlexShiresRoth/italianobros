@@ -1,8 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-
 import { ServiceMenu } from "./ServiceMenu"
-import wideScreenLayoutStyles from "./navstyles/NavDesktop.module.scss"
 import styled from "styled-components"
 
 const TopTier = styled.div`
@@ -10,12 +8,14 @@ const TopTier = styled.div`
   align-items: center;
   justify-content: space-around;
   position: relative;
+  height: 100%;
   @media screen and (max-width: 760px) {
     display: none;
     max-height: 0;
   }
 `
 const Inner = styled.div`
+  height: 100%;
   width: 90%;
   display: flex;
   align-items: center;
@@ -32,6 +32,10 @@ const Logo = styled.img`
   width: 100%;
 `
 const Item = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   & a {
     text-decoration: none;
   }
@@ -39,6 +43,7 @@ const Item = styled.div`
 const List = styled.ul`
   list-style: none;
   display: flex;
+  height: 100%;
 `
 
 const ListItem = styled.li`
@@ -85,6 +90,7 @@ const Button = styled.button`
 
 const DesktopNavMenu = ({
   setServiceToggle,
+  serviceToggled,
   contactToggle,
   contactToggled,
 }) => {
@@ -122,10 +128,12 @@ const DesktopNavMenu = ({
                   key={key}
                   onMouseEnter={e => setServiceToggle(true)}
                   onMouseLeave={e => setServiceToggle(false)}
+                  style={{ position: serviceToggled ? "relative" : "" }}
                 >
                   <Link to={linkObj.path} activeClassName="active">
                     <ListItem>{linkObj.text}</ListItem>
                   </Link>
+                  <ServiceMenu toggled={serviceToggled} />
                 </Item>
               ) : (
                 <Item>
