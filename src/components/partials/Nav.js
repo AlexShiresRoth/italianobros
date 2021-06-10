@@ -9,7 +9,6 @@ import styled from "styled-components"
 const NavContainer = styled.nav`
   width: 100%;
   height: 5.2rem;
-
   display: flex;
   flex-direction: column;
   justify-content: center;

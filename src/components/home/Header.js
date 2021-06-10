@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import layoutStyles from "./headerstyles/Header.module.scss"
-import wideScreenLayoutStyles from "./headerstyles/HeaderDesktop.module.scss"
 import { ContentContext } from "../RootLayout"
 import Slider from "./slider/Slider"
 import styled from "styled-components"
@@ -15,7 +14,7 @@ const HeaderSection = styled.header`
   background-size: cover;
   background-position: 50% 0vh;
   background-repeat: no-repeat;
-  height: 40rem;
+  min-height: 70vh;
   overflow: hidden;
   position: relative;
 `
@@ -26,7 +25,7 @@ const Heading = styled.h1`
   font-style: italic;
   max-width: 70%;
   color: #eee;
-  font-size: 4.3rem;
+  font-size: 5.3rem;
   text-shadow: 0 1px 20px #99999933;
   text-align: center;
 
@@ -43,6 +42,46 @@ const HeroBox = styled.div`
   justify-content: center;
   margin-top: 4rem;
   z-index: 20;
+`
+
+const FancyButton = styled.button`
+  background-color: #ceb862;
+  color: #fff;
+  padding: 1.5rem 2rem;
+  margin-top: 4rem;
+  border: 0;
+  width: 20rem;
+  position: relative;
+  z-index: 1;
+  border: 2px solid #ceb862;
+  transition: all 0.3s ease;
+  &:hover {
+    cursor: pointer;
+    background-color: #ceb862;
+    color: #fff;
+    &::after {
+      top: 0;
+      left: 0;
+    }
+  }
+  &::after {
+    content: "";
+    border: 2px double #ceb862;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 10%;
+    left: 2%;
+    z-index: -1;
+    transition: all 0.3s ease;
+    &:hover: {
+      cursor: pointer;
+    }
+  }
+  @media screen and (max-width: 760px) {
+    width: 15rem;
+    margin-top: 1rem;
+  }
 `
 
 const Header = () => {
@@ -73,11 +112,7 @@ const Header = () => {
           {pageContent.data["mainpage-header"][0]["mainpage-slogan"][0].text}
         </Heading>
         <Link to={"/Services"}>
-          <button
-            className={`${layoutStyles.button} ${wideScreenLayoutStyles.desktop__button}`}
-          >
-            Learn More
-          </button>
+          <FancyButton>Learn More</FancyButton>
         </Link>
       </HeroBox>
     </HeaderSection>

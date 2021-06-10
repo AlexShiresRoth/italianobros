@@ -9,6 +9,8 @@ const TopTier = styled.div`
   justify-content: space-around;
   position: relative;
   height: 100%;
+  z-index: 2;
+  background: #fff;
   @media screen and (max-width: 760px) {
     display: none;
     max-height: 0;
