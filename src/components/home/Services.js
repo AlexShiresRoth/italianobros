@@ -12,22 +12,32 @@ const Section = styled.section`
   justify-content: center;
   border-top: 5px solid #ceb86266;
   width: 100%;
+  height: 100vh;
+  background: url("https://images.prismic.io/italiano-bros/5bda5480-8af2-4041-8ccc-bd38bc757b58_IMG_4183.jpg?auto=compress,format");
+  background-size: cover;
+  background-position: center;
 `
 
 const Inner = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   @media screen and (max-width: 760px) {
     flex-direction: column;
   }
 `
 const Column = styled.div`
   width: 50%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 1;
+  transition: all 0.3s ease;
+  &:hover {
+    flex: 1.5;
+  }
   @media screen and (max-width: 760px) {
     width: 100%;
   }
@@ -38,6 +48,7 @@ const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: #fff;
 `
 const Image = styled.img`
   object-fit: cover;
@@ -60,9 +71,9 @@ const Services = () => {
     <Section>
       <Inner>
         <Column style={{ flex: "1.2" }}>
-          <Image src="https://images.prismic.io/italiano-bros/5bda5480-8af2-4041-8ccc-bd38bc757b58_IMG_4183.jpg?auto=compress,format" />
+          {/* <Image src="https://images.prismic.io/italiano-bros/5bda5480-8af2-4041-8ccc-bd38bc757b58_IMG_4183.jpg?auto=compress,format" /> */}
         </Column>
-        <Column>
+        <Column style={{ backgroundColor: "#fff" }}>
           <TextBox>
             <div className={layoutStyles.heading}>
               <h3 className={layoutStyles.services__h3}>

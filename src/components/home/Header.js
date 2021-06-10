@@ -14,7 +14,7 @@ const HeaderSection = styled.header`
   background-size: cover;
   background-position: 50% 0vh;
   background-repeat: no-repeat;
-  min-height: 70vh;
+  min-height: 100vh;
   overflow: hidden;
   position: relative;
 `
@@ -25,7 +25,7 @@ const Heading = styled.h1`
   font-style: italic;
   max-width: 70%;
   color: #eee;
-  font-size: 5.3rem;
+  font-size: 5rem;
   text-shadow: 0 1px 20px #99999933;
   text-align: center;
 
@@ -50,7 +50,7 @@ const FancyButton = styled.button`
   padding: 1.5rem 2rem;
   margin-top: 4rem;
   border: 0;
-  width: 20rem;
+  width: 16rem;
   position: relative;
   z-index: 1;
   border: 2px solid #ceb862;
