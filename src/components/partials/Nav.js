@@ -9,6 +9,7 @@ import styled from "styled-components"
 const NavContainer = styled.nav`
   width: 100%;
   height: 5.2rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,6 +22,9 @@ const NavContainer = styled.nav`
   @media screen and (max-width: 760px) {
     align-items: center;
     padding-bottom: 0;
+    height: auto;
+    padding: 1rem 0 0 0;
+    min-height: 6rem;
   }
 `
 const MobileGrouping = styled.div`

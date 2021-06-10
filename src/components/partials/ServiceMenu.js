@@ -5,7 +5,6 @@ import styled from "styled-components"
 const ServiceMenuContainer = styled.div`
   position: absolute;
   top: 100%;
-  left: 0;
   display: flex;
   flex-direction: column;
   max-height: 100vh;

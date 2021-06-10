@@ -7,12 +7,14 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  position: absolute;
+  top: 100%;
+  z-index: -1;
   min-height: ${props => (props.toggled ? "50vh" : 0)};
   max-height: ${props => (props.toggled ? "100vh" : 0)};
   opacity: ${props => (props.toggled ? 1 : 0)};
   transition: all 0.3s ease;
   z-index: 0;
-  margin-top: ${props => (props.toggled ? "1rem" : 0)};
   background-color: #fbfbfb;
   @media screen and (max-width: 760px) {
     margin-top: 0;

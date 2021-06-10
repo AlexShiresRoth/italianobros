@@ -52,7 +52,7 @@ const ListItem = styled.li`
   margin: 0 1rem;
   transition: all 0.3s ease;
   position: relative;
-
+  height: 100%;
   &:after {
     content: " ";
     width: 0%;
@@ -81,6 +81,7 @@ const Button = styled.button`
   font-weight: 500;
   height: 3.2rem;
   width: 15rem;
+  position: relative;
   &:hover {
     cursor: pointer;
     background: #ceb862;
