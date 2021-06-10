@@ -7,7 +7,7 @@ const Slider = styled.div`
   position: absolute;
   overflow: scroll;
   width: 100vw;
-  height: 40rem;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   z-index: 1;

@@ -7,12 +7,14 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  position: absolute;
+  top: 100%;
+  z-index: ${props => (props.toggled ? -999 : 0)};
   min-height: ${props => (props.toggled ? "50vh" : 0)};
   max-height: ${props => (props.toggled ? "100vh" : 0)};
   opacity: ${props => (props.toggled ? 1 : 0)};
+  transform: translateY(${props => (props.toggled ? "0" : "-100vh")});
   transition: all 0.3s ease;
-  z-index: 0;
-  margin-top: ${props => (props.toggled ? "1rem" : 0)};
   background-color: #fbfbfb;
   @media screen and (max-width: 760px) {
     margin-top: 0;
@@ -21,6 +23,7 @@ const Container = styled.div`
 const Inner = styled.div`
   width: 90%;
   display: grid;
+  z-index: -999;
   grid-template-columns: repeat(2, 1fr);
   transition: all 0.3s ease;
   @media screen and (max-width: 760px) {

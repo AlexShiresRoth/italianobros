@@ -21,6 +21,9 @@ const NavContainer = styled.nav`
   @media screen and (max-width: 760px) {
     align-items: center;
     padding-bottom: 0;
+    height: auto;
+    padding: 1rem 0 0 0;
+    min-height: 6rem;
   }
 `
 const MobileGrouping = styled.div`
