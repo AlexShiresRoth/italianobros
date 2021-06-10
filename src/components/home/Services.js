@@ -11,6 +11,7 @@ const Section = styled.section`
   align-items: center;
   justify-content: center;
   border-top: 5px solid #ceb86266;
+  margin-bottom: 10rem;
 `
 
 const Container = styled.div`
@@ -32,6 +33,7 @@ const Inner = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 60rem;
+  width: 100%;
 `
 
 const Services = () => {

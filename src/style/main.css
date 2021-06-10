@@ -59,7 +59,7 @@
     background: #eee; }
   100% {
     opacity: 1;
-    background: #CEB862; } }
+    background: #ceb862; } }
 
 * {
   padding: 0;
@@ -109,7 +109,7 @@ body::-webkit-scrollbar-thumb {
 
 button {
   font-family: "Work Sans", serif;
-  min-width: 25remrem;
+  min-width: 25rem;
   color: #707070;
   text-transform: uppercase; }
   button:focus {

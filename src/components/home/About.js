@@ -24,13 +24,7 @@ const About = _ => {
   return (
     <Fragment>
       <section className={layoutStyles.about__section}>
-        <div>
-          <img
-            src={mainImg}
-            alt="Marc Italiano"
-            className={layoutStyles.about__img}
-          />
-        </div>
+        <div></div>
         <div className={layoutStyles.container}>
           <div className={layoutStyles.heading}>
             <h3 className={layoutStyles.about__h3}>{heading}</h3>
