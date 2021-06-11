@@ -45,15 +45,17 @@ const HeroBox = styled.div`
 `
 
 const FancyButton = styled.button`
-  background-color: #ceb862;
+  background-color: transparent;
   color: #fff;
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.5rem;
   margin-top: 4rem;
   border: 0;
-  width: 16rem;
+  min-width: 14rem;
   position: relative;
   z-index: 1;
+  font-size:1.2rem;
   border: 2px solid #ceb862;
+  border-radius:2px;
   transition: all 0.3s ease;
   &:hover {
     cursor: pointer;
@@ -64,20 +66,7 @@ const FancyButton = styled.button`
       left: 0;
     }
   }
-  &::after {
-    content: "";
-    border: 2px double #ceb862;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 10%;
-    left: 2%;
-    z-index: -1;
-    transition: all 0.3s ease;
-    &:hover: {
-      cursor: pointer;
-    }
-  }
+
   @media screen and (max-width: 760px) {
     width: 15rem;
     margin-top: 1rem;

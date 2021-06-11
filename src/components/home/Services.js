@@ -1,6 +1,6 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { Link } from "gatsby"
-
+import { ArrowLeft, ArrowRight } from "react-feather"
 import layoutStyles from "./servicestyles/Services.module.scss"
 import { ContentContext } from "../RootLayout"
 import styled from "styled-components"
@@ -10,13 +10,10 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-top: 5px solid #ceb86266;
-
-  margin-bottom: 10rem;
-
+  border-top: 0px solid #fbfbfb;
   width: 100%;
   height: 100vh;
-  background: url("https://images.prismic.io/italiano-bros/5bda5480-8af2-4041-8ccc-bd38bc757b58_IMG_4183.jpg?auto=compress,format");
+  background-image: url(https://images.prismic.io/italiano-bros/b4b4ad37-986d-4595-b751-ed377fc86b5f_IMG_1402.jpg);
   background-size: cover;
   background-position: center;
 `
@@ -36,31 +33,62 @@ const Column = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
-  transition: all 0.3s ease;
-  &:hover {
-    flex: 1.5;
-  }
+  flex: ${props => (props.toggled ? 0 : 0.8)};
+  transition: all 0.5s ease-in-out;
+  position: relative;
   @media screen and (max-width: 760px) {
     width: 100%;
   }
 `
 const TextBox = styled.div`
   width: 80%;
-  max-width: 40rem;
-  display: flex;
+  padding: 4rem;
+  display: ${props => (props.textBox ? "none" : "flex")};
   flex-direction: column;
-  max-width: 60rem;
   justify-content: center;
-  background-color: #fff;
+  border-radius: 10px;
+  transition: all 0.5s ease-in-out;
+  opacity: ${props => (props.toggled ? 0 : 1)};
+  transform: translateX(${props => (props.toggled ? "50vw" : "0vw")});
+  max-width: ${props => (props.toggled ? "0%" : "60rem")};
+  &:hover {
+    box-shadow: 0 1px 30px #66666622;
+  }
 `
-const Image = styled.img`
-  object-fit: cover;
+
+const HideToggler = styled.div`
+  position: absolute;
+  bottom: 0%;
+  display: flex;
+  justify-content: flex-end;
   width: 100%;
+  z-index: 2;
+  // background: #ceb86211;
 `
+const ToggleButton = styled.button`
+  background: transparent;
+  margin-right: 2rem;
+  padding: 1rem;
+  min-width: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px solid transparent;
+  color: ${props => (props.toggled ? "#fff" : "#707070")};
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 1px 30px ${props => (props.toggled ? "#ffffff00" : "#eee")};
+  }
+`
+
 const Services = () => {
   const { pageContent } = useContext(ContentContext)
 
+  const [isToggled, toggleBox] = useState(false)
+  const [textBoxHidden, hideTextBox] = useState(false)
+  const handleTransition = () =>
+    isToggled ? hideTextBox(true) : hideTextBox(false)
   if (!pageContent) {
     return (
       <section className={layoutStyles.services__section}>
@@ -69,16 +97,20 @@ const Services = () => {
     )
   }
 
+  console.log("toggled", isToggled)
+
   const { data } = pageContent
 
   return (
     <Section>
       <Inner>
-        <Column style={{ flex: "1.2" }}>
-          {/* <Image src="https://images.prismic.io/italiano-bros/5bda5480-8af2-4041-8ccc-bd38bc757b58_IMG_4183.jpg?auto=compress,format" /> */}
-        </Column>
-        <Column style={{ backgroundColor: "#fff" }}>
-          <TextBox>
+        <Column style={{ flex: "1.2" }}></Column>
+        <Column
+          style={{ backgroundColor: "#fff" }}
+          toggled={isToggled}
+          onTransitionEnd={e => handleTransition()}
+        >
+          <TextBox toggled={isToggled} textBox={textBoxHidden}>
             <div className={layoutStyles.heading}>
               <h3 className={layoutStyles.services__h3}>
                 {data["mainpage-section1"][0]["mainpage-heading1"][0].text}
@@ -99,6 +131,22 @@ const Services = () => {
               </Link>
             </div>
           </TextBox>
+          <HideToggler>
+            <ToggleButton
+              onClick={e => toggleBox(!isToggled)}
+              toggled={isToggled}
+            >
+              {!isToggled ? (
+                <>
+                  View Full Image <ArrowRight size={20} />
+                </>
+              ) : (
+                <>
+                  <ArrowLeft size={20} /> Show Text{" "}
+                </>
+              )}
+            </ToggleButton>
+          </HideToggler>
         </Column>
       </Inner>
     </Section>

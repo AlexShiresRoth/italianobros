@@ -26,7 +26,7 @@ const Overlay = styled.div`
   background: #000;
   height: 100%;
   width: 100%;
-  opacity: 0.4;
+  opacity: 0.3;
   z-index: 2;
 `
 const Inner = styled.div`
@@ -108,7 +108,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
       //set state of slide to be transitioning
       setShifting(true)
       //activate transition
-      scrollRef.current.style.transition = "all 1.1s ease"
+      scrollRef.current.style.transition = "all 1.1s ease-in-out"
       //index determines where in sequence
       setIndex(prevState => prevState + 1)
       //scroll width determines size of slide
@@ -121,7 +121,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
       //set state of slide to be transitioning
       setShifting(true)
       //activate transition
-      scrollRef.current.style.transition = "all 1.1s ease"
+      scrollRef.current.style.transition = "all 1.1s ease-in-out"
       //index determines where in sequence
       setIndex(prevState => prevState - 1)
       //scroll width determines size of slide
@@ -151,7 +151,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
     if (!loading) {
       timeID = setTimeout(() => {
         if (!paused) handleTimedSlide()
-      }, 4000)
+      }, 4500)
     }
     return () => clearTimeout(timeID)
   }, [loading, paused, currentIndex])
