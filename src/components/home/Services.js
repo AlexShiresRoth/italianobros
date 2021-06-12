@@ -41,8 +41,8 @@ const Column = styled.div`
   }
 `
 const TextBox = styled.div`
-  width: 80%;
-  padding: 4rem;
+  width: 90%;
+  padding: 4.5rem;
   display: ${props => (props.textBox ? "none" : "flex")};
   flex-direction: column;
   justify-content: center;
@@ -53,6 +53,49 @@ const TextBox = styled.div`
   max-width: ${props => (props.toggled ? "0%" : "60rem")};
   &:hover {
     box-shadow: 0 1px 30px #66666622;
+  }
+`
+const Heading = styled.h3`
+  font-size: 2.5rem;
+  color: #707070;
+  max-width: 80rem;
+  text-transform: uppercase;
+`
+
+const Divider = styled.hr`
+  height: 5px;
+  background: #ceb862;
+  border: 0;
+  width: 6rem;
+  margin: 1rem 0;
+`
+
+const Par = styled.p`
+  font-size: 1.25rem;
+  color: #707070;
+  line-height: 2;
+  letter-spacing: 1.3px;
+  font-family: "Work Sans";
+  margin: 1rem 0;
+`
+const ButtonContainer = styled.div`
+  margin-top: 1rem;
+`
+
+const Button = styled.button`
+  border: 3px solid #ceb862;
+  background: transparent;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  font-weight: 500;
+  height: 3.2rem;
+  min-width: 15rem;
+  transition: all 0.3s ease-in-out;
+  border-radius: 3px;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background: #ceb862;
   }
 `
 
@@ -111,25 +154,23 @@ const Services = () => {
           onTransitionEnd={e => handleTransition()}
         >
           <TextBox toggled={isToggled} textBox={textBoxHidden}>
-            <div className={layoutStyles.heading}>
-              <h3 className={layoutStyles.services__h3}>
-                {data["mainpage-section1"][0]["mainpage-heading1"][0].text}
-              </h3>
-              <hr className={layoutStyles.services__hr} />
-            </div>
-            <div className={layoutStyles.paragraph__section}>
-              <p className={layoutStyles.paragraph}>
-                {data["mainpage-section1"][0]["mainpage-paragraph"][0].text}
-              </p>
-            </div>
-            <div className={layoutStyles.button__container}>
+            <Heading>
+              {data["mainpage-section1"][0]["mainpage-heading1"][0].text}
+            </Heading>
+            <Divider />
+
+            <Par>
+              {data["mainpage-section1"][0]["mainpage-paragraph"][0].text}
+            </Par>
+
+            <ButtonContainer>
               <Link
                 to={"/Services"}
                 style={{ textDecoration: "none", alignSelf: "center" }}
               >
-                <button className={layoutStyles.button}>Learn More</button>
+                <Button>Learn More</Button>
               </Link>
-            </div>
+            </ButtonContainer>
           </TextBox>
           <HideToggler>
             <ToggleButton

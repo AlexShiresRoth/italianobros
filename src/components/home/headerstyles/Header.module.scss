@@ -34,11 +34,11 @@
   opacity: 0.6;
   z-index: 1;
   scroll-snap-type: x mandatory;
-  scrollbar-width:none;
+  scrollbar-width: none;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
-    height:0;
+    height: 0;
   }
   & .inner {
     display: flex;
@@ -58,14 +58,17 @@
 }
 .index_marker {
   display: flex;
+  flex-direction: column;
   position: absolute;
-  bottom: 0;
+  bottom: 40%;
+  left: 0;
   margin: 1.5rem 0rem;
+  z-index: 3;
   & span {
-    margin: 0 1rem;
+    margin: 2rem 1rem;
     height: 15px;
     width: 15px;
-    border: 2px solid #eee;
+    border: 2px solid #eeeeee44;
     border-radius: 500px;
     display: block;
   }

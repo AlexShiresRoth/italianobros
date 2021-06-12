@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
+import { ArrowDown } from "react-feather"
 import layoutStyles from "./headerstyles/Header.module.scss"
 import { ContentContext } from "../RootLayout"
 import Slider from "./slider/Slider"
@@ -14,7 +15,7 @@ const HeaderSection = styled.header`
   background-size: cover;
   background-position: 50% 0vh;
   background-repeat: no-repeat;
-  min-height: 100vh;
+  min-height: 95vh;
   overflow: hidden;
   position: relative;
 `
@@ -53,9 +54,9 @@ const FancyButton = styled.button`
   min-width: 14rem;
   position: relative;
   z-index: 1;
-  font-size:1.2rem;
+  font-size: 1.2rem;
   border: 2px solid #ceb862;
-  border-radius:2px;
+  border-radius: 2px;
   transition: all 0.3s ease;
   &:hover {
     cursor: pointer;
@@ -71,6 +72,31 @@ const FancyButton = styled.button`
     width: 15rem;
     margin-top: 1rem;
   }
+`
+const ScrollDown = styled.div`
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Items = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & svg {
+    color: #fff;
+  }
+`
+const Text = styled.h3`
+  color: #fff;
+  font-style: italic;
+  font-weight: 100;
+  font-family: mencken-std, sans-serif;
+  font-size: 1rem;
 `
 
 const Header = () => {
@@ -104,6 +130,12 @@ const Header = () => {
           <FancyButton>Learn More</FancyButton>
         </Link>
       </HeroBox>
+      <ScrollDown>
+        <Items>
+          <Text>Scroll</Text>
+          <ArrowDown size={20} />
+        </Items>
+      </ScrollDown>
     </HeaderSection>
   )
 }

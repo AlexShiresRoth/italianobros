@@ -82,7 +82,7 @@ const Button = styled.button`
   text-transform: uppercase;
   font-weight: 500;
   height: 3.2rem;
-  width: 15rem;
+  min-width: 13rem;
   position: relative;
   &:hover {
     cursor: pointer;

@@ -41,17 +41,61 @@ const Column = styled.div`
   }
 `
 const TextBox = styled.div`
-  width: 80%;
-  padding: 4rem;
+  width: 90%;
+  padding: 4.5rem;
   display: ${props => (props.textBox ? "none" : "flex")};
   flex-direction: column;
   justify-content: center;
   border-radius: 10px;
   transition: all 0.5s ease-in-out;
   opacity: ${props => (props.toggled ? 0 : 1)};
-  transform: translateX(${props => (props.toggled ? "-50vw" : "0vw")});
+  transform: translateX(${props => (props.toggled ? "50vw" : "0vw")});
+  max-width: ${props => (props.toggled ? "0%" : "60rem")};
   &:hover {
     box-shadow: 0 1px 30px #66666622;
+  }
+`
+const Heading = styled.h3`
+  font-size: 2.5rem;
+  color: #707070;
+  max-width: 80rem;
+  text-transform: uppercase;
+`
+
+const Divider = styled.hr`
+  height: 5px;
+  background: #ceb862;
+  border: 0;
+  width: 6rem;
+  margin: 1rem 0;
+`
+
+const Par = styled.p`
+  font-size: 1.25rem;
+  color: #707070;
+  line-height: 2;
+  letter-spacing: 1.3px;
+  font-family: "Work Sans";
+  margin: 1rem 0;
+`
+const ButtonContainer = styled.div`
+  margin-top: 1rem;
+`
+
+const Button = styled.button`
+  border: 3px solid #ceb862;
+  background: transparent;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  font-weight: 500;
+  height: 3.2rem;
+  min-width: 15rem;
+  transition: all 0.3s ease-in-out;
+  border-radius: 3px;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background: #ceb862;
   }
 `
 
@@ -93,14 +137,8 @@ const Gallery = () => {
 
   const { data } = pageContent
 
-  const imgs = [
-    data["mainpage-section2"][0].image1,
-    data["mainpage-section2"][0].image2,
-    data["mainpage-section2"][0].image3,
-  ]
-  console.log(textBoxHidden)
   return (
-    <Section bgImg={imgs[1].url}>
+    <Section>
       <Inner>
         <Column
           style={{ background: "#fbfbfb" }}
@@ -108,26 +146,20 @@ const Gallery = () => {
           onTransitionEnd={e => handleTransition()}
         >
           <TextBox toggled={isToggled} textBox={textBoxHidden}>
-            <div className={layoutStyles.heading}>
-              <h3 className={layoutStyles.gallery__h3}>
-                {
-                  data["mainpage-section2"][0]["mainpage-section2-heading2"][0]
-                    .text
-                }
-              </h3>
-              <hr className={layoutStyles.gallery__hr} />
-            </div>
-            <p className={layoutStyles.paragraph}>
-              {data["mainpage-section2"][0].paragraph[0].text}
-            </p>
-            <div
-              className={layoutStyles.button__container}
-              style={{ marginTop: "2rem" }}
-            >
+            <Heading>
+              {
+                data["mainpage-section2"][0]["mainpage-section2-heading2"][0]
+                  .text
+              }
+            </Heading>
+            <Divider />
+
+            <Par>{data["mainpage-section2"][0].paragraph[0].text}</Par>
+            <ButtonContainer>
               <Link to={"/OurWork"} style={{ textDecoration: "none" }}>
-                <button className={layoutStyles.button}>Learn more</button>
+                <Button>Learn more</Button>
               </Link>
-            </div>
+            </ButtonContainer>
           </TextBox>
           <HideToggler>
             <ToggleButton
