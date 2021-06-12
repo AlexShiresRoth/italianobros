@@ -6,16 +6,20 @@ import { ContentContext } from "../RootLayout"
 import styled from "styled-components"
 
 const Section = styled.section`
-  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background: url("https://images.prismic.io/italiano-bros/5bda5480-8af2-4041-8ccc-bd38bc757b58_IMG_4183.jpg?auto=compress,format");
-  background-size: cover;
-  background-position: center 50%;
-  background-repeat: no-repeat;
+  justify-content: center;
+  border-top: 0px solid #fbfbfb;
+  width: 100%;
   height: 100vh;
+  background-image: url(${props => props.bgImg});
+  background-size: cover;
+  background-position: center;
+  @media screen and (max-width: 760px) {
+    background-image: none;
+    height: auto;
+  }
 `
 
 const Inner = styled.div`
@@ -23,7 +27,8 @@ const Inner = styled.div`
   width: 100%;
   height: 100%;
   @media screen and (max-width: 760px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    position: relative;
   }
 `
 const Column = styled.div`
@@ -38,8 +43,28 @@ const Column = styled.div`
   position: relative;
   @media screen and (max-width: 760px) {
     width: 100%;
+    &:nth-child(2) {
+      height: 50vh;
+      display: flex;
+      position: relative;
+    }
+    &:nth-child(1) {
+      position: absolute;
+      top: 0%;
+      z-index: 2;
+      background-color: transparent !important;
+    }
   }
 `
+const Image = styled.img`
+  object-fit: contain;
+  width: 100%;
+  display: none;
+  @media screen and (max-width: 760px) {
+    display: block;
+  }
+`
+
 const TextBox = styled.div`
   width: 90%;
   padding: 4.5rem;
@@ -54,12 +79,22 @@ const TextBox = styled.div`
   &:hover {
     box-shadow: 0 1px 30px #66666622;
   }
+  @media screen and (max-width: 760px) {
+    padding: 0;
+    align-items: center;
+
+    justify-content: center;
+  }
 `
 const Heading = styled.h3`
   font-size: 2.5rem;
   color: #707070;
   max-width: 80rem;
   text-transform: uppercase;
+  @media screen and (max-width: 760px) {
+    font-size: 1.5rem;
+    color: #fff;
+  }
 `
 
 const Divider = styled.hr`
@@ -68,6 +103,9 @@ const Divider = styled.hr`
   border: 0;
   width: 6rem;
   margin: 1rem 0;
+  @media screen and (max-width: 760px) {
+    height: 3px;
+  }
 `
 
 const Par = styled.p`
@@ -77,6 +115,9 @@ const Par = styled.p`
   letter-spacing: 1.3px;
   font-family: "Work Sans";
   margin: 1rem 0;
+  @media screen and (max-width: 760px) {
+    display: none;
+  }
 `
 const ButtonContainer = styled.div`
   margin-top: 1rem;
@@ -97,15 +138,23 @@ const Button = styled.button`
     color: #fff;
     background: #ceb862;
   }
+  @media screen and (max-width: 760px) {
+    height: 2.5rem;
+    min-width: 11rem;
+    color: #eee;
+  }
 `
 
 const HideToggler = styled.div`
   position: absolute;
   bottom: 0%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   width: 100%;
   z-index: 2;
+  @media screen and (max-width: 760px) {
+    display: none;
+  }
 `
 const ToggleButton = styled.button`
   background: transparent;
@@ -136,9 +185,10 @@ const Gallery = () => {
   }
 
   const { data } = pageContent
-
+  const img =
+    "https://images.prismic.io/italiano-bros/5bda5480-8af2-4041-8ccc-bd38bc757b58_IMG_4183.jpg?auto=compress,format"
   return (
-    <Section>
+    <Section bgImg={img}>
       <Inner>
         <Column
           style={{ background: "#fbfbfb" }}
@@ -157,7 +207,7 @@ const Gallery = () => {
             <Par>{data["mainpage-section2"][0].paragraph[0].text}</Par>
             <ButtonContainer>
               <Link to={"/OurWork"} style={{ textDecoration: "none" }}>
-                <Button>Learn more</Button>
+                <Button>View Gallery</Button>
               </Link>
             </ButtonContainer>
           </TextBox>
@@ -178,7 +228,9 @@ const Gallery = () => {
             </ToggleButton>
           </HideToggler>
         </Column>
-        <Column style={{ flex: "1.2" }}></Column>
+        <Column style={{ flex: "1.2" }}>
+          <Image src={img}></Image>
+        </Column>
       </Inner>
     </Section>
   )
