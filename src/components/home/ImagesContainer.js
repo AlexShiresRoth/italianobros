@@ -13,6 +13,9 @@ const Section = styled.section`
   align-items: center;
   justify-content: center;
   width: 100%;
+  @media screen and (max-width: 760px) {
+    display: none;
+  }
 `
 const Heading = styled.button`
   font-size: 1.8rem;

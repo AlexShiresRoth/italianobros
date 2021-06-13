@@ -36,7 +36,6 @@ const MobileContainer = styled.div`
   display: none;
   @media screen and (max-width: 760px) {
     display: flex;
-
     justify-content: center;
     background-color: #ceb862;
     width: 100%;
