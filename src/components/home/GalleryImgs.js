@@ -18,6 +18,7 @@ const MobileImageGrid = styled.div`
   @media screen and (max-width: 1000px) {
     display: flex;
     justify-content: space-around;
+    width: 100%;
   }
 `
 const ImageContainer = styled.div`
@@ -30,8 +31,11 @@ const ImageContainer = styled.div`
   }
   @media screen and (max-width: 1000px) {
     flex: none;
-    height: 300px;
-    width: 300px;
+    height: auto;
+    width: 100%;
+    &:hover {
+      flex: none;
+    }
   }
 `
 

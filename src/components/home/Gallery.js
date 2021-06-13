@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react"
 import { Link } from "gatsby"
 import { ArrowLeft, ArrowRight } from "react-feather"
-import layoutStyles from "./gallerystyles/Gallery.module.scss"
 import { ContentContext } from "../RootLayout"
 import styled from "styled-components"
 

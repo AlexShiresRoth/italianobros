@@ -10,6 +10,9 @@ const Section = styled.section`
   justify-content: center;
   align-items: center;
   padding: 4rem 0;
+  @media screen and (max-width: 760px) {
+    padding: 1rem 0;
+  }
 `
 
 const Inner = styled.div`
@@ -53,6 +56,10 @@ const Heading = styled.h3`
   color: #707070;
   max-width: 80rem;
   text-transform: uppercase;
+  @media screen and (max-width: 760px) {
+    font-size: 1.5rem;
+    text-align: center;
+  }
 `
 
 const Divider = styled.hr`
@@ -71,6 +78,9 @@ const Par = styled.p`
   font-family: "Work Sans";
   margin: 1rem 0;
   text-align: center;
+  @media screen and (max-width: 760px) {
+    display: none;
+  }
 `
 const ButtonContainer = styled.div`
   margin-top: 1rem;
