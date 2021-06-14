@@ -148,7 +148,7 @@ const HideToggler = styled.div`
   position: absolute;
   bottom: 0%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   width: 100%;
   z-index: 2;
   @media screen and (max-width: 760px) {
