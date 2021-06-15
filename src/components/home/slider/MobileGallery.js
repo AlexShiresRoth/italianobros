@@ -1,6 +1,6 @@
 import React, { createRef, useEffect, useRef, useState } from "react"
 import style from "./MobileGallery.module.scss"
-const MobileGallery = ({ layoutStyles, sliderImgs, reset }) => {
+const MobileGallery = ({ sliderImgs, reset }) => {
   let timeID
 
   const [currentIndex, setIndex] = useState(1)
@@ -58,26 +58,6 @@ const MobileGallery = ({ layoutStyles, sliderImgs, reset }) => {
           })}
         </div>
       </div>
-
-      {/* <div className={style.index_marker}>
-        {sliderImgs.map((_, i) => {
-          return (
-            <span
-              key={i}
-              onPointerDown={e => setIndex(i)}
-              className={currentIndex === i ? style.active : ""}
-              style={{
-                display:
-                  i === 0 || i === sliderImgs.length - 1 ? "none" : "block",
-                transition:
-                  currentIndex >= sliderImgs.length - 1
-                    ? "all 0s"
-                    : "all 1.3s ease",
-              }}
-            ></span>
-          )
-        })}
-      </div> */}
     </>
   )
 }

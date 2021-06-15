@@ -73,7 +73,7 @@ const TextBox = styled.div`
   border-radius: 10px;
   transition: all 0.5s ease-in-out;
   opacity: ${props => (props.toggled ? 0 : 1)};
-  transform: translateX(${props => (props.toggled ? "50vw" : "0vw")});
+  transform: translateX(${props => (props.toggled ? "-50vw" : "0vw")});
   max-width: ${props => (props.toggled ? "0%" : "60rem")};
   &:hover {
     box-shadow: 0 1px 30px #66666622;
@@ -206,7 +206,7 @@ const Gallery = () => {
             <Par>{data["mainpage-section2"][0].paragraph[0].text}</Par>
             <ButtonContainer>
               <Link to={"/OurWork"} style={{ textDecoration: "none" }}>
-                <Button>View Gallery</Button>
+                <Button>View Work</Button>
               </Link>
             </ButtonContainer>
           </TextBox>

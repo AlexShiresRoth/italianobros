@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react"
 import { Link } from "gatsby"
 import { ArrowLeft, ArrowRight } from "react-feather"
-import layoutStyles from "./servicestyles/Services.module.scss"
 import { ContentContext } from "../RootLayout"
 import styled from "styled-components"
 
@@ -182,9 +181,9 @@ const Services = () => {
     isToggled ? hideTextBox(true) : hideTextBox(false)
   if (!pageContent) {
     return (
-      <section className={layoutStyles.services__section}>
+      <Section>
         <p>Loading...</p>
-      </section>
+      </Section>
     )
   }
 

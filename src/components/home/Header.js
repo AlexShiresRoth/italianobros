@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import { ArrowDown } from "react-feather"
-import layoutStyles from "./headerstyles/Header.module.scss"
 import { ContentContext } from "../RootLayout"
 import Slider from "./slider/Slider"
 import styled from "styled-components"
@@ -121,13 +120,13 @@ const Header = () => {
 
   return (
     <HeaderSection datatype={sliderImgs[0]}>
-      <Slider sliderImgs={sliderImgs} layoutStyles={layoutStyles} />
+      <Slider sliderImgs={sliderImgs} />
       <HeroBox>
         <Heading>
           {pageContent.data["mainpage-header"][0]["mainpage-slogan"][0].text}
         </Heading>
         <Link to={"/Services"}>
-          <FancyButton>Learn More</FancyButton>
+          <FancyButton>View Our Services</FancyButton>
         </Link>
       </HeroBox>
       <ScrollDown>

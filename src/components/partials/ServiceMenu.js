@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import { ContentContext } from "../RootLayout"
 
 const ServiceMenuContainer = styled.div`
   position: absolute;
@@ -60,54 +61,29 @@ const ListItem = styled.li`
 
 //fix hash route
 export const ServiceMenu = ({ toggled }) => {
-  const items = (
-    <List>
-      <Link
-        to={"/Services#venetian-plaster"}
-        style={{ textDecoration: "none", width: "100%" }}
-      >
-        <ListItem>Venetian Plaster</ListItem>
-      </Link>
+  const { serviceLinks } = useContext(ContentContext)
 
+  const listItems = serviceLinks.map((item, i) => {
+    return (
       <Link
-        to={"/Services#plaster-mouldings"}
+        to={item.to}
+        key={i}
         style={{ textDecoration: "none", width: "100%" }}
       >
-        <ListItem> Plaster Mouldings</ListItem>
+        <ListItem>{item.title}</ListItem>
       </Link>
-
-      <Link
-        to={"/Services#stucco"}
-        style={{ textDecoration: "none", width: "100%" }}
-      >
-        <ListItem>Stucco</ListItem>
-      </Link>
-
-      <Link
-        to={"/Services#drywall"}
-        style={{ textDecoration: "none", width: "100%" }}
-      >
-        <ListItem>Drywall</ListItem>
-      </Link>
-
-      <Link
-        to={"/Services#concrete"}
-        style={{ textDecoration: "none", width: "100%" }}
-      >
-        <ListItem>Concrete</ListItem>
-      </Link>
-    </List>
-  )
+    )
+  })
 
   return toggled ? (
     <ServiceMenuContainer>
       <BGContainer />
-      {items}
+      <List>{listItems}</List>
     </ServiceMenuContainer>
   ) : (
     <Hidden>
       <BGContainer />
-      {items}
+      <List>{listItems}</List>
     </Hidden>
   )
 }

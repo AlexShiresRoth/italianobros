@@ -40,7 +40,6 @@ const ImgContainer = styled.div`
   width: 100vw;
   height: 100%;
   scroll-snap-align: center;
-
   & img {
     width: 100%;
     height: 100%;
@@ -48,7 +47,28 @@ const ImgContainer = styled.div`
   }
 `
 
-const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
+const IndexMarkers = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 40%;
+  left: 0;
+  margin: 1.5rem 0rem;
+  z-index: 3;
+  & span {
+    margin: 2rem 1rem;
+    height: 15px;
+    width: 15px;
+    border: 2px solid #eeeeee44;
+    border-radius: 500px;
+    display: block;
+  }
+  & .active {
+    background: #eee;
+  }
+`
+
+const ImageSlider = ({ sliderImgs, reset }) => {
   let timeID
   const scrollRef = useRef()
 
@@ -175,28 +195,6 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
 
   return (
     <>
-      {showArrows && (
-        <div className={layoutStyles.buttons}>
-          <button
-            onPointerDown={e => {
-              handleIndexChange(0)
-            }}
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            <ChevronLeft size={55} />
-          </button>
-          <button
-            onPointerDown={e => {
-              handleIndexChange(1)
-            }}
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            <ChevronRight size={55} />
-          </button>
-        </div>
-      )}
       <Overlay />
 
       <Slider ref={sliderRef} onTouchEnd={e => endTransition()}>
@@ -217,13 +215,13 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
         </Inner>
       </Slider>
 
-      <div className={layoutStyles.index_marker}>
+      <IndexMarkers>
         {sliderImgs.map((_, i) => {
           return (
             <span
               key={i}
               onPointerDown={e => setIndex(i)}
-              className={currentIndex === i ? layoutStyles.active : ""}
+              className={currentIndex === i ? "active" : ""}
               style={{
                 display:
                   i === 0 || i === sliderImgs.length - 1 ? "none" : "block",
@@ -235,7 +233,7 @@ const ImageSlider = ({ sliderImgs, layoutStyles, reset }) => {
             ></span>
           )
         })}
-      </div>
+      </IndexMarkers>
     </>
   )
 }

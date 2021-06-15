@@ -5,6 +5,7 @@ import { ArrowRight } from "react-feather"
 import { ContentContext } from "../RootLayout"
 import GalleryImgs from "./GalleryImgs"
 import { Link } from "gatsby"
+
 const Section = styled.section`
   padding: 4rem 0;
   background: #eee;

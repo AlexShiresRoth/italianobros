@@ -6,7 +6,7 @@ import Header from "./Header"
 import ImagesContainer from "./ImagesContainer"
 import Services from "./Services"
 import ContactSection from "./ContactSection"
-
+import ServiceBoxes from "./ServiceBoxes"
 const Home = () => {
   return (
     <Fragment>
@@ -14,6 +14,7 @@ const Home = () => {
       <Services />
       <Gallery />
       <ImagesContainer />
+      <ServiceBoxes />
       <About />
       <ContactSection />
     </Fragment>

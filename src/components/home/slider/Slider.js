@@ -33,21 +33,9 @@ const Slider = ({ sliderImgs, layoutStyles }) => {
   }
 
   if (isMobile) {
-    return (
-      <MobileGallery
-        layoutStyles={layoutStyles}
-        sliderImgs={sliderImgs}
-        reset={reset}
-      />
-    )
+    return <MobileGallery sliderImgs={sliderImgs} reset={reset} />
   }
-  return (
-    <ImageSlider
-      layoutStyles={layoutStyles}
-      sliderImgs={sliderImgs}
-      reset={reset}
-    />
-  )
+  return <ImageSlider sliderImgs={sliderImgs} reset={reset} />
 }
 
 Slider.propTypes = {}
