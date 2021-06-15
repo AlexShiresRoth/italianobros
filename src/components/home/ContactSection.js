@@ -9,6 +9,9 @@ const Section = styled.section`
   min-height: 50vh;
   position: relative;
   justify-content: center;
+  @media screen and (max-width:760px){
+    display:none;
+  }
 `
 const Inner = styled.div`
   width: 100%;

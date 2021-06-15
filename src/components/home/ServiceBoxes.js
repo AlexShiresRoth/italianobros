@@ -1,23 +1,28 @@
 import React, { useContext } from "react"
-import PropTypes from "prop-types"
 import styled from "styled-components"
 import { ContentContext } from "../RootLayout"
 import { Link } from "gatsby"
 
 const Section = styled.section`
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns:repeat(2,1fr);
+  grid-template-rows: repeat(2,1fr);
+  @media screen and (max-width:760px){
+    display:none;
+  }
 `
 const Box = styled.div`
-  min-width: 25rem;
-  height: 20rem;
-  flex: 1.5;
+  height:20rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  &:last-child {
+    grid-column-start:1;
+    grid-column-end:3;
+  }
 `
 const Overlay = styled.div`
   width: 100%;
@@ -47,6 +52,8 @@ const HeadingLink = styled.h2`
   border: 2px solid #fff;
   padding: 1rem;
   transition: all 0.3s ease;
+  min-width:20rem;
+  text-align:center;
   &:hover {
     cursor: pointer;
     background: #fff;

@@ -90,9 +90,11 @@ const Heading = styled.h3`
   color: #707070;
   max-width: 80rem;
   text-transform: uppercase;
+  
   @media screen and (max-width: 760px) {
     font-size: 1.5rem;
     color: #fff;
+    text-align:center;
   }
 `
 
