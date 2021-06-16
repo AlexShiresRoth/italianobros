@@ -10,6 +10,7 @@ const ServiceList = () => {
   const { pageContent } = useContext(ContentContext)
 
   const [content, setContent] = useState([])
+
   const [loading, setLoading] = useState(true)
 
   const [isMobile, setMobile] = useState(false)
@@ -165,7 +166,6 @@ const ServiceList = () => {
   const heading = servicesData["services-heading1"][0].text
   const paragraph = servicesData["paragraph"][0].text
 
-  console.log("is mobile", isMobile)
   return (
     <div className={layoutStyles.servicesList__section}>
       <div className={layoutStyles.heading}>

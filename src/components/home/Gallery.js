@@ -11,7 +11,7 @@ const Section = styled.section`
   justify-content: center;
   border-top: 0px solid #fbfbfb;
   width: 100%;
-  height: 100vh;
+  height: 50rem;
   background-image: url(${props => props.bgImg});
   background-size: cover;
   background-position: center;

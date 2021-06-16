@@ -5,55 +5,50 @@ import { Link } from "gatsby"
 
 const Section = styled.section`
   width: 100%;
-  display: grid;
-  grid-template-columns:repeat(2,1fr);
-  grid-template-rows: repeat(2,1fr);
-  @media screen and (max-width:760px){
-    display:none;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  flex-wrap: wrap;
+  @media screen and (max-width: 760px) {
+    display: none;
   }
 `
 const Box = styled.div`
-  height:20rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: block;
   position: relative;
-  &:last-child {
-    grid-column-start:1;
-    grid-column-end:3;
-  }
+  min-width: 33.33%;
+  flex: 4;
+  background: #222;
 `
-const Overlay = styled.div`
+const InnerBox = styled.div`
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #ceb862;
-  opacity: 0.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem;
   z-index: 2;
 `
 const Image = styled.img`
   object-fit: cover;
   position: absolute;
   top: 0;
+  opacity: 0.4;
   display: block;
   height: 100%;
   width: 100%;
-  opacity: 0.7;
   z-index: 1;
 `
 const HeadingLink = styled.h2`
-  color: #fff;
   font-size: 1.8rem;
   z-index: 3;
   text-transform: uppercase;
   border: 2px solid #fff;
   padding: 1rem;
   transition: all 0.3s ease;
-  min-width:20rem;
-  text-align:center;
+  min-width: 20rem;
+  text-align: center;
+  color: #fff;
   &:hover {
     cursor: pointer;
     background: #fff;
@@ -72,22 +67,25 @@ const HeadingLink = styled.h2`
   }
 `
 
+const linkClass = { textDecoration: "none", minWidth: "33.33%" }
+
 const ServiceBoxes = () => {
   const { serviceLinks, pageContent } = useContext(ContentContext)
 
-  console.log("page!", pageContent)
-  const services = serviceLinks.map((item, i) => {
-    return (
-      <Box key={i}>
-        <Overlay />
-        <Image src={item.img} />
-
-        <HeadingLink>
-          <Link to={item.to}>{item.title}</Link>
-        </HeadingLink>
-      </Box>
-    )
-  })
+  const services = serviceLinks
+    .map((item, i) => {
+      return (
+        <Link to={item.to} style={linkClass}>
+          <Box key={i}>
+            <Image src={item.img} />
+            <InnerBox>
+              <HeadingLink>{item.title}</HeadingLink>
+            </InnerBox>
+          </Box>
+        </Link>
+      )
+    })
+    .slice(0, 3)
   return <Section>{services}</Section>
 }
 
