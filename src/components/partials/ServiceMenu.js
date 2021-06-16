@@ -53,6 +53,7 @@ const ListItem = styled.li`
   color: #707070;
   font-size: 1.2rem;
   height: 100%;
+  font-family: Cormorant Garamond;
   &:hover {
     color: #ceb862;
     cursor: pointer;

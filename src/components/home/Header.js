@@ -20,9 +20,8 @@ const HeaderSection = styled.header`
 `
 
 const Heading = styled.h1`
-  font-family: mencken-std, sans-serif;
-  font-weight: 700;
-  font-style: italic;
+  font-family: Cormorant Garamond;
+  font-weight: 400;
   max-width: 70%;
   color: #eee;
   font-size: 5rem;
@@ -94,7 +93,7 @@ const Text = styled.h3`
   color: #fff;
   font-style: italic;
   font-weight: 100;
-  font-family: mencken-std, sans-serif;
+  font-family: Cormorant Garamond;
   font-size: 1rem;
 `
 

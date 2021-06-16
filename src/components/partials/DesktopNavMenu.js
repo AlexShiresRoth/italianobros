@@ -55,6 +55,7 @@ const ListItem = styled.li`
   transition: all 0.3s ease;
   position: relative;
   height: 100%;
+  font-family: Cormorant Garamond;
   &:after {
     content: " ";
     width: 0%;
