@@ -19,6 +19,16 @@ const Box = styled.div`
   min-width: 33.33%;
   flex: 4;
   background: #222;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    background: #ceb862;
+  }
+  @media screen and (max-width: 760px) {
+    flex: 1;
+    background: transparent;
+    min-width: 50%;
+  }
 `
 const InnerBox = styled.div`
   width: 100%;
@@ -28,6 +38,13 @@ const InnerBox = styled.div`
   justify-content: center;
   padding: 8rem;
   z-index: 2;
+  &:hover {
+    cursor: pointer;
+    background: #ceb862;
+  }
+  @media screen and (max-width: 760px) {
+    padding: 1rem;
+  }
 `
 const Image = styled.img`
   object-fit: cover;
@@ -38,25 +55,22 @@ const Image = styled.img`
   height: 100%;
   width: 100%;
   z-index: 1;
+  @media screen and (max-width: 760px) {
+    display: none;
+  }
 `
 const HeadingLink = styled.h2`
-  font-size: 1.8rem;
+  font-size: 2rem;
+  letter-spacing: 1.8px;
   z-index: 3;
   text-transform: uppercase;
-  border: 2px solid #fff;
   padding: 1rem;
   transition: all 0.3s ease;
   min-width: 20rem;
   text-align: center;
+  font-family: Cormorant Garamond;
   color: #fff;
-  &:hover {
-    cursor: pointer;
-    background: #fff;
-    color: #ceb862;
-    & a {
-      color: #ceb862;
-    }
-  }
+
   & a {
     text-decoration: none;
     color: #fff;
@@ -64,6 +78,11 @@ const HeadingLink = styled.h2`
     &:hover {
       color: #ceb862;
     }
+  }
+  @media screen and (max-width: 760px) {
+    font-size: 1rem;
+    min-width: 1rem;
+    color: #707070;
   }
 `
 

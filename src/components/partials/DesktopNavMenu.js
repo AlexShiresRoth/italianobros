@@ -85,6 +85,7 @@ const Button = styled.button`
   height: 3.2rem;
   min-width: 13rem;
   position: relative;
+  font-family: Cormorant Garamond;
   &:hover {
     cursor: pointer;
     background: #ceb862;

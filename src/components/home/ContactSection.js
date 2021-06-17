@@ -9,8 +9,8 @@ const Section = styled.section`
   min-height: 50vh;
   position: relative;
   justify-content: center;
-  @media screen and (max-width:760px){
-    display:none;
+  @media screen and (max-width: 760px) {
+    display: none;
   }
 `
 const Inner = styled.div`
@@ -41,7 +41,7 @@ const ColumnLeft = styled.div`
   justify-content: center;
   align-content: center;
   width: 100%;
-  background-image: url("https://images.prismic.io/italiano-bros/a24a9fb2-2c8c-4820-b8e8-6b2085f9c6cc_IMG_3978.jpg?auto=compress,format");
+  background-image: url("https://images.prismic.io/italiano-bros/e49910b2-dd40-4e68-9186-9bc9fa5b84c0_a24a9fb2-2c8c-4820-b8e8-6b2085f9c6cc_IMG_3978.png?auto=compress,format");
   background-size: cover;
   background-position: center;
   @media screen and (max-width: 760px) {
