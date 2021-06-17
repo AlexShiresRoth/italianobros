@@ -8,7 +8,7 @@ const Section = styled.section`
   display: flex;
   align-items: stretch;
   justify-content: stretch;
-  flex-wrap: wrap;
+  flex-wrap: no-wrap;
   @media screen and (max-width: 760px) {
     display: none;
   }
