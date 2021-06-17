@@ -18,6 +18,7 @@ const Section = styled.section`
   @media screen and (max-width: 760px) {
     background-image: none;
     height: auto;
+    min-height: 60vh;
   }
 `
 
@@ -26,8 +27,9 @@ const Inner = styled.div`
   width: 100%;
   height: 100%;
   @media screen and (max-width: 760px) {
-    flex-direction: column-reverse;
+    flex-direction: column;
     position: relative;
+    align-items: center;
   }
 `
 const Column = styled.div`
@@ -41,16 +43,12 @@ const Column = styled.div`
   transition: all 0.5s ease-in-out;
   position: relative;
   @media screen and (max-width: 760px) {
-    width: 100%;
-    &:nth-child(2) {
-      height: 50vh;
-      display: flex;
-      position: relative;
-    }
+    width: 95%;
     &:nth-child(1) {
-      position: absolute;
-      top: 0%;
-      z-index: 2;
+      display: flex;
+    }
+    &:nth-child(2) {
+      z-index: 0;
       background-color: transparent !important;
     }
   }
@@ -79,10 +77,12 @@ const TextBox = styled.div`
     box-shadow: 0 1px 30px #66666622;
   }
   @media screen and (max-width: 760px) {
-    padding: 0;
-    align-items: center;
+    padding: 3rem 0;
 
     justify-content: center;
+    &:hover {
+      box-shadow: 0 1px 30px transparent;
+    }
   }
 `
 const Heading = styled.h3`
@@ -90,9 +90,10 @@ const Heading = styled.h3`
   color: #707070;
   max-width: 80rem;
   text-transform: uppercase;
+
   @media screen and (max-width: 760px) {
     font-size: 1.5rem;
-    color: #fff;
+    text-align: left;
   }
 `
 
@@ -115,11 +116,15 @@ const Par = styled.p`
   font-family: "Work Sans";
   margin: 1rem 0;
   @media screen and (max-width: 760px) {
-    display: none;
+    font-size: 1.1rem;
   }
 `
 const ButtonContainer = styled.div`
   margin-top: 1rem;
+  @media screen and (max-width: 760px) {
+    display: flex;
+    justify-content: flex-end;
+  }
 `
 
 const Button = styled.button`
@@ -138,9 +143,10 @@ const Button = styled.button`
     background: #ceb862;
   }
   @media screen and (max-width: 760px) {
-    height: 2.5rem;
+    height: 2.8rem;
     min-width: 11rem;
-    color: #eee;
+    color: #fff;
+    background: #ceb862;
   }
 `
 
@@ -190,7 +196,7 @@ const Gallery = () => {
     <Section bgImg={img}>
       <Inner>
         <Column
-          style={{ background: "#fbfbfb" }}
+          style={{ background: "#fff" }}
           toggled={isToggled}
           onTransitionEnd={e => handleTransition()}
         >

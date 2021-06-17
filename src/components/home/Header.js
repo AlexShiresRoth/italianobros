@@ -67,8 +67,12 @@ const FancyButton = styled.button`
   }
 
   @media screen and (max-width: 760px) {
-    width: 15rem;
-    margin-top: 1rem;
+    min-width: 15rem;
+    margin-top: 2rem;
+    background-color: #ceb862;
+    font-weight: 400;
+    padding: 1rem;
+    font-size: 1.1rem;
   }
 `
 const ScrollDown = styled.div`

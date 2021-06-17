@@ -18,6 +18,7 @@ const Section = styled.section`
   @media screen and (max-width: 760px) {
     background-image: none;
     height: auto;
+    min-height: 60vh;
   }
 `
 
@@ -28,6 +29,7 @@ const Inner = styled.div`
   @media screen and (max-width: 760px) {
     flex-direction: column-reverse;
     position: relative;
+    align-items: center;
   }
 `
 const Column = styled.div`
@@ -41,15 +43,11 @@ const Column = styled.div`
   transition: all 0.5s ease-in-out;
   position: relative;
   @media screen and (max-width: 760px) {
-    width: 100%;
+    width: 95%;
     &:nth-child(1) {
-      height: 50vh;
       display: flex;
-      position: relative;
     }
     &:nth-child(2) {
-      position: absolute;
-      top: 0%;
       z-index: 0;
       background-color: transparent !important;
     }
@@ -79,10 +77,12 @@ const TextBox = styled.div`
     box-shadow: 0 1px 30px #66666622;
   }
   @media screen and (max-width: 760px) {
-    padding: 0;
-    align-items: center;
+    padding: 3rem 0;
 
     justify-content: center;
+    &:hover {
+      box-shadow: 0 1px 30px transparent;
+    }
   }
 `
 const Heading = styled.h3`
@@ -93,8 +93,7 @@ const Heading = styled.h3`
 
   @media screen and (max-width: 760px) {
     font-size: 1.5rem;
-    color: #fff;
-    text-align: center;
+    text-align: left;
   }
 `
 
@@ -117,11 +116,15 @@ const Par = styled.p`
   font-family: "Work Sans";
   margin: 1rem 0;
   @media screen and (max-width: 760px) {
-    display: none;
+    font-size: 1.1rem;
   }
 `
 const ButtonContainer = styled.div`
   margin-top: 1rem;
+  @media screen and (max-width: 760px) {
+    display: flex;
+    justify-content: flex-end;
+  }
 `
 
 const Button = styled.button`
@@ -140,9 +143,10 @@ const Button = styled.button`
     background: #ceb862;
   }
   @media screen and (max-width: 760px) {
-    height: 2.5rem;
+    height: 2.8rem;
     min-width: 11rem;
-    color: #eee;
+    color: #fff;
+    background: #ceb862;
   }
 `
 

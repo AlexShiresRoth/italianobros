@@ -20,7 +20,6 @@ const Label = styled.label`
   margin-bottom: 0.5rem;
   color: #fff;
   font-size: 1.2rem;
-  font-weight: 700;
 `
 const Input = styled.input`
   background: #c2ac54;

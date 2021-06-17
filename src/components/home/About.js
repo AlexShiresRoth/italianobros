@@ -4,24 +4,31 @@ import { ContentContext } from "../RootLayout"
 import styled from "styled-components"
 
 const Section = styled.section`
-  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 4rem 0;
+  justify-content: center;
+  border-top: 0px solid #fbfbfb;
+  width: 100%;
+  height: 50rem;
+  background-image: url(${props => props.bgImg});
+  background-size: cover;
+  background-position: center;
   @media screen and (max-width: 760px) {
-    padding: 1rem 0;
+    background-image: none;
+    height: auto;
+    min-height: 30vh;
   }
 `
 
 const Inner = styled.div`
   display: flex;
-  justify-content: center;
   width: 100%;
   height: 100%;
   @media screen and (max-width: 760px) {
     flex-direction: column;
+    position: relative;
+    align-items: center;
   }
 `
 const Column = styled.div`
@@ -35,30 +42,49 @@ const Column = styled.div`
   transition: all 0.5s ease-in-out;
   position: relative;
   @media screen and (max-width: 760px) {
-    width: 100%;
+    width: 95%;
+    &:nth-child(1) {
+      display: flex;
+    }
+    &:nth-child(2) {
+      z-index: 0;
+      background-color: transparent !important;
+    }
   }
 `
+
 const TextBox = styled.div`
   width: 90%;
   padding: 4.5rem;
   display: ${props => (props.textBox ? "none" : "flex")};
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   border-radius: 10px;
   transition: all 0.5s ease-in-out;
   opacity: ${props => (props.toggled ? 0 : 1)};
-  transform: translateX(${props => (props.toggled ? "50vw" : "0vw")});
+  transform: translateX(${props => (props.toggled ? "-50vw" : "0vw")});
   max-width: ${props => (props.toggled ? "0%" : "60rem")};
+  &:hover {
+    box-shadow: 0 1px 30px #66666622;
+  }
+  @media screen and (max-width: 760px) {
+    padding: 3rem 0;
+
+    justify-content: center;
+    &:hover {
+      box-shadow: 0 1px 30px transparent;
+    }
+  }
 `
 const Heading = styled.h3`
   font-size: 2.5rem;
   color: #707070;
   max-width: 80rem;
   text-transform: uppercase;
+
   @media screen and (max-width: 760px) {
     font-size: 1.5rem;
-    text-align: center;
+    text-align: left;
   }
 `
 
@@ -68,6 +94,9 @@ const Divider = styled.hr`
   border: 0;
   width: 6rem;
   margin: 1rem 0;
+  @media screen and (max-width: 760px) {
+    height: 3px;
+  }
 `
 
 const Par = styled.p`
@@ -77,13 +106,16 @@ const Par = styled.p`
   letter-spacing: 1.3px;
   font-family: "Work Sans";
   margin: 1rem 0;
-  text-align: center;
   @media screen and (max-width: 760px) {
-    display: none;
+    font-size: 1.1rem;
   }
 `
 const ButtonContainer = styled.div`
   margin-top: 1rem;
+  @media screen and (max-width: 760px) {
+    display: flex;
+    justify-content: flex-end;
+  }
 `
 
 const Button = styled.button`
@@ -101,6 +133,19 @@ const Button = styled.button`
     color: #fff;
     background: #ceb862;
   }
+  @media screen and (max-width: 760px) {
+    height: 2.8rem;
+    min-width: 11rem;
+    color: #fff;
+    background: #ceb862;
+  }
+`
+const Image = styled.img`
+  object-fit: contain;
+  width: 90%;
+  @media screen and (max-width: 760px) {
+    display: none;
+  }
 `
 const About = _ => {
   const { pageContent } = useContext(ContentContext)
@@ -115,7 +160,7 @@ const About = _ => {
     data["mainpage-section3"][0]["mainpage-section3-paragraph3"][0].text
   const heading =
     data["mainpage-section3"][0]["mainpage-section3-heading"][0].text
-
+  const marc = data["marc-italiano"][0]
   return (
     <Section>
       <Inner>
@@ -134,6 +179,9 @@ const About = _ => {
               </Link>
             </ButtonContainer>
           </TextBox>
+        </Column>
+        <Column>
+          <Image src={marc["profile-image"].url} />{" "}
         </Column>
       </Inner>
     </Section>
