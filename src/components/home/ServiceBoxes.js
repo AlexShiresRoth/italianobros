@@ -6,8 +6,8 @@ import { Link } from "gatsby"
 const Section = styled.section`
   width: 100%;
   display: flex;
-  align-items: stretch;
-  justify-content: stretch;
+  align-items: center;
+  justify-content: center;
   flex-wrap: no-wrap;
   @media screen and (max-width: 760px) {
     display: none;
@@ -17,6 +17,7 @@ const Box = styled.div`
   display: block;
   position: relative;
   min-width: 33.33%;
+  height:20rem;
   flex: 4;
   background: #222;
   transition: all 0.3s ease-in-out;
