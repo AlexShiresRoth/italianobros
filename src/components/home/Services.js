@@ -21,6 +21,7 @@ const Section = styled.section`
     background-image: none;
     height: auto;
     min-height: 60vh;
+    overflow: hidden;
   }
 `
 

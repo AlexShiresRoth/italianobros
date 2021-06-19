@@ -22,6 +22,7 @@ const Section = styled.section`
     height: auto;
     min-height: 60vh;
     margin-top: 2rem;
+    overflow: hidden;
   }
 `
 
@@ -86,6 +87,7 @@ const TextBox = styled.div`
     padding: 3rem 0;
     position: static;
     justify-content: center;
+    min-width: 5rem;
     &:hover {
       box-shadow: 0 1px 30px transparent;
     }
