@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import { useInView } from "react-intersection-observer"
 
 const Section = styled.section`
   display: flex;
@@ -9,8 +10,11 @@ const Section = styled.section`
   align-items: center;
   padding: 4rem;
   width: 100%;
+  background: #ceb86211;
+  overflow: hidden;
   @media screen and (max-width: 760px) {
-    display: none;
+    padding: 4rem;
+    background: #ceb86211;
   }
 `
 const Inner = styled.div`
@@ -18,15 +22,6 @@ const Inner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
-
-const Heading = styled.h2`
-  font-size: 1.5rem;
-  color: #707070;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: 0;
-  margin-bottom: 1rem;
 `
 
 const FancyButton = styled.button`
@@ -43,7 +38,7 @@ const FancyButton = styled.button`
   border: 2px solid #ceb862;
   box-shadow: 0 1px 10px #22222205;
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: all 1s ease-in-out;
   &:hover {
     cursor: pointer;
     color: #fff;
@@ -54,17 +49,32 @@ const FancyButton = styled.button`
   }
 
   @media screen and (max-width: 760px) {
+    min-width: 12rem;
     width: 15rem;
-    margin-top: 1rem;
+    margin-top: 0rem;
+    font-size: 1rem;
   }
 `
 
 const ViewAllServices = () => {
+  const [isSeen, setVisible] = useState(false)
+  const { ref, inView, entry } = useInView({
+    threshold: 0.3,
+  })
+
+  useEffect(() => {
+    if (inView) setVisible(true)
+  }, [inView])
+
   return (
     <Section>
-      <Inner>
+      <Inner ref={ref}>
         <Link to={"/Services"}>
-          <FancyButton>View All Services</FancyButton>
+          <FancyButton
+            style={{ transform: `translateY(${isSeen ? "0vh" : "40vh"})` }}
+          >
+            View All Services
+          </FancyButton>
         </Link>
       </Inner>
     </Section>

@@ -1,7 +1,8 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import { ContentContext } from "../RootLayout"
 import styled from "styled-components"
+import { useInView } from "react-intersection-observer"
 
 const Section = styled.section`
   display: flex;
@@ -14,6 +15,7 @@ const Section = styled.section`
   background-image: url(${props => props.bgImg});
   background-size: cover;
   background-position: center;
+  overflow: hidden;
   @media screen and (max-width: 760px) {
     background-image: none;
     height: auto;
@@ -26,9 +28,10 @@ const Inner = styled.div`
   width: 100%;
   height: 100%;
   @media screen and (max-width: 760px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
     position: relative;
     align-items: center;
+    margin-top: -1.5rem;
   }
 `
 const Column = styled.div`
@@ -39,7 +42,7 @@ const Column = styled.div`
   align-items: center;
   justify-content: center;
   flex: ${props => (props.toggled ? 0 : 0.8)};
-  transition: all 0.5s ease-in-out;
+  transition: all 1.2s ease-in-out;
   position: relative;
   @media screen and (max-width: 760px) {
     width: 95%;
@@ -135,7 +138,7 @@ const Button = styled.button`
   }
   @media screen and (max-width: 760px) {
     height: 2.8rem;
-    min-width: 11rem;
+    min-width: 13rem;
     color: #fff;
     background: #ceb862;
   }
@@ -144,11 +147,18 @@ const Image = styled.img`
   object-fit: contain;
   width: 90%;
   @media screen and (max-width: 760px) {
-    display: none;
   }
 `
 const About = _ => {
   const { pageContent } = useContext(ContentContext)
+  const [isSeen, setVisible] = useState(false)
+  const { ref, inView, entry } = useInView({
+    threshold: 0.3,
+  })
+
+  useEffect(() => {
+    if (inView) setVisible(true)
+  }, [inView])
 
   if (!pageContent) {
     return <p>Loading...</p>
@@ -163,8 +173,8 @@ const About = _ => {
   const marc = data["marc-italiano"][0]
   return (
     <Section>
-      <Inner>
-        <Column>
+      <Inner ref={ref}>
+        <Column style={{ transform: `translateX(${isSeen ? 0 : "-40vw"})` }}>
           <TextBox>
             <Heading>{heading}</Heading>
             <Divider />
@@ -180,7 +190,7 @@ const About = _ => {
             </ButtonContainer>
           </TextBox>
         </Column>
-        <Column>
+        <Column style={{ transform: `translateX(${isSeen ? 0 : "40vw"})` }}>
           <Image src={marc["profile-image"].url} />{" "}
         </Column>
       </Inner>

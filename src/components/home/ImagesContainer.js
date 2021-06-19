@@ -1,28 +1,30 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { ArrowRight } from "react-feather"
 import { ContentContext } from "../RootLayout"
 import GalleryImgs from "./GalleryImgs"
 import { Link } from "gatsby"
+import { useInView } from "react-intersection-observer"
 
 const Section = styled.section`
   padding: 4rem 0;
-  background: #eee;
+  background: #ceb86211;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   @media screen and (max-width: 760px) {
-    display: none;
+    min-height: 100vh;
+    padding-top: 2rem;
   }
 `
 const Heading = styled.button`
   font-size: 1.8rem;
   color: #707070;
-  font-weight: 100;
-  font-family: mencken-std, sans-serif;
+  background: transparent;
+  font-family: "Cormorant Garamond", sans-serif;
   text-transform: uppercase;
   margin-bottom: 1rem;
   align-content: center;
@@ -30,24 +32,32 @@ const Heading = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease-in-out;
-
+  transition: all 1.2s ease-in-out;
+  padding: 1rem;
   &:hover {
     cursor: pointer;
-    background: #ceb862;
-    color: #fff;
-    border: 2px solid #ceb862;
-    box-shadow: 0 1px 30px #66666633;
   }
 `
 
 const ImagesContainer = props => {
   const { pageContent } = useContext(ContentContext)
+  const [isSeen, setVisible] = useState(false)
+
+  const { ref, inView, entry } = useInView({
+    threshold: 0.2,
+  })
+
+  useEffect(() => {
+    if (inView) setVisible(true)
+  }, [inView])
+
   if (!pageContent) {
     return <p>Loading...</p>
   }
   const { data } = pageContent
+
   console.log(data)
+
   const imgs = [
     data["mainpage-section2"][0].image1,
     data["mainpage-section2"][0].image2,
@@ -58,13 +68,15 @@ const ImagesContainer = props => {
   ]
 
   return (
-    <Section>
+    <Section ref={ref}>
       <Link to="/OurWork" style={{ textDecoration: "none" }}>
-        <Heading>
+        <Heading
+          style={{ transform: `translateY(${isSeen ? "0vh" : "40vh"})` }}
+        >
           View The Gallery <ArrowRight />
         </Heading>
       </Link>
-      <GalleryImgs imgs={imgs} />
+      <GalleryImgs imgs={imgs} isSeen={isSeen} />
     </Section>
   )
 }

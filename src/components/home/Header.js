@@ -3,7 +3,18 @@ import { Link } from "gatsby"
 import { ArrowDown } from "react-feather"
 import { ContentContext } from "../RootLayout"
 import Slider from "./slider/Slider"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
+
+const fadeIn = keyframes`
+  0%{
+    opacity:0;
+    transform:translateY(30vh);
+  }
+  100% {
+    opacity:1;
+    transform: translateY(0vh);
+  }
+`
 
 const HeaderSection = styled.header`
   display: flex;
@@ -24,10 +35,10 @@ const Heading = styled.h1`
   font-weight: 400;
   max-width: 70%;
   color: #eee;
-  font-size: 5rem;
+  font-size: 6rem;
   text-shadow: 0 1px 20px #99999933;
   text-align: center;
-
+  animation: ${fadeIn} 1s ease-in-out forwards;
   @media screen and (max-width: 760px) {
     font-size: 2.5rem;
     line-height: 1.5;
@@ -56,6 +67,7 @@ const FancyButton = styled.button`
   border: 2px solid #ceb862;
   border-radius: 2px;
   transition: all 0.3s ease;
+  animation: ${fadeIn} 1.5s ease-in-out forwards;
   &:hover {
     cursor: pointer;
     background-color: #ceb862;

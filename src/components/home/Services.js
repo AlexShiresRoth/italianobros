@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react"
+import React, { createRef, useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import { ArrowLeft, ArrowRight } from "react-feather"
 import { ContentContext } from "../RootLayout"
 import styled from "styled-components"
+import { useInView } from "react-intersection-observer"
 
 const Section = styled.section`
   display: flex;
@@ -15,6 +16,7 @@ const Section = styled.section`
   background-image: url(${props => props.bgImg});
   background-size: cover;
   background-position: center;
+  transition: all 1.2s ease-in-out;
   @media screen and (max-width: 760px) {
     background-image: none;
     height: auto;
@@ -39,13 +41,14 @@ const Column = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: ${props => (props.toggled ? 0 : 0.8)};
-  transition: all 0.5s ease-in-out;
+  flex: ${props => (props.toggled ? 0 : "0.8")};
+  transition: all 1.2s ease-in-out;
   position: relative;
   @media screen and (max-width: 760px) {
     width: 95%;
     &:nth-child(1) {
       display: flex;
+      background: #ceb86211;
     }
     &:nth-child(2) {
       z-index: 0;
@@ -65,20 +68,19 @@ const Image = styled.img`
 const TextBox = styled.div`
   width: 90%;
   padding: 4.5rem;
-  display: ${props => (props.textBox ? "none" : "flex")};
+  position: absolute;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   border-radius: 10px;
-  transition: all 0.5s ease-in-out;
+  transition: all 1s ease-in-out;
   opacity: ${props => (props.toggled ? 0 : 1)};
-  transform: translateX(${props => (props.toggled ? "50vw" : "0vw")});
-  max-width: ${props => (props.toggled ? "0%" : "60rem")};
   &:hover {
     box-shadow: 0 1px 30px #66666622;
   }
   @media screen and (max-width: 760px) {
     padding: 3rem 0;
-
+    position: static;
     justify-content: center;
     &:hover {
       box-shadow: 0 1px 30px transparent;
@@ -90,7 +92,7 @@ const Heading = styled.h3`
   color: #707070;
   max-width: 80rem;
   text-transform: uppercase;
-
+  transition: all 1s ease-in-out;
   @media screen and (max-width: 760px) {
     font-size: 1.5rem;
     text-align: left;
@@ -103,6 +105,7 @@ const Divider = styled.hr`
   border: 0;
   width: 6rem;
   margin: 1rem 0;
+  transition: all 1s ease-in-out;
   @media screen and (max-width: 760px) {
     height: 3px;
   }
@@ -115,6 +118,7 @@ const Par = styled.p`
   letter-spacing: 1.3px;
   font-family: "Work Sans";
   margin: 1rem 0;
+  transition: all 1s ease-in-out;
   @media screen and (max-width: 760px) {
     font-size: 1.1rem;
   }
@@ -180,11 +184,20 @@ const ToggleButton = styled.button`
 
 const Services = () => {
   const { pageContent } = useContext(ContentContext)
-
   const [isToggled, toggleBox] = useState(false)
   const [textBoxHidden, hideTextBox] = useState(false)
+  const [beenVisited, setVisit] = useState(false)
+  const { ref, inView, entry } = useInView({
+    threshold: 0.4,
+  })
+
   const handleTransition = () =>
     isToggled ? hideTextBox(true) : hideTextBox(false)
+
+  useEffect(() => {
+    if (inView) setVisit(true)
+  }, [inView])
+
   if (!pageContent) {
     return (
       <Section>
@@ -193,22 +206,24 @@ const Services = () => {
     )
   }
 
-  console.log("toggled", isToggled)
-
   const { data } = pageContent
 
   const img = `https://images.prismic.io/italiano-bros/b4b4ad37-986d-4595-b751-ed377fc86b5f_IMG_1402.jpg`
 
   return (
-    <Section bgImg={img}>
-      <Inner>
+    <Section bgImg={img} style={{ opacity: beenVisited ? 1 : 0 }}>
+      <Inner ref={ref}>
         <Column style={{ flex: "1.2" }}>
           <Image src={img} />
         </Column>
         <Column
-          style={{ backgroundColor: "#fff" }}
           toggled={isToggled}
           onTransitionEnd={e => handleTransition()}
+          style={{
+            backgroundColor: "#fff",
+            opacity: beenVisited ? 1 : 0,
+            transform: `translateX(${beenVisited ? "0" : "40vw"})`,
+          }}
         >
           <TextBox toggled={isToggled} textBox={textBoxHidden}>
             <Heading>
