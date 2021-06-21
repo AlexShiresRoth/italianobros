@@ -1,0 +1,47 @@
+@media screen and (min-width: 900px) {
+  .desktop {
+    background: url("https://res.cloudinary.com/snackmanproductions/image/upload/v1568246178/italianobros/home/main_header_pci4iq.jpg") center center fixed;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    background-size: cover;
+    background-position: 50% -12vh;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 95vh;
+    text-align: center;
+  }
+  .herobox {
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    z-index: 2;
+  }
+  .heading {
+    font-size: 4rem;
+    font-weight: 500;
+    margin: 0 0 2rem 0;
+    color: #fff;
+    max-width: 100rem;
+  }
+  .button {
+    border: 0;
+    background: #CEB862;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1rem;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    margin: 1rem;
+    height: 3.2rem;
+    width: 14rem;
+  }
+  .button:hover {
+    cursor: pointer;
+    background: #c1a63c;
+  }
+}
+/*# sourceMappingURL=HeaderDesktop.module.css.map */

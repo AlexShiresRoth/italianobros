@@ -15,6 +15,7 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
