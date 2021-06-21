@@ -5,7 +5,6 @@ import Gallery from "./Gallery"
 import Header from "./Header"
 import ImagesContainer from "./ImagesContainer"
 import Services from "./Services"
-import ContactSection from "./ContactSection"
 import ServiceBoxes from "./ServiceBoxes"
 import ViewAllServices from "./ViewAllServices"
 const Home = () => {
@@ -18,7 +17,6 @@ const Home = () => {
       <Gallery />
       <ImagesContainer />
       <About />
-      <ContactSection />
     </Fragment>
   )
 }

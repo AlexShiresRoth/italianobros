@@ -31,8 +31,9 @@ const ImageContainer = styled.div`
   }
   @media screen and (max-width: 1000px) {
     flex: none;
-    height: auto;
-    width: 100%;
+    height: 20rem;
+    width: 95%;
+    margin: 0.5rem 0;
     &:hover {
       flex: none;
     }
@@ -44,12 +45,20 @@ const Image = styled.img`
   object-position: center;
   width: 100%;
   height: 100%;
+  @media screen and (max-width: 760px) {
+    object-position: bottom;
+  }
 `
 
-const GalleryImgs = ({ imgs }) => {
+const GalleryImgs = ({ imgs, isSeen }) => {
   const imgMap = imgs.map((img, i) => {
     return (
-      <ImageContainer>
+      <ImageContainer
+        style={{
+          transform: `translateY(${isSeen ? "0vh" : "30vh"})`,
+          transition: `all ${1 + `.${i}`}s ease-in-out`,
+        }}
+      >
         <Image key={i} src={img.url} alt={img.title} />
       </ImageContainer>
     )
