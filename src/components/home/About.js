@@ -153,7 +153,7 @@ const About = _ => {
   const { pageContent } = useContext(ContentContext)
   const [isSeen, setVisible] = useState(false)
   const { ref, inView, entry } = useInView({
-    threshold: 0.3,
+    threshold: 0.2,
   })
 
   useEffect(() => {
@@ -174,7 +174,7 @@ const About = _ => {
   return (
     <Section>
       <Inner ref={ref}>
-        <Column style={{ transform: `translateX(${isSeen ? 0 : "-40vw"})` }}>
+        <Column style={{ transform: `translateX(${isSeen ? 0 : "-40vw"})`, opacity: isSeen ? 1 : 0 }}>
           <TextBox>
             <Heading>{heading}</Heading>
             <Divider />
@@ -190,7 +190,7 @@ const About = _ => {
             </ButtonContainer>
           </TextBox>
         </Column>
-        <Column style={{ transform: `translateX(${isSeen ? 0 : "40vw"})` }}>
+        <Column style={{ transform: `translateX(${isSeen ? 0 : "40vw"})`, opacity: isSeen ? 1 : 0 }}>
           <Image src={marc["profile-image"].url} />{" "}
         </Column>
       </Inner>

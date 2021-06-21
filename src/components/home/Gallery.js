@@ -51,7 +51,7 @@ const Column = styled.div`
 
     &:nth-child(1) {
       display: flex;
-      margin-top: -2rem;
+      margin-top: -1rem;
     }
     &:nth-child(2) {
       z-index: 0;
@@ -198,7 +198,7 @@ const Gallery = () => {
 
   const [beenVisited, setVisit] = useState(false)
   const { ref, inView, entry } = useInView({
-    threshold: 0.4,
+    threshold: 0.2,
   })
 
   useEffect(() => {

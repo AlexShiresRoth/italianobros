@@ -189,7 +189,7 @@ const Services = () => {
   const [textBoxHidden, hideTextBox] = useState(false)
   const [beenVisited, setVisit] = useState(false)
   const { ref, inView, entry } = useInView({
-    threshold: 0.4,
+    threshold: 0.2,
   })
 
   const handleTransition = () =>

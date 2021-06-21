@@ -59,7 +59,7 @@ const FancyButton = styled.button`
 const ViewAllServices = () => {
   const [isSeen, setVisible] = useState(false)
   const { ref, inView, entry } = useInView({
-    threshold: 0.3,
+    threshold: 0.2,
   })
 
   useEffect(() => {
