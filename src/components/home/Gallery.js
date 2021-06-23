@@ -103,7 +103,7 @@ const Heading = styled.h3`
   text-transform: uppercase;
   transition: all 1s ease-in-out;
   @media screen and (max-width: 760px) {
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     text-align: left;
   }
 `
