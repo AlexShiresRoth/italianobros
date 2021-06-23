@@ -18,7 +18,7 @@ const MobileImageGrid = styled.div`
   @media screen and (max-width: 1000px) {
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    width: 90%;
   }
 `
 const ImageContainer = styled.div`

@@ -70,6 +70,7 @@ const IndexMarkers = styled.div`
 
 const ImageSlider = ({ sliderImgs, reset }) => {
   let timeID
+
   const scrollRef = useRef()
 
   const sliderRef = createRef()

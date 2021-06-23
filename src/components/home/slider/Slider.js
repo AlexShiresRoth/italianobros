@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import ImageSlider from "./ImageSlider"
 import MobileGallery from "./MobileGallery"
 
-const Slider = ({ sliderImgs, layoutStyles }) => {
+const Slider = ({ sliderImgs }) => {
   const [isMobile, setMobile] = useState(true)
   const [isReset, reset] = useState(false)
 
@@ -32,10 +32,7 @@ const Slider = ({ sliderImgs, layoutStyles }) => {
     )
   }
 
-  if (isMobile) {
-    return <MobileGallery sliderImgs={sliderImgs} reset={reset} />
-  }
-  return <ImageSlider sliderImgs={sliderImgs} reset={reset} />
+  return <MobileGallery sliderImgs={sliderImgs} reset={reset} />
 }
 
 Slider.propTypes = {}

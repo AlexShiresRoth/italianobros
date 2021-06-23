@@ -13,27 +13,30 @@ const Section = styled.section`
   border-top: 0px solid #fbfbfb;
   width: 100%;
   height: 50rem;
-  background-image: url(${props => props.bgImg});
-  background-size: cover;
-  background-position: center;
+  padding: 4rem 0;
   transition: all 1.2s ease-in-out;
   @media screen and (max-width: 760px) {
     background-image: none;
     height: auto;
     min-height: 60vh;
-    margin-top: 2rem;
+    margin-top: -2rem;
     overflow: hidden;
+    padding: 0rem;
   }
 `
 
 const Inner = styled.div`
   display: flex;
-  width: 100%;
+  width: 90%;
   height: 100%;
+  background-image: url(${props => props.bgImg});
+  background-size: cover;
+  background-position: center;
   @media screen and (max-width: 760px) {
     flex-direction: column-reverse;
     position: relative;
     align-items: center;
+    background-image: none;
   }
 `
 const Column = styled.div`
@@ -104,6 +107,18 @@ const Heading = styled.h3`
     text-align: left;
   }
 `
+const SubHeading = styled.h4`
+  font-size: 1.2rem;
+  color: #70707088;
+  max-width: 80rem;
+  text-transform: uppercase;
+  margin: 0.5rem 0;
+  transition: all 1s ease-in-out;
+  @media screen and (max-width: 760px) {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+`
 
 const Divider = styled.hr`
   height: 5px;
@@ -127,36 +142,6 @@ const Par = styled.p`
   transition: all 1s ease-in-out;
   @media screen and (max-width: 760px) {
     font-size: 1.1rem;
-  }
-`
-const ButtonContainer = styled.div`
-  margin-top: 1rem;
-  @media screen and (max-width: 760px) {
-    display: flex;
-    justify-content: flex-end;
-  }
-`
-
-const Button = styled.button`
-  border: 3px solid #ceb862;
-  background: transparent;
-  transition: all 0.2s;
-  text-transform: uppercase;
-  font-weight: 500;
-  height: 3.2rem;
-  min-width: 15rem;
-  transition: all 0.3s ease-in-out;
-  border-radius: 3px;
-  &:hover {
-    cursor: pointer;
-    color: #fff;
-    background: #ceb862;
-  }
-  @media screen and (max-width: 760px) {
-    height: 2.8rem;
-    min-width: 11rem;
-    color: #fff;
-    background: #ceb862;
   }
 `
 
@@ -215,9 +200,10 @@ const Gallery = () => {
   const { data } = pageContent
   const img =
     "https://images.prismic.io/italiano-bros/5bda5480-8af2-4041-8ccc-bd38bc757b58_IMG_4183.jpg?auto=compress,format"
+
   return (
-    <Section bgImg={img}>
-      <Inner ref={ref}>
+    <Section>
+      <Inner ref={ref} bgImg={img}>
         <Column
           style={{
             background: "#fff",
@@ -228,20 +214,16 @@ const Gallery = () => {
           onTransitionEnd={e => handleTransition()}
         >
           <TextBox toggled={isToggled} textBox={textBoxHidden}>
-            <Heading>
+            <SubHeading>
               {
                 data["mainpage-section2"][0]["mainpage-section2-heading2"][0]
                   .text
               }
-            </Heading>
+            </SubHeading>
+            <Heading>Our Work</Heading>
             <Divider />
 
             <Par>{data["mainpage-section2"][0].paragraph[0].text}</Par>
-            <ButtonContainer>
-              <Link to={"/OurWork"} style={{ textDecoration: "none" }}>
-                <Button>View Work</Button>
-              </Link>
-            </ButtonContainer>
           </TextBox>
           <HideToggler>
             <ToggleButton

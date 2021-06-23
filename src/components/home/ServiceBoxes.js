@@ -10,25 +10,37 @@ const Section = styled.section`
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
+  padding: 4rem 0 2rem 0;
+  background: #ceb86211;
   @media screen and (max-width: 760px) {
     flex-direction: column;
     margin-top: 0.5rem;
-    background: #ceb86211;
     & a {
-      width: 95%;
+      width: 100%;
       margin: 0.5rem 0;
       border-radius: 20px;
     }
   }
 `
+const Inner = styled.div`
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  @media screen and (max-width: 760px) {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+    background: #ceb86211;
+  }
+`
 const Box = styled.div`
   display: block;
   position: relative;
-  min-width: 33.33%;
   height: 20rem;
-  flex: 4;
   background: #666;
   overflow: hidden;
+
   transition: all 0.3s ease-in-out;
   &:hover {
     cursor: pointer;
@@ -82,7 +94,7 @@ const HeadingLink = styled.h2`
   text-align: center;
   font-family: Cormorant Garamond;
   color: #fff;
-
+  opacity: 0;
   & a {
     text-decoration: none;
     color: #fff;
@@ -100,7 +112,7 @@ const HeadingLink = styled.h2`
 const linkClass = { textDecoration: "none", minWidth: "33.33%" }
 
 const ServiceBoxes = () => {
-  const { serviceLinks, pageContent } = useContext(ContentContext)
+  const { serviceLinks } = useContext(ContentContext)
   const [isSeen, setVisible] = useState(false)
   const { ref, inView, entry } = useInView({
     threshold: 0.3,
@@ -110,8 +122,6 @@ const ServiceBoxes = () => {
     if (inView) setVisible(true)
   }, [inView])
 
-  console.log("seenm", inView, isSeen)
-
   const services = serviceLinks
     .map((item, i) => {
       return (
@@ -119,9 +129,7 @@ const ServiceBoxes = () => {
           <Box key={i}>
             <Image src={item.img} />
             <InnerBox>
-              <HeadingLink
-                style={{ transform: `translateX(${inView ? "0" : "-100vw"} )` }}
-              >
+              <HeadingLink style={{ opacity: `${inView ? 1 : 0}` }}>
                 {item.title}
               </HeadingLink>
             </InnerBox>
@@ -130,7 +138,11 @@ const ServiceBoxes = () => {
       )
     })
     .slice(0, 3)
-  return <Section ref={ref}>{services}</Section>
+  return (
+    <Section ref={ref}>
+      <Inner>{services}</Inner>
+    </Section>
+  )
 }
 
 ServiceBoxes.propTypes = {}

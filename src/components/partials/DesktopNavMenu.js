@@ -103,7 +103,7 @@ const DesktopNavMenu = ({
     { path: "/", text: "Home", hoverable: false },
     { path: "/Services", text: "Services", hoverable: true },
     { path: "/OurWork", text: "Our Work", hoverable: false },
-    { path: "/About", text: "About", hoverable: false },
+    { path: "/History", text: "History", hoverable: false },
     { path: "/Location", text: "Location", hoverable: false },
   ]
 

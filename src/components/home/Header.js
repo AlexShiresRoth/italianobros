@@ -35,7 +35,7 @@ const Heading = styled.h1`
   font-weight: 400;
   max-width: 70%;
   color: #eee;
-  font-size: 6rem;
+  font-size: 5rem;
   text-shadow: 0 1px 20px #99999933;
   text-align: center;
   animation: ${fadeIn} 1s ease-in-out forwards;

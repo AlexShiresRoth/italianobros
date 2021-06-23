@@ -8,12 +8,13 @@ const Section = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
   width: 100%;
   background: #ceb86211;
   overflow: hidden;
   @media screen and (max-width: 760px) {
-    padding: 4rem;
+    padding: 1rem 0 6rem 0;
     background: #ceb86211;
   }
 `

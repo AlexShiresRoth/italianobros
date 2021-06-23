@@ -8,7 +8,7 @@ export const NavLink = _ => {
     { path: "/", title: "Home" },
     { path: "/Services", title: "Services" },
     { path: "/OurWork", title: "Our Work" },
-    { path: "/About", title: "About" },
+    { path: "/History", title: "History" },
     { path: "/Location", title: "Contact" },
   ]
 

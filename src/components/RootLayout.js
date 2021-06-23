@@ -11,13 +11,13 @@ export const ContentContext = React.createContext({
 const serviceLinks = [
   {
     to: "/Services#venetian-plaster",
-    title: "Venetian Plaster",
+    title: "Plaster Finishes",
     img:
       "https://images.prismic.io/italiano-bros/1c04e2b9-c567-4bb9-9b5d-7007f9b4265b_vp3_ljljot.jpg?auto=compress,format",
   },
   {
     to: "/Services#plaster-mouldings",
-    title: "Plaster Mouldings",
+    title: "Mouldings",
     img:
       "https://images.prismic.io/italiano-bros/d586c3d9-0fae-40da-b276-13526f57d87d_plaster+walls.jpg?auto=compress,format",
   },

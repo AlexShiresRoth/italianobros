@@ -20,18 +20,18 @@ const Section = styled.section`
     background-image: none;
     height: auto;
     min-height: 30vh;
+    margin-top: -2rem;
   }
 `
 
 const Inner = styled.div`
   display: flex;
-  width: 100%;
+  width: 90%;
   height: 100%;
   @media screen and (max-width: 760px) {
     flex-direction: column-reverse;
     position: relative;
     align-items: center;
-    margin-top: -1.5rem;
   }
 `
 const Column = styled.div`
@@ -50,7 +50,7 @@ const Column = styled.div`
       display: flex;
     }
     &:nth-child(2) {
-      z-index: 0;
+      z-index: 2;
       background-color: transparent !important;
     }
   }
@@ -77,6 +77,18 @@ const TextBox = styled.div`
     &:hover {
       box-shadow: 0 1px 30px transparent;
     }
+  }
+`
+const SubHeading = styled.h4`
+  font-size: 1.2rem;
+  color: #70707088;
+  max-width: 80rem;
+  text-transform: uppercase;
+  margin: 0.5rem 0;
+  transition: all 1s ease-in-out;
+  @media screen and (max-width: 760px) {
+    font-size: 1.5rem;
+    text-align: left;
   }
 `
 const Heading = styled.h3`
@@ -174,9 +186,15 @@ const About = _ => {
   return (
     <Section>
       <Inner ref={ref}>
-        <Column style={{ transform: `translateX(${isSeen ? 0 : "-40vw"})`, opacity: isSeen ? 1 : 0 }}>
+        <Column
+          style={{
+            transform: `translateX(${isSeen ? 0 : "-40vw"})`,
+            opacity: isSeen ? 1 : 0,
+          }}
+        >
           <TextBox>
-            <Heading>{heading}</Heading>
+            <SubHeading>{heading}</SubHeading>
+            <Heading>Our History</Heading>
             <Divider />
             <Par>{paragraph}</Par>
 
@@ -190,7 +208,12 @@ const About = _ => {
             </ButtonContainer>
           </TextBox>
         </Column>
-        <Column style={{ transform: `translateX(${isSeen ? 0 : "40vw"})`, opacity: isSeen ? 1 : 0 }}>
+        <Column
+          style={{
+            transform: `translateX(${isSeen ? 0 : "40vw"})`,
+            opacity: isSeen ? 1 : 0,
+          }}
+        >
           <Image src={marc["profile-image"].url} />{" "}
         </Column>
       </Inner>
