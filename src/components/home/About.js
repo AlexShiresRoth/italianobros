@@ -87,7 +87,7 @@ const SubHeading = styled.h4`
   margin: 0.5rem 0;
   transition: all 1s ease-in-out;
   @media screen and (max-width: 760px) {
-    font-size: 1.5rem;
+    font-size: 0.9rem;
     text-align: left;
   }
 `
