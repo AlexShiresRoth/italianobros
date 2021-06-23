@@ -200,7 +200,7 @@ const About = _ => {
 
             <ButtonContainer>
               <Link
-                to={"/About"}
+                to={"/History"}
                 style={{ textDecoration: "none", alignSelf: "center" }}
               >
                 <Button>Discover our history</Button>

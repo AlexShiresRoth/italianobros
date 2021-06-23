@@ -216,7 +216,7 @@ const Services = () => {
             <SubHeading>
               {data["mainpage-section1"][0]["mainpage-heading1"][0].text}
             </SubHeading>
-            <Heading>Services</Heading>
+            <Heading>Our Services</Heading>
             <Divider />
 
             <Par>
