@@ -10,22 +10,22 @@ export const ContentContext = React.createContext({
 
 const serviceLinks = [
   {
-    to: "/Services#venetian-plaster",
+    to: "/Services#plaster-finishes",
     title: "Plaster Finishes",
     img:
-      "https://images.prismic.io/italiano-bros/1c04e2b9-c567-4bb9-9b5d-7007f9b4265b_vp3_ljljot.jpg?auto=compress,format",
+      "https://images.prismic.io/italiano-bros/82f4bc1c-7935-41d3-9d31-d6c8eeed769f_IMG_1198.jpg?auto=compress,format",
   },
   {
-    to: "/Services#plaster-mouldings",
+    to: "/Services#mouldings",
     title: "Mouldings",
     img:
-      "https://images.prismic.io/italiano-bros/d586c3d9-0fae-40da-b276-13526f57d87d_plaster+walls.jpg?auto=compress,format",
+      "https://images.prismic.io/italiano-bros/4338e961-15e1-42d5-860d-5c14a9322148_IMG_0862.jpg?auto=compress,format",
   },
   {
     to: "/Services#stucco",
     title: "Stucco",
     img:
-      "https://images.prismic.io/italiano-bros/c2321391-3bcb-47bc-8b1e-6e53298c3087_surfside+color.jpg?auto=compress,format",
+      "https://images.prismic.io/italiano-bros/2d535066-47b9-4719-aa8d-1c28f0781b6f_IMG_3885%2B.jpeg?auto=compress,format",
   },
   {
     to: "/Services#drywall",

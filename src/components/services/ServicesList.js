@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from "react"
-
 import layoutStyles from "./servicestyles/ServicesList.module.scss"
-
+import { useLocation } from "@reach/router"
 import ServicesListItem from "./ServicesListItem"
 import ServicesListItemDesktop from "./ServicesListItemDesktop"
 import { ContentContext } from "../RootLayout"
 
 const ServiceList = () => {
   const { pageContent } = useContext(ContentContext)
+
+  const locationParams = useLocation()
 
   const [content, setContent] = useState([])
 
@@ -21,13 +22,11 @@ const ServiceList = () => {
 
   const [read, setMore] = useState("Read More")
 
-  const [service, setCurrent] = useState([])
+  const [service, setCurrent] = useState(null)
 
-  const [serviceTitle, setTitle] = useState("Venetian Plaster")
+  const [serviceTitle, setTitle] = useState("Plaster Finishes")
 
   const [animation, setAnimation] = useState(false)
-
-  const [location, setLocation] = useState("")
 
   const handleWindowResize = () => {
     setMobile(window.innerWidth < 600)
@@ -40,15 +39,13 @@ const ServiceList = () => {
 
   //Set which content to render based on title
   const renderService = (title, index, arr) => {
-    console.log(title, index, arr)
     setCurrent(arr[index])
     setTitle(title)
   }
 
   const getPathName = arr => {
     return arr.map((data, i) => {
-      console.log("path data", data.id)
-      if (window.location.href.match(data.id) || location.match(data.id)) {
+      if (locationParams.hash.split("#")[1] === data.id.toLowerCase()) {
         return renderService(data.title, i, arr)
       }
     })
@@ -60,6 +57,7 @@ const ServiceList = () => {
     const stucco = pageContent.data["stucco"][0]
     const concrete = pageContent.data["architectural-concrete"][0]
     const plaster = pageContent.data["plaster-mouldings"][0]
+
     setContent([
       {
         title: vpData.heading[0].text,
@@ -70,7 +68,7 @@ const ServiceList = () => {
           vpData.image3.url,
           vpData.image4.url,
         ],
-        id: "venetian-plaster",
+        id: "plaster-finishes",
         button: true,
         display1: "left",
         display2: "right",
@@ -80,7 +78,7 @@ const ServiceList = () => {
         content: dryWall.paragraph[0].text,
         images: [dryWall.image1.url, dryWall.image2.url],
         id: "drywall",
-        button: true,
+        button: false,
         display1: "left",
         display2: "right",
       },
@@ -94,7 +92,7 @@ const ServiceList = () => {
           stucco.image4.url,
         ],
         id: "stucco",
-        button: true,
+        button: false,
         display1: "left",
         display2: "right",
       },
@@ -108,7 +106,7 @@ const ServiceList = () => {
           concrete.image4.url,
         ],
         id: "concrete",
-        button: true,
+        button: false,
         display1: "left",
         display2: "right",
       },
@@ -121,8 +119,8 @@ const ServiceList = () => {
           plaster.image3.url,
           plaster.image4.url,
         ],
-        id: "plaster-mouldings",
-        button: true,
+        id: "mouldings",
+        button: false,
         display1: "left",
         display2: "right",
       },
@@ -147,15 +145,19 @@ const ServiceList = () => {
   }, [])
 
   useEffect(() => {
-    if (content.length > 0) {
+    if (content) {
       getPathName(content)
-      setLocation(window.location.href)
-      setCurrent(content[0])
       setArraySize(content)
     }
   }, [content])
 
-  if (!pageContent || loading || !content) {
+  useEffect(() => {
+    if (!locationParams.hash && content) {
+      setCurrent(content[0])
+    }
+  }, [content, locationParams])
+
+  if (!pageContent || !content) {
     return <p>Loading...</p>
   }
 
@@ -164,7 +166,12 @@ const ServiceList = () => {
   const servicesData = data["services-section1"][0]
 
   const heading = servicesData["services-heading1"][0].text
+
   const paragraph = servicesData["paragraph"][0].text
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
 
   return (
     <div className={layoutStyles.servicesList__section}>

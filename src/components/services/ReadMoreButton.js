@@ -1,7 +1,6 @@
 import React from "react"
 import layoutStyles from "./servicestyles/ServicesList.module.scss"
 export const ReadMoreButton = ({ content, read, reduced, contentSize }) => {
-  const styles = {}
   return (
     <div>
       <p>

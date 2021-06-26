@@ -10,12 +10,10 @@ const ServicesListItemDesktop = ({
   styles,
   animate,
 }) => {
-  const { images } = service
-
-  if (!images || !service) {
+  if (!service) {
     return <p>Loading...</p>
   }
-  console.log("service", service, images)
+
   return (
     <div className={styles.container__column} id={service.id}>
       <div
@@ -43,7 +41,7 @@ const ServicesListItemDesktop = ({
           </div>
         )}
         <div className={styles.services__image__grid}>
-          {images.map((img, i) => {
+          {service?.images.map((img, i) => {
             return (
               <figure className={styles.services__image} key={i}>
                 <img src={img} alt={img} className={styles.services__img} />
