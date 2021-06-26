@@ -13,7 +13,9 @@ const Header = () => {
       style={{
         backgroundImage: `url(${pageContent.data["header-img"].url})`,
       }}
-    ></header>
+    >
+      {" "}
+    </header>
   )
 }
 

@@ -3,8 +3,10 @@
 
 @media screen and (min-width: 601px) {
   .about__header {
-    @include mobile_header;
-    background-position: center 25%;
+    @include desktop-header;
+    background-position: center 70%;
+    position: relative;
+    z-index: 0;
   }
 }
 

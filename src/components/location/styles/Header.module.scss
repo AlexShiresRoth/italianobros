@@ -5,7 +5,7 @@
   .location__header {
     background: url("https://res.cloudinary.com/snackmanproductions/image/upload/c_scale,q_51,w_2067/v1568248627/italianobros/contact/contact-header_mntiyk.jpg");
 
-    @include mobile-header;
+    @include desktop-header;
   }
 }
 

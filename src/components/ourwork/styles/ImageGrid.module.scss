@@ -6,7 +6,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
-    gap: 0.5rem;
+    gap: 4rem;
     justify-items: center;
     align-content: center;
     margin: 2rem;
@@ -15,8 +15,8 @@
     padding: 0;
   }
   .grid__image {
-    height: 35rem;
-    width: 30rem;
+    height: 40rem;
+    width: 35rem;
     object-fit: cover;
     animation: fadeIn 0.5s ease-in-out;
   }

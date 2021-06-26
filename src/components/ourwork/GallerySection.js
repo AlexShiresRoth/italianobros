@@ -30,6 +30,26 @@ const GallerySection = () => {
     }
   }
 
+  const shuffleImages = array => {
+    let currentIndex = array.length,
+      randomIndex
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex--
+
+      // And swap it with the current element.
+      ;[array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ]
+    }
+
+    return array
+  }
+
   useEffect(() => {
     if (images) reduceImageArray(images)
   }, [images])
@@ -37,16 +57,21 @@ const GallerySection = () => {
   useEffect(() => {
     if (pageContent) {
       const workImgs = pageContent.data.images.map(src => src.image.url)
-      console.log("workimgs", workImgs)
+
       setImages(workImgs)
     }
   }, [pageContent])
+
+  useEffect(() => {
+    if (images > 0) {
+      setArray(shuffleImages(images))
+    }
+  }, [images])
 
   if (!pageContent) {
     return <p>Loading...</p>
   }
 
-  console.log(pageContent.data)
   return (
     <section className={layoutStyles.gallery__section}>
       <div className={layoutStyles.heading}>

@@ -3,31 +3,11 @@
 
 @media screen and (min-width: 601px) {
   .header__section {
-    @include mobile-header;
-    -webkit-box-pack: end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-    padding: 2rem;
-    background-position: "center";
-    background-repeat: "no-repeat";
-    background-attachment: "fixed";
+    @include desktop-header;
   }
 }
 @media screen and (max-width: 600px) {
   .header__section {
     @include mobile-header;
-    -webkit-box-pack: end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-    padding: 2rem;
-    background-position: "center";
-    background-repeat: "no-repeat";
-    background-attachment: "fixed";
   }
 }

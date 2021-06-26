@@ -17,8 +17,12 @@
   }
   .heading {
     @include desktop-layout-heading;
+    background: #fff;
+    width: 70%;
+    margin-top: -5rem;
+    z-index: 3;
     & h2 {
-      margin: 1rem;
+      margin: 2rem 1rem 1rem 1rem;
       text-transform: uppercase;
       font-size: 3.5rem;
       color: $gold-color;
