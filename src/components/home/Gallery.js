@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight } from "react-feather"
 import { ContentContext } from "../RootLayout"
 import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
+import axios from "axios"
 
 const Section = styled.section`
   display: flex;

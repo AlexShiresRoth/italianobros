@@ -10,14 +10,17 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-styled-components`,
+    `gatsby-plugin-image`,
+    `gatsby-transformer-sharp`,
+    `gatsby-source-instagram-all`,
     {
       resolve: `gatsby-plugin-manifest`,
+      // This path is relative to the root of the site.
       options: {
         name: `gatsby-starter-default`,
         short_name: `starter`,
@@ -26,7 +29,7 @@ module.exports = {
         theme_color: `#CEB862`,
         display: `minimal-ui`,
         icon: `src/images/Knife.png`,
-      }, // This path is relative to the root of the site.
+      },
     },
     {
       resolve: `gatsby-plugin-sitemap`,
@@ -46,6 +49,31 @@ module.exports = {
         host: "https://www.italianobrosenterprise.com/",
         sitemap: "https://www.italianobrosenterprise.com/sitemap.xml",
         policy: [{ userAgent: "*", allow: "/" }],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-sharp",
+      options: {
+        defaults: {
+          formats: [`auto`, `webp`],
+          placeholder: `dominantColor`,
+          quality: 50,
+          breakpoints: [750, 1080, 1366, 1920],
+          backgroundColor: `transparent`,
+          tracedSVGOptions: {},
+          blurredOptions: {},
+          jpgOptions: {},
+          pngOptions: {},
+          webpOptions: {},
+          avifOptions: {},
+        },
+      },
+    },
+    {
+      resolve: `gatsby-source-instagram-all`,
+      options: {
+        access_token:
+          "IGQVJWT3VQTlNOOVNPREljS0ppMnJBWTN1WTU5UHVPTTBJY0w5M0p5OFNRTnlvcDk1NDlSa2lzLXBpbVZAieFloTzc3aGgyYXBneU5HVEVDRXExWWVrZAWxQM1RqM0xPSGM5MXR0VURFVTdDcm45a3FDNAZDZD",
       },
     },
 

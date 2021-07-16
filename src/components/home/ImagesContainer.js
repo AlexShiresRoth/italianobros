@@ -44,7 +44,7 @@ const ImagesContainer = props => {
   const [isSeen, setVisible] = useState(false)
 
   const { ref, inView, entry } = useInView({
-    threshold: 0.2,
+    threshold: 0.1,
   })
 
   useEffect(() => {
@@ -58,15 +58,6 @@ const ImagesContainer = props => {
 
   console.log(data)
 
-  const imgs = [
-    data["mainpage-section2"][0].image1,
-    data["mainpage-section2"][0].image2,
-    data["mainpage-section2"][0].image3,
-    data["mainpage-section2"][0].image4,
-    data["mainpage-section2"][0].image5,
-    data["mainpage-section2"][0].image6,
-  ]
-
   return (
     <Section ref={ref}>
       <Link to="/OurWork" style={{ textDecoration: "none" }}>
@@ -76,7 +67,7 @@ const ImagesContainer = props => {
           View The Gallery <ArrowRight />
         </Heading>
       </Link>
-      <GalleryImgs imgs={imgs} isSeen={isSeen} />
+      <GalleryImgs isSeen={isSeen} />
     </Section>
   )
 }
