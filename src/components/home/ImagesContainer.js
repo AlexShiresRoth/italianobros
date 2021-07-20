@@ -39,7 +39,7 @@ const Heading = styled.button`
   }
 `
 
-const ImagesContainer = props => {
+const ImagesContainer = () => {
   const { pageContent } = useContext(ContentContext)
   const [isSeen, setVisible] = useState(false)
 

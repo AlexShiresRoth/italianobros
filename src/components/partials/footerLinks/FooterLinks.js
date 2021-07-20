@@ -23,7 +23,7 @@ const FooterLinks = ({ isMobile }) => {
 
   const linksMap = links.map((link, i) => {
     return (
-      <Link to={`${link.path}`} style={isMobile ? styles : stylesWide}>
+      <Link to={`${link.path}`} style={isMobile ? styles : stylesWide} key={i}>
         <li
           key={i}
           className={

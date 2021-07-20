@@ -141,7 +141,7 @@ const DesktopNavMenu = ({
                   <ServiceMenu toggled={serviceToggled} />
                 </Item>
               ) : (
-                <Item>
+                <Item key={key}>
                   <Link to={linkObj.path} activeClassName="active">
                     <ListItem>{linkObj.text}</ListItem>
                   </Link>

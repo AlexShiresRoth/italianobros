@@ -1,110 +1,167 @@
 @import "../../../../sass/base/variables";
 @import "../../../../sass/base/mixins";
 
-@media screen and (min-width: 601px) {
-  .services__section {
-    @include section__desktop;
+.Section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top: 0px solid #fbfbfb;
+  width: 100%;
+  height: 50rem;
+  padding: 4rem 0;
+  transition: all 1.2s ease-in-out;
+  @media screen and (max-width: 760px) {
+    padding: 0;
+    height: auto;
+    min-height: 60vh;
+    overflow: hidden;
   }
+}
 
-  .services__h3 {
-    @include sub-header;
-    text-transform: uppercase;
+.Inner {
+  display: flex;
+  width: 90%;
+  height: 100%;
+  background-image: url("");
+  background-size: cover;
+  background-position: center;
+  @media screen and (max-width: 760px) {
+    flex-direction: column-reverse;
+    position: relative;
+    align-items: center;
+    background-image: none;
+    width: 100%;
   }
-  .services__hr {
-    @include hr-gold-desktop;
-  }
-  .heading,
-  .button__container {
-    display: grid;
-    align-content: center;
-  }
-  .button__container {
-    justify-items: end;
-  }
-  .container {
-    @include container--grid--rows--three;
-  }
-  .paragraph__section {
-    @include paragraph--section--desktop;
-  }
-  .paragraph {
-    @include paragraph--desktop;
-  }
+}
 
-  .button {
-    border: 2px solid $gold-color;
-    background: transparent;
-    -webkit-transition: all 0.2s;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    font-weight: 500;
-    height: 3.2rem;
-    width: 20rem;
-    &:hover {
-      cursor: pointer;
-      background: $gold-color;
-      color: #fff;
+.Column {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 0.8;
+  transition: all 1.2s ease-in-out;
+  position: relative;
+  @media screen and (max-width: 760px) {
+    width: 95%;
+    &:nth-child(1) {
+      display: flex;
+      background: #ceb86211;
+    }
+    &:nth-child(2) {
+      z-index: 0;
+      background-color: transparent !important;
     }
   }
 }
 
-@media screen and (max-width: 600px) {
-  .services__section {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
+.Image {
+  object-fit: contain;
+  width: 100%;
+  display: none;
+  @media screen and (max-width: 760px) {
+    display: block;
+  }
+}
+
+.TextBox {
+  width: 90%;
+  padding: 4.5rem;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  transition: all 1s ease-in-out;
+  &:hover {
+    box-shadow: 0 1px 30px #66666622;
+  }
+  @media screen and (max-width: 760px) {
+    padding: 3rem 0;
+    position: static;
     justify-content: center;
-  }
-
-  .heading {
-    margin: 1rem;
-  }
-
-  .services__h3 {
-    color: $dark-color;
-    text-transform: uppercase;
-  }
-  .services__hr {
-    height: 0;
-    border-top: 1px solid $gold-color;
-    width: 4rem;
-    margin: 1rem 0;
-  }
-
-  .container {
-    padding: 2rem;
-  }
-
-  .paragraph__section {
-    @include paragraph--section;
-  }
-
-  .paragraph {
-    @include paragraph;
-  }
-
-  .button__container {
-    @include button__container--center;
-  }
-  .button {
-    border: 1px solid $gold-color;
-    background: transparent;
-    -webkit-transition: all 0.2s;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    font-weight: 500;
-    height: 3.2rem;
-    width: 15rem;
     &:hover {
-      cursor: pointer;
-      background: $gold-color;
-      color: #fff;
+      box-shadow: 0 1px 30px transparent;
     }
+  }
+}
+
+.SubHeading {
+  font-size: 1.2rem;
+  color: #70707088;
+  max-width: 80rem;
+  text-transform: uppercase;
+  margin: 0.5rem 0;
+  transition: all 1s ease-in-out;
+  @media screen and (max-width: 760px) {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+}
+
+.Heading {
+  font-size: 3.5rem;
+  color: #707070;
+  max-width: 80rem;
+  text-transform: uppercase;
+  transition: all 1s ease-in-out;
+  @media screen and (max-width: 760px) {
+    font-size: 1.9rem;
+    text-align: left;
+  }
+}
+
+.Divider {
+  height: 5px;
+  background: #ceb862;
+  border: 0;
+  width: 6rem;
+  margin: 1rem 0;
+  transition: all 1s ease-in-out;
+  @media screen and (max-width: 760px) {
+    height: 3px;
+  }
+}
+
+.Par {
+  font-size: 1.25rem;
+  color: #707070;
+  line-height: 2;
+  letter-spacing: 1.3px;
+  font-family: "Work Sans";
+  margin: 1rem 0;
+  transition: all 1s ease-in-out;
+  @media screen and (max-width: 760px) {
+    font-size: 1.1rem;
+  }
+}
+
+.HideToggle {
+  position: absolute;
+  bottom: 0%;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  z-index: 2;
+  @media screen and (max-width: 760px) {
+    display: none;
+  }
+}
+
+.ToggleButton {
+  background: transparent;
+  margin-right: 2rem;
+  padding: 1rem;
+  min-width: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px solid transparent;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    cursor: pointer;
   }
 }

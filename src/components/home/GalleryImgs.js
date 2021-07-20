@@ -1,6 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby"
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styled, { keyframes } from "styled-components"
+import { ContentContext } from "../RootLayout"
 import GalleryImg from "./GalleryImg"
 
 const spin = keyframes`
@@ -88,35 +89,14 @@ const LoadingSpinner = styled.div`
 `
 
 const GalleryImgs = ({ isSeen }) => {
-  const { allInstagramContent } = useStaticQuery(graphql`
-    query InstagramPosts {
-      allInstagramContent {
-        edges {
-          node {
-            id
-            caption
-            permalink
-            media_type
-            localImage {
-              childImageSharp {
-                gatsbyImageData(
-                  layout: CONSTRAINED
-                  placeholder: BLURRED
-                  width: 500
-                  height: 500
-                )
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
-
   const [amount, extend] = useState(18)
   const [max, setMax] = useState(0)
 
   const [loading, setLoading] = useState(false)
+
+  const { instaContent } = useContext(ContentContext)
+
+  console.log("instaContent!", instaContent)
 
   const handleShowImgs = current => {
     if (current >= max) return
@@ -130,18 +110,18 @@ const GalleryImgs = ({ isSeen }) => {
   }
 
   useEffect(() => {
-    if (allInstagramContent) {
-      setMax(allInstagramContent.edges.length)
+    if (instaContent) {
+      setMax(instaContent?.data?.length || 10)
     }
-  }, [allInstagramContent])
+  }, [instaContent])
 
-  if (!allInstagramContent) {
+  if (!instaContent) {
     return <p>Loading...</p>
   }
 
-  const imgMap = allInstagramContent.edges
+  const imgMap = instaContent.data
     .map((item, i) => {
-      return <GalleryImg item={item} i={i} isSeen={isSeen} />
+      return <GalleryImg item={item} i={i} isSeen={isSeen} key={i} />
     })
     .slice(0, amount)
 

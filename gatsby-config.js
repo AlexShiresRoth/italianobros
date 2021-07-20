@@ -17,7 +17,6 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
-    `gatsby-source-instagram-all`,
     {
       resolve: `gatsby-plugin-manifest`,
       // This path is relative to the root of the site.
@@ -70,13 +69,12 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-instagram-all`,
+      resolve: `gatsby-plugin-styled-components`,
       options: {
-        access_token:
-          "IGQVJWT3VQTlNOOVNPREljS0ppMnJBWTN1WTU5UHVPTTBJY0w5M0p5OFNRTnlvcDk1NDlSa2lzLXBpbVZAieFloTzc3aGgyYXBneU5HVEVDRXExWWVrZAWxQM1RqM0xPSGM5MXR0VURFVTdDcm45a3FDNAZDZD",
+        minify: true,
+        ssr: false, // Breaks styles if not set to false
       },
     },
-
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

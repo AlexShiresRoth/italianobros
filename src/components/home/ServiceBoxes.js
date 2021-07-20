@@ -125,8 +125,8 @@ const ServiceBoxes = () => {
   const services = serviceLinks
     .map((item, i) => {
       return (
-        <Link to={item.to} style={linkClass}>
-          <Box key={i}>
+        <Link to={item.to} style={linkClass} key={i}>
+          <Box>
             <Image src={item.img} />
             <InnerBox>
               <HeadingLink style={{ opacity: `${inView ? 1 : 0}` }}>

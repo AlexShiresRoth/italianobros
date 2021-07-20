@@ -1,11 +1,14 @@
 import Prismic from "@prismicio/client"
+import axios from "axios"
 
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useMemo, useState } from "react"
 
 export const ContentContext = React.createContext({
   pageContent: {},
   setPageContent: () => {},
   serviceLinks: [],
+  instaContent: [],
+  setInstaContent: () => {},
 })
 
 const serviceLinks = [
@@ -47,6 +50,25 @@ const Client = Prismic.client(apiEndpoint)
 
 export const RootLayout = ({ children }) => {
   const [content, setContent] = useState(null)
+  const [insta, setInsta] = useState(null)
+  const { setInstaContent } = useContext(ContentContext)
+
+  const fetchInsta = async () => {
+    try {
+      const res = await axios.get(
+        "https://graph.instagram.com/v11.0/4421706784515534/media/?fields=media_url,permalink,media_type&access_token=IGQVJWeE5xNTVBTkM2YlJIZATU5bTBHWEJ0OXM1b0lza3hEYzc3TVRjblZAQN09jVHZAONWdTQVVkVTFubzBra3hMQjB5RWozTDJGUENkZAmFMLUJ6SjJzOXRObTRsZAW1rdjU2UHQ0LUN3OS1XUG04dWxkMgZDZD"
+      )
+      // console.log("res.data", res.data)
+      setInsta(res.data)
+      return res.data
+    } catch (error) {
+      console.error("error:", error)
+    }
+  }
+
+  const instaData = useMemo(() => fetchInsta(), [])
+
+  console.log("insta data", instaData)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +84,13 @@ export const RootLayout = ({ children }) => {
 
   return (
     <ContentContext.Provider
-      value={{ pageContent: content, setPageContent: () => {}, serviceLinks }}
+      value={{
+        pageContent: content,
+        setPageContent: () => {},
+        serviceLinks,
+        instaContent: insta,
+        setInstaContent: () => {},
+      }}
     >
       {children}
     </ContentContext.Provider>

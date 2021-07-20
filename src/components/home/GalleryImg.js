@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import { Heart } from "react-feather"
+import ReactPlayer from "react-player"
 const ImageContainer = styled.a`
   flex: 1;
   transition: all 0.3s ease-in-out;
@@ -87,17 +88,23 @@ const GalleryImg = ({ isSeen, i, item }) => {
         transition: `all ${1 + `.${i}`}s ease-in-out`,
       }}
       key={i}
-      href={item.node.permalink}
+      href={item.permalink}
       onMouseEnter={e => showCaption(true)}
       onMouseLeave={e => showCaption(false)}
     >
       <CaptionContainer isVisible={captionVisibility}>
-        <Caption>{item.node.caption}</Caption>
+        <Caption>{item.caption}</Caption>
       </CaptionContainer>
-      <GatsbyImage
-        image={item.node.localImage.childImageSharp.gatsbyImageData}
-        alt={"image"}
-      />
+      {item.media_type !== "VIDEO" ? (
+        <img src={item.media_url} alt={"image"} />
+      ) : (
+        <ReactPlayer
+          url={item.media_url}
+          height="100%"
+          width="100%"
+          controls={true}
+        />
+      )}
       <RedirectContainer>
         <Heart size={"2rem"} width={"10rem"} />
       </RedirectContainer>
