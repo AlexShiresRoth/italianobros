@@ -1,4 +1,3 @@
-import { graphql, useStaticQuery } from "gatsby"
 import React, { useContext, useEffect, useState } from "react"
 import styled, { keyframes } from "styled-components"
 import { ContentContext } from "../RootLayout"

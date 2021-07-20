@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -13,3 +13,5 @@ const IndexPage = () => (
 )
 
 export default IndexPage
+
+

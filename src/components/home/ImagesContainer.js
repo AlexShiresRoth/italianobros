@@ -67,7 +67,7 @@ const ImagesContainer = () => {
           View The Gallery <ArrowRight />
         </Heading>
       </Link>
-      <GalleryImgs isSeen={isSeen} />
+      <GalleryImgs isSeen={isSeen} instaData={instaData} />
     </Section>
   )
 }
