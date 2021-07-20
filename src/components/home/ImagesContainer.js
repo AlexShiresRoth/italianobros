@@ -39,7 +39,7 @@ const Heading = styled.button`
   }
 `
 
-const ImagesContainer = props => {
+const ImagesContainer = ({ instaData }) => {
   const { pageContent } = useContext(ContentContext)
   const [isSeen, setVisible] = useState(false)
 
@@ -67,7 +67,7 @@ const ImagesContainer = props => {
           View The Gallery <ArrowRight />
         </Heading>
       </Link>
-      <GalleryImgs isSeen={isSeen} />
+      <GalleryImgs isSeen={isSeen} instaData={instaData} />
     </Section>
   )
 }

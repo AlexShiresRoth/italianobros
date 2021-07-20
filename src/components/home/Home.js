@@ -7,7 +7,7 @@ import ImagesContainer from "./ImagesContainer"
 import Services from "./Services"
 import ServiceBoxes from "./ServiceBoxes"
 import ViewAllServices from "./ViewAllServices"
-const Home = () => {
+const Home = ({ instaData }) => {
   return (
     <Fragment>
       <Header />
@@ -15,7 +15,7 @@ const Home = () => {
       <ServiceBoxes />
       <ViewAllServices />
       <Gallery />
-      <ImagesContainer />
+      <ImagesContainer instaData={instaData} />
       <About />
     </Fragment>
   )

@@ -6,6 +6,8 @@ export const ContentContext = React.createContext({
   pageContent: {},
   setPageContent: () => {},
   serviceLinks: [],
+  setInstaContent: () => [],
+  instaContent: [],
 })
 
 const serviceLinks = [

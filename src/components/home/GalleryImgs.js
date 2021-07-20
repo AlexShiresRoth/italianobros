@@ -1,6 +1,8 @@
+import axios from "axios"
 import { graphql, useStaticQuery } from "gatsby"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import styled, { keyframes } from "styled-components"
+import { query } from "../RootLayout"
 import GalleryImg from "./GalleryImg"
 
 const spin = keyframes`
@@ -87,31 +89,10 @@ const LoadingSpinner = styled.div`
   animation: ${spin} .2s linear infinite;
 `
 
-const GalleryImgs = ({ isSeen }) => {
-  const { allInstagramContent } = useStaticQuery(graphql`
-    query InstagramPosts {
-      allInstagramContent {
-        edges {
-          node {
-            id
-            caption
-            permalink
-            media_type
-            localImage {
-              childImageSharp {
-                gatsbyImageData(
-                  layout: CONSTRAINED
-                  placeholder: BLURRED
-                  width: 500
-                  height: 500
-                )
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
+const GalleryImgs = ({ isSeen, instaData }) => {
+  const { allInstagramContent } = instaData
+
+  console.log("insta", allInstagramContent)
 
   const [amount, extend] = useState(18)
   const [max, setMax] = useState(0)
@@ -135,7 +116,7 @@ const GalleryImgs = ({ isSeen }) => {
     }
   }, [allInstagramContent])
 
-  if (!allInstagramContent) {
+  if (allInstagramContent.edges.length === 0) {
     return <p>Loading...</p>
   }
 
