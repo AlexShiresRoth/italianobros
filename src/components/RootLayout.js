@@ -56,7 +56,7 @@ export const RootLayout = ({ children }) => {
   const fetchInsta = async () => {
     try {
       const res = await axios.get(
-        "https://graph.instagram.com/v11.0/4421706784515534/media/?fields=media_url,permalink,media_type&access_token=IGQVJWeE5xNTVBTkM2YlJIZATU5bTBHWEJ0OXM1b0lza3hEYzc3TVRjblZAQN09jVHZAONWdTQVVkVTFubzBra3hMQjB5RWozTDJGUENkZAmFMLUJ6SjJzOXRObTRsZAW1rdjU2UHQ0LUN3OS1XUG04dWxkMgZDZD"
+        "https://graph.instagram.com/v11.0/4421706784515534/media/?fields=media_url,permalink,media_type,caption&access_token=IGQVJWeE5xNTVBTkM2YlJIZATU5bTBHWEJ0OXM1b0lza3hEYzc3TVRjblZAQN09jVHZAONWdTQVVkVTFubzBra3hMQjB5RWozTDJGUENkZAmFMLUJ6SjJzOXRObTRsZAW1rdjU2UHQ0LUN3OS1XUG04dWxkMgZDZD"
       )
       // console.log("res.data", res.data)
       setInsta(res.data)
