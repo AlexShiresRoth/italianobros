@@ -44,7 +44,7 @@ const ImagesContainer = () => {
   const [isSeen, setVisible] = useState(false)
 
   const { ref, inView, entry } = useInView({
-    threshold: 0.1,
+    threshold: 0,
   })
 
   useEffect(() => {

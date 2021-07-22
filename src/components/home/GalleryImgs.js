@@ -78,13 +78,14 @@ const FancyButton = styled.button`
 `
 
 const LoadingSpinner = styled.div`
-  display:block;
-  height:2.6rem;
-  width:2.6rem'
-  border-radius:100%;
-  border:2px solid transparent;
-  border-top:2px solid #707070;
-  animation: ${spin} .2s linear infinite;
+  margin: 2rem 0;
+  display: block;
+  height: 2.6rem;
+  width: 2.6rem;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  border-top: 2px solid #ceb862;
+  animation: ${spin} 0.2s linear infinite;
 `
 
 const GalleryImgs = ({ isSeen }) => {
@@ -98,7 +99,10 @@ const GalleryImgs = ({ isSeen }) => {
   console.log("instaContent!", instaContent)
 
   const handleShowImgs = current => {
-    if (current >= max) return
+    if (current >= max) {
+      setLoading(false)
+      return
+    }
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
@@ -128,12 +132,14 @@ const GalleryImgs = ({ isSeen }) => {
     <>
       <MobileImageGrid>{imgMap}</MobileImageGrid>
       <ImageGrid>{imgMap}</ImageGrid>
-      {amount < max && !loading ? (
-        <BtnContainer>
-          <FancyButton onClick={e => handleShowImgs(amount)}>
-            Show More
-          </FancyButton>
-        </BtnContainer>
+      {!loading ? (
+        amount < max ? (
+          <BtnContainer>
+            <FancyButton onClick={e => handleShowImgs(amount)}>
+              Show More
+            </FancyButton>
+          </BtnContainer>
+        ) : null
       ) : (
         <LoadingSpinner />
       )}

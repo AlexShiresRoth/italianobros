@@ -18,7 +18,14 @@
     height: 40rem;
     width: 35rem;
     object-fit: cover;
-    animation: fadeIn 0.5s ease-in-out;
+    // animation: fadeIn 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    & > img {
+    }
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 1px 30px #66666653;
+    }
   }
 }
 @media screen and (min-width: 601px) and(max-width: 850px) {
@@ -44,18 +51,20 @@
 
 @media screen and (max-width: 600px) {
   .image__grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 1rem;
-    justify-items: center;
-    align-content: center;
     margin: 2rem 0;
   }
   .grid__item {
     padding: 0 1rem;
   }
   .grid__image {
-    @include image;
+    height: 25rem;
+    width: 30rem;
+    object-fit: cover;
+    animation: fadeIn 0.5s ease-in-out;
     animation: fadeIn 0.5s ease-in-out;
   }
 }

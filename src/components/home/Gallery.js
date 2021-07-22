@@ -181,8 +181,8 @@ const Gallery = () => {
   const { pageContent } = useContext(ContentContext)
   const [isToggled, toggleBox] = useState(false)
   const [textBoxHidden, hideTextBox] = useState(false)
-
   const [beenVisited, setVisit] = useState(false)
+
   const { ref, inView, entry } = useInView({
     threshold: 0.2,
   })
