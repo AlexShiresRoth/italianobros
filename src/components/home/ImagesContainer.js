@@ -24,6 +24,11 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   width: 80%;
+  @media screen and (max-width: 760px) {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+  }
 `
 const Heading = styled.button`
   font-size: 1.8rem;
@@ -41,6 +46,10 @@ const Heading = styled.button`
   padding: 1rem;
   &:hover {
     cursor: pointer;
+  }
+  @media screen and (max-width: 760px) {
+    font-size: 1.2rem;
+    margin: 0.2rem 0;
   }
 `
 const HeadingTwo = styled.a`
@@ -60,6 +69,10 @@ const HeadingTwo = styled.a`
   text-decoration: none;
   &:hover {
     cursor: pointer;
+  }
+  @media screen and (max-width: 760px) {
+    font-size: 1.2rem;
+    margin: 0.2rem 0;
   }
 `
 const ImagesContainer = () => {
