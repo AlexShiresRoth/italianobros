@@ -20,6 +20,11 @@ const Section = styled.section`
     padding-top: 2rem;
   }
 `
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+`
 const Heading = styled.button`
   font-size: 1.8rem;
   color: #707070;
@@ -38,7 +43,25 @@ const Heading = styled.button`
     cursor: pointer;
   }
 `
-
+const HeadingTwo = styled.a`
+  font-size: 1.8rem;
+  color: #707070;
+  background: transparent;
+  font-family: "Cormorant Garamond", sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  align-content: center;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 1.2s ease-in-out;
+  padding: 1rem;
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+  }
+`
 const ImagesContainer = () => {
   const { pageContent } = useContext(ContentContext)
   const [isSeen, setVisible] = useState(false)
@@ -60,13 +83,22 @@ const ImagesContainer = () => {
 
   return (
     <Section ref={ref}>
-      <Link to="/OurWork" style={{ textDecoration: "none" }}>
-        <Heading
-          style={{ transform: `translateY(${isSeen ? "0vh" : "40vh"})` }}
+      <Header>
+        <Link to="/OurWork" style={{ textDecoration: "none" }}>
+          <Heading
+            style={{ transform: `translateY(${isSeen ? "0vh" : "40vh"})` }}
+          >
+            View The Gallery <ArrowRight />
+          </Heading>
+        </Link>
+        <HeadingTwo
+          href="https://www.instagram.com/italianobros.enterprise/"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          View The Gallery <ArrowRight />
-        </Heading>
-      </Link>
+          Follow us on instagram
+        </HeadingTwo>
+      </Header>
       <GalleryImgs isSeen={isSeen} />
     </Section>
   )
