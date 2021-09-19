@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Italiano Bros. Enterprise`,
@@ -17,6 +21,13 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
+    `gatsby-source-custom-api`,
+    {
+      resolve: `gatsby-source-custom-api`,
+      options: {
+        apiKey: process.env.TOKEN,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       // This path is relative to the root of the site.

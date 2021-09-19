@@ -45,6 +45,8 @@ const serviceLinks = [
 ]
 
 const apiEndpoint = "https://italiano-bros.cdn.prismic.io/api/v2"
+const token =
+  "IGQVJWYlQ2ai1ZARW5FRkd0TXlFak9XU3Uwc0FTUUhoUU40M0ZA6cGx5bWdPRVQ0QlI0MllWN2VHQW0wY3JfbjlzMmZAwVVdUdWEzV215NzJzSVpocC12eTBwS2lEVkdNclhmeHJaWlBtNzBlaXNDWC1INAZDZD"
 
 const Client = Prismic.client(apiEndpoint)
 
@@ -56,7 +58,7 @@ export const RootLayout = ({ children }) => {
   const fetchInsta = async () => {
     try {
       const res = await axios.get(
-        "https://graph.instagram.com/v11.0/4421706784515534/media/?fields=media_url,permalink,media_type,caption&access_token=IGQVJWeE5xNTVBTkM2YlJIZATU5bTBHWEJ0OXM1b0lza3hEYzc3TVRjblZAQN09jVHZAONWdTQVVkVTFubzBra3hMQjB5RWozTDJGUENkZAmFMLUJ6SjJzOXRObTRsZAW1rdjU2UHQ0LUN3OS1XUG04dWxkMgZDZD"
+        `https://graph.instagram.com/v11.0/4421706784515534/media/?fields=media_url,permalink,media_type,caption&access_token=${token}`
       )
       // console.log("res.data", res.data)
       setInsta(res.data)
@@ -67,8 +69,6 @@ export const RootLayout = ({ children }) => {
   }
 
   const instaData = useMemo(() => fetchInsta(), [])
-
-  console.log("insta data", instaData)
 
   useEffect(() => {
     const fetchData = async () => {
