@@ -46,7 +46,7 @@ const serviceLinks = [
 
 const apiEndpoint = "https://italiano-bros.cdn.prismic.io/api/v2"
 const token =
-  "IGQVJWYlQ2ai1ZARW5FRkd0TXlFak9XU3Uwc0FTUUhoUU40M0ZA6cGx5bWdPRVQ0QlI0MllWN2VHQW0wY3JfbjlzMmZAwVVdUdWEzV215NzJzSVpocC12eTBwS2lEVkdNclhmeHJaWlBtNzBlaXNDWC1INAZDZD"
+  "IGQVJWWnJEQ0t5a1Brb3dkb3RJcVZAHZAHY1WHIzcWZATZAnRZASmZAkNng3Y0dLUzlZARThhOWMxSzFDU014dzVRcGhmZAEFWbzhOVUdwLVpmSHNLbXlNRzJZASjgzcTV5cXpOcmVXX09iNFF1aEtTT2wxc00wdQZDZD"
 
 const Client = Prismic.client(apiEndpoint)
 
