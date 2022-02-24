@@ -46,7 +46,7 @@ const serviceLinks = [
 
 const apiEndpoint = "https://italiano-bros.cdn.prismic.io/api/v2"
 const token =
-  "IGQVJWYlQ2ai1ZARW5FRkd0TXlFak9XU3Uwc0FTUUhoUU40M0ZA6cGx5bWdPRVQ0QlI0MllWN2VHQW0wY3JfbjlzMmZAwVVdUdWEzV215NzJzSVpocC12eTBwS2lEVkdNclhmeHJaWlBtNzBlaXNDWC1INAZDZD"
+  "IGQVJVejBqYjRnejk1dHIxQ2VIQVptUkRzYmdBb0JKRU4xY0Yyd1hDX01QM0FyYTNwbmNacnUwNUx6b1BFR1NQa3B1Tm15dGVkR2ZAtbHpfQXpLZAUNiSFE2MGx3ZATFfRVluTTBVaEFiTjVBZAV9FdG1UaAZDZD"
 
 const Client = Prismic.client(apiEndpoint)
 
@@ -67,8 +67,8 @@ export const RootLayout = ({ children }) => {
       console.error("error:", error)
     }
   }
-
-  const instaData = useMemo(() => fetchInsta(), [])
+//grab instagram api data
+ useMemo(() => fetchInsta(), [])
 
   useEffect(() => {
     const fetchData = async () => {
